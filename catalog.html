@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Каталог — Культурный код</title><link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="header"><a class="logo" href="index.html"><span>К</span> Культурный код</a>
+<nav><a class="active" href="catalog.html">Каталог</a><a href="peoples.html">Народы</a><a href="collection.html">Моя коллекция</a><a href="about.html">О проекте</a></nav></header>
+<main class="page">
+<p class="eyebrow">Исследование</p><h1>Каталог культурных объектов</h1>
+<p class="lead">Выбирай предмет и узнавай, какую историю он рассказывает.</p>
+<div class="filters">
+<select id="peopleFilter"><option value="">Все народы</option><option>Шорцы</option><option>Телеуты</option></select>
+<select id="categoryFilter"><option value="">Все категории</option><option>Одежда</option><option>Украшения</option><option>Музыка</option><option>Быт</option></select>
+</div>
+<div id="catalog" class="cards"></div>
+</main>
+<script src="js/data.js"></script><script src="js/catalog.js"></script>
+</body></html>
