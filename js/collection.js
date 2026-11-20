@@ -22,21 +22,45 @@ function readSelected() {
   return objects.filter(object => ids.includes(object.id));
 }
 
+function encodeSharePayload(value) {
+  const bytes = new TextEncoder().encode(JSON.stringify({
+    i: value.ids,
+    r: value.recipient,
+    d: value.date
+  }));
+  let binary = "";
+  for (let offset = 0; offset < bytes.length; offset += 0x8000) {
+    binary += String.fromCharCode(...bytes.subarray(offset, offset + 0x8000));
+  }
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+function readSharePayload(raw, compact) {
+  if (!compact) return JSON.parse(raw);
+  const base64 = raw.replace(/-/g, "+").replace(/_/g, "/");
+  const binary = atob(base64 + "=".repeat((4 - base64.length % 4) % 4));
+  const bytes = Uint8Array.from(binary, character => character.charCodeAt(0));
+  return JSON.parse(new TextDecoder().decode(bytes));
+}
+
 function readSharedReceipt() {
-  const raw = shareParams.get("share");
+  const compactRaw = shareParams.get("s");
+  const legacyRaw = shareParams.get("share");
+  const raw = compactRaw || legacyRaw;
   if (!raw) return null;
   try {
-    const value = JSON.parse(raw);
-    if (!Array.isArray(value.ids)) return null;
-    const ids = value.ids.map(Number).filter(Number.isInteger);
+    const value = readSharePayload(raw, Boolean(compactRaw));
+    const rawIds = value.ids ?? value.i;
+    if (!Array.isArray(rawIds)) return null;
+    const ids = rawIds.map(Number).filter(Number.isInteger);
     const selected = objects.filter(object => ids.includes(object.id));
     if (!selected.length) return null;
     return {
       selected,
-      recipient: typeof value.recipient === "string" && value.recipient.trim()
-        ? value.recipient.trim().slice(0, 60)
+      recipient: typeof (value.recipient ?? value.r) === "string" && (value.recipient ?? value.r).trim()
+        ? (value.recipient ?? value.r).trim().slice(0, 60)
         : "Дорогой человек",
-      date: typeof value.date === "string" ? value.date : ""
+      date: typeof (value.date ?? value.d) === "string" ? (value.date ?? value.d) : ""
     };
   } catch {
     return null;
@@ -140,41 +164,49 @@ function wrapCanvasText(context, text, maxWidth) {
   return lines;
 }
 
-function makeReceiptImage(selected, recipient) {
+async function makeReceiptImage(selected, recipient) {
+  if (document.fonts?.ready) await document.fonts.ready;
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
   const width = 1000;
   const left = 82;
   const maxWidth = width - left * 2;
-  context.font = "20px Arial";
-  const itemLines = selected.map(object => wrapCanvasText(context, object.short, maxWidth));
-  const rowHeights = itemLines.map(lines => 90 + lines.length * 28);
-  const height = 700 + rowHeights.reduce((sum, value) => sum + value, 0);
+  const bodyFont = '20px "Blogger Sans", Arial, sans-serif';
+  const itemLines = selected.map(object => {
+    context.font = bodyFont;
+    return wrapCanvasText(context, object.short, maxWidth);
+  });
+  const rowHeights = itemLines.map(lines => 92 + lines.length * 30);
+  const height = 590 + rowHeights.reduce((sum, value) => sum + value, 0);
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext("2d");
 
   ctx.fillStyle = "#fffdf7";
   ctx.fillRect(0, 0, width, height);
-  ctx.strokeStyle = "#d7a83d";
+  ctx.strokeStyle = "#ef2638";
   ctx.lineWidth = 2;
   ctx.strokeRect(24, 24, width - 48, height - 48);
+  ctx.strokeStyle = "rgba(239, 38, 56, .22)";
+  ctx.lineWidth = 1;
+  ctx.strokeRect(34, 34, width - 68, height - 68);
   ctx.textAlign = "center";
-  ctx.fillStyle = "#855a1a";
-  ctx.font = "bold 17px Arial";
-  ctx.fillText("КУЛЬТУРНАЯ ЛАВКА КУЗБАССА", width / 2, 84);
-  ctx.fillStyle = "#26352e";
-  ctx.font = "bold 46px Georgia";
-  ctx.fillText("Культурный чек", width / 2, 146);
-  ctx.font = "24px Arial";
-  ctx.fillText(`Собран с теплом для ${recipient}`, width / 2, 192);
-  ctx.fillStyle = "#68716b";
-  ctx.font = "18px Arial";
-  ctx.fillText(`${formatDate()} · Кемеровская область — Кузбасс`, width / 2, 228);
+  ctx.fillStyle = "#d91f31";
+  ctx.font = 'bold 17px "Blogger Sans", Arial, sans-serif';
+  ctx.fillText("КУЛЬТУРНАЯ ЛАВКА КУЗБАССА", width / 2, 86);
+  ctx.fillStyle = "#242a26";
+  ctx.font = 'bold 48px "Column Simple", Georgia, serif';
+  ctx.fillText("КУЛЬТУРНЫЙ ЧЕК", width / 2, 154);
+  ctx.fillStyle = "#424943";
+  ctx.font = '22px "Blogger Sans", Arial, sans-serif';
+  ctx.fillText(`Собран с теплом для ${recipient}`, width / 2, 200, maxWidth);
+  ctx.fillStyle = "#7a807b";
+  ctx.font = '18px "Blogger Sans", Arial, sans-serif';
+  ctx.fillText(`${formatDate()} · Кемеровская область — Кузбасс`, width / 2, 236);
 
   const rule = y => {
     ctx.save();
-    ctx.strokeStyle = "#b9ad91";
+    ctx.strokeStyle = "rgba(239, 38, 56, .35)";
     ctx.setLineDash([8, 8]);
     ctx.beginPath();
     ctx.moveTo(left, y);
@@ -182,52 +214,52 @@ function makeReceiptImage(selected, recipient) {
     ctx.stroke();
     ctx.restore();
   };
-  rule(270);
+  rule(276);
   ctx.textAlign = "left";
-  ctx.fillStyle = "#855a1a";
-  ctx.font = "bold 15px Arial";
-  ctx.fillText("ВЫБРАННЫЕ ИСТОРИИ", left, 310);
+  ctx.fillStyle = "#d91f31";
+  ctx.font = 'bold 16px "Blogger Sans", Arial, sans-serif';
+  ctx.fillText("ВЫБРАННЫЕ ИСТОРИИ", left, 318);
 
-  let y = 356;
+  let y = 366;
   selected.forEach((object, index) => {
-    ctx.fillStyle = "#26352e";
-    ctx.font = "bold 25px Georgia";
+    ctx.fillStyle = "#242a26";
+    ctx.font = 'bold 27px "Column Simple", Georgia, serif';
     ctx.fillText(object.name, left, y);
     y += 30;
-    ctx.fillStyle = "#855a1a";
-    ctx.font = "18px Arial";
+    ctx.fillStyle = "#d91f31";
+    ctx.font = '18px "Blogger Sans", Arial, sans-serif';
     ctx.fillText(`${object.people} · ${object.category}`, left, y);
-    y += 30;
-    ctx.fillStyle = "#58635c";
-    ctx.font = "20px Arial";
+    y += 32;
+    ctx.fillStyle = "#59615b";
+    ctx.font = bodyFont;
     itemLines[index].forEach(line => {
       ctx.fillText(line, left, y);
-      y += 28;
+      y += 30;
     });
-    y += 26;
+    y += 28;
     rule(y - 8);
   });
 
   const peoples = [...new Set(selected.map(object => object.people))];
-  y += 20;
-  ctx.fillStyle = "#26352e";
-  ctx.font = "bold 20px Arial";
+  y += 24;
+  ctx.fillStyle = "#242a26";
+  ctx.font = 'bold 20px "Blogger Sans", Arial, sans-serif';
   ctx.textAlign = "left";
   ctx.fillText(`Историй в чеке: ${selected.length}`, left, y);
   ctx.textAlign = "right";
   ctx.fillText(`Культур представлено: ${peoples.length}`, width - left, y);
-  y += 36;
+  y += 42;
   ctx.textAlign = "center";
-  ctx.fillStyle = "#855a1a";
-  ctx.font = "bold 18px Arial";
+  ctx.fillStyle = "#d91f31";
+  ctx.font = 'bold 19px "Blogger Sans", Arial, sans-serif';
   ctx.fillText(peoples.join(" · "), width / 2, y);
-  y += 48;
-  ctx.fillStyle = "#53635d";
-  ctx.font = "italic 20px Georgia";
-  ctx.fillText("Я выбрал эти истории, потому что они напомнили мне о тебе.", width / 2, y);
-  y += 34;
-  ctx.font = "18px Arial";
-  ctx.fillText("Открой ссылку, чтобы увидеть чек и собрать свой.", width / 2, y);
+  y += 54;
+  ctx.fillStyle = "#59615b";
+  ctx.font = 'italic 20px Georgia, serif';
+  ctx.fillText("Не цена важна, а то, о ком ты вспомнил.", width / 2, y);
+  y += 32;
+  ctx.font = bodyFont;
+  ctx.fillText("Передай чек и поделись историей.", width / 2, y);
 
   return new Promise(resolve => canvas.toBlob(blob => {
     if (!blob) return resolve(null);
@@ -250,16 +282,17 @@ function downloadReceiptImage(file) {
 async function shareReceipt(selected, recipient) {
   const date = formatDate();
   const shareUrl = new URL("collection.html", location.href);
-  shareUrl.searchParams.set("share", JSON.stringify({ids:selected.map(object => object.id), recipient, date}));
+  shareUrl.searchParams.set("s", encodeSharePayload({ids:selected.map(object => object.id), recipient, date}));
   const peoples = [...new Set(selected.map(object => object.people))];
   const text = `Я собрал(а) этот культурный чек для тебя: выбрал(а) истории, которые напомнили мне о тебе. Открой его и собери свой для друга или близкого.\n\nКультуры: ${peoples.join(", ")}.`;
-  const copyText = `${text}\n\n${shareUrl.href}`;
+  const shareText = `${text}\n\n${shareUrl.href}`;
+  const copyText = shareText;
 
   let image = null;
   try { image = await makeReceiptImage(selected, recipient); } catch { /* The interactive link remains shareable. */ }
 
   if (navigator.share) {
-    const payload = {title:`Культурный чек для ${recipient}`, text, url:shareUrl.href};
+    const payload = {title:`Культурный чек для ${recipient}`, text:shareText};
     if (image && navigator.canShare?.({files:[image]})) payload.files = [image];
     try {
       await navigator.share(payload);
