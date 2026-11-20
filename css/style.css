@@ -697,3 +697,11 @@ body {
 .share-invitation p:not(.eyebrow) {
   font-size: 18px;
 }
+
+/* Keep the red illustrated wallpaper visible on narrow screens */
+@media (max-width: 800px) {
+  body {
+    background-size: 900px auto;
+    background-position: center top;
+  }
+}
