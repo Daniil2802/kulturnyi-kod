@@ -88,3 +88,8 @@
 @media(prefers-reduced-motion:reduce) {
   *,*:before,*:after {scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+.share-invitation{max-width:760px;margin:32px 0;padding:28px 32px;background:#e9eee4;border:1px solid #d9dfd2}
+.share-invitation h2{font:600 clamp(28px,4vw,38px) Georgia,serif;margin:10px 0 14px}
+.share-invitation p:not(.eyebrow){max-width:620px;line-height:1.65;color:#53635d}
+.share-invitation .button{border-radius:2px}
+@media(max-width:600px){.share-invitation{padding:22px}.receipt-head h2{font-size:30px}.receipt-actions{flex-direction:column;align-items:stretch}}
