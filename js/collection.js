@@ -252,7 +252,8 @@ async function shareReceipt(selected, recipient) {
   const shareUrl = new URL("collection.html", location.href);
   shareUrl.searchParams.set("share", JSON.stringify({ids:selected.map(object => object.id), recipient, date}));
   const peoples = [...new Set(selected.map(object => object.people))];
-  const text = `Я собрал(а) этот культурный чек для тебя: выбрал(а) истории, которые напомнили мне о тебе.\n\nОткрой чек и собери свой для друга или близкого:\n${shareUrl.href}\n\nКультуры: ${peoples.join(", ")}.`;
+  const text = `Я собрал(а) этот культурный чек для тебя: выбрал(а) истории, которые напомнили мне о тебе. Открой его и собери свой для друга или близкого.\n\nКультуры: ${peoples.join(", ")}.`;
+  const copyText = `${text}\n\n${shareUrl.href}`;
 
   let image = null;
   try { image = await makeReceiptImage(selected, recipient); } catch { /* The interactive link remains shareable. */ }
@@ -269,14 +270,14 @@ async function shareReceipt(selected, recipient) {
   }
 
   try {
-    await navigator.clipboard.writeText(text);
+    await navigator.clipboard.writeText(copyText);
     if (image) downloadReceiptImage(image);
     alert(image
       ? "Ссылка-приглашение скопирована, а картинка чека скачана. Отправь их другу вместе."
       : "Ссылка на чек и приглашение скопирована — отправь её другу.");
   } catch {
     if (image) downloadReceiptImage(image);
-    alert(text);
+    alert(copyText);
   }
 }
 
