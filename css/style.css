@@ -783,7 +783,7 @@ body {
 
 
 /* Fine-line route illustration, matching the site's background ornaments */
-.hero-art .line-route-art {display:block;width:100%;height:100%;max-width:500px;margin:0 auto;overflow:visible}
+.hero-art .line-route-art {display:block;width:100%;height:100%;max-width:500px;margin:0 auto;overflow:visible;object-fit:contain}
 @media(max-width:800px) {
   .hero-art {height:290px}
   .hero-art .line-route-art {max-width:370px}
