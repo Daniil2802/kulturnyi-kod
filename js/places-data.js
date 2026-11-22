@@ -3,7 +3,7 @@ const areas = [
     id: "tashtagol",
     title: "Таштагол и Шерегеш",
     short: "Горная Шория: места, где природа и память шорского народа неразделимы.",
-    image: "https://static.wixstatic.com/media/8694d0_0c95da7b1c9a4a7d8981752a04233bb2~mv2.jpg/v1/fill/w_900%2Ch_600%2Cal_c%2Cq_90%2Cenc_auto/8694d0_0c95da7b1c9a4a7d8981752a04233bb2~mv2.jpg"
+    image: "https://shorskynp.ru/wp-content/uploads/2024/09/kobzev-a.v.-dsc_0511-1-768x512.jpg"
   },
   {
     id: "novokuznetsk",
