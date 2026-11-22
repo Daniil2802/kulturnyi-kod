@@ -53,7 +53,6 @@ const places = [
     sourceUrl: "https://shorskynp.ru/2024/09/17/vodopad-saga/",
     objects: [7],
     itemsTitle: "Культурный предмет «Голос воды»",
-    itemsNote: "Вода в традиционной культуре народов Сибири — символ жизни, движения и очищения.",
   },
   {
     id: "novokuznetsk-museum",
