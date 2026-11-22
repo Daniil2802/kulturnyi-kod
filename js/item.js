@@ -9,7 +9,7 @@ if (!item) {
     <a class="button" href="catalog.html">Открыть лавку</a>
   </section>`;
 } else {
-  container.innerHTML = `<div class="item-art" aria-hidden="true"><span>${item.people[0]}</span><small>КУЛЬТУРНАЯ ЛАВКА КУЗБАССА</small></div>
+  container.innerHTML = `<div class="item-art${item.image ? " has-image" : ""}" ${item.image ? "" : 'aria-hidden="true"'}>${item.image ? `<img src="${item.image}" alt="${item.name}">` : `<span>${item.people[0]}</span>`}<small>КУЛЬТУРНАЯ ЛАВКА КУЗБАССА</small></div>
     <article class="item-copy">
       <p class="eyebrow">${item.people} · ${item.category}</p>
       <h1>${item.name}</h1>
