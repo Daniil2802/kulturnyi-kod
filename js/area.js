@@ -24,7 +24,7 @@ if (!area) {
       return '<article class="place-card">' +
         '<img src="' + place.image + '" alt="' + escapeText(place.imageAlt) + '" loading="lazy">' +
         '<div class="place-card-copy"><span class="tag">' + escapeText(place.kind) + '</span><h2><a href="place.html?id=' + encodeURIComponent(place.id) + '">' + escapeText(place.title) + '</a></h2>' +
-        '<p>' + escapeText(place.description) + '</p><div class="place-card-location"><span class="place-location-label">Местоположение:</span><span>' + escapeText(place.address) + '</span>' +
+        '<p>' + escapeText(place.shortDescription || place.description) + '</p><div class="place-card-location"><span class="place-location-label">Местоположение:</span><span>' + escapeText(place.address) + '</span>' +
         '<a class="place-map-link" href="' + mapSearchUrl(place) + '" target="_blank" rel="noopener">Открыть в Яндекс Картах ↗</a></div><a class="place-card-open" href="place.html?id=' + encodeURIComponent(place.id) + '">Открыть место →</a></div></article>';
     }).join("") + '</div>';
 }
