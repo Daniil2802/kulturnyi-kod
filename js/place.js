@@ -23,7 +23,7 @@ function renderPartnerTour(tour) {
     '<p class="place-tour-safety">' + escapePlaceText(tour.safety) + '</p>' +
     '<div class="place-tour-pricing"><p><strong>Стоимость экскурсии:</strong> ' + escapePlaceText(tour.price) + '</p>' +
     '<p>' + escapePlaceText(tour.priceNote) + '</p></div>' +
-    '<p><strong>Бронирование:</strong> <a href="tel:' + escapePlaceText(tour.phone.replace(/[^+\\d]/g, "")) + '">' + escapePlaceText(tour.phone) + '</a> · ' + escapePlaceText(tour.address) + '</p>' +
+    '<p><strong>Бронирование:</strong> <a href="tel:' + escapePlaceText(tour.phone.replace(/[^+\d]/g, "")) + '">' + escapePlaceText(tour.phone) + '</a> · ' + escapePlaceText(tour.address) + '</p>' +
     '<div class="place-tour-links"><a href="' + escapePlaceText(tour.routeUrl) + '" target="_blank" rel="noopener">Маршрут на сайте парка ↗</a>' +
     '<a href="' + escapePlaceText(tour.servicesUrl) + '" target="_blank" rel="noopener">Услуги и цены ↗</a>' +
     '<a href="' + escapePlaceText(tour.rulesUrl) + '" target="_blank" rel="noopener">Правила посещения пещер ↗</a>' +
