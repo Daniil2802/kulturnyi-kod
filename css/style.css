@@ -761,27 +761,9 @@ body {
 }
 
 
-/* Hero illustration: a visitor follows the route to a destination */
-.hero-art .route-art {display:block;width:100%;height:100%;max-width:500px;margin:0 auto;overflow:visible}
-.route-sun {fill:#fffafa;stroke:#ef2638;stroke-opacity:.16;stroke-width:2}
-.route-contour {fill:none;stroke:#ef2638;stroke-opacity:.22;stroke-width:2}
-.route-path {fill:none;stroke:#d91f31;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 13}
-.route-stop {fill:#fffafa;stroke:#d91f31;stroke-width:4}
-.route-destination circle {fill:#fff;stroke:#d91f31;stroke-width:5}
-.route-destination path {fill:none;stroke:#d91f31;stroke-width:7;stroke-linecap:round}
-.route-label,.route-start {fill:#d91f31;font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:2px}
-.route-label {font-size:13px}
-.route-start {font-size:11px;letter-spacing:1.7px}
-.traveler-shadow {fill:#d91f31;opacity:.12}
-.traveler-pack {fill:#d91f31;stroke:#a91d2c;stroke-width:2}
-.traveler-body {fill:#34554a;stroke:#243d35;stroke-width:2;stroke-linejoin:round}
-.traveler-arm {fill:none;stroke:#34554a;stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
-.traveler-pants {fill:#38424b;stroke:#253039;stroke-width:2;stroke-linejoin:round}
-.traveler-boots {fill:#26312f;stroke:#1b2422;stroke-width:2;stroke-linejoin:round}
-.traveler-head {fill:#efc7a6;stroke:#8d5847;stroke-width:2}
-.traveler-hair {fill:#28302f}
-.traveler-strap {fill:none;stroke:#f8f6ef;stroke-width:3;stroke-linecap:round}
+/* Fine-line route illustration, matching the site's background ornaments */
+.hero-art .line-route-art {display:block;width:100%;height:100%;max-width:500px;margin:0 auto;overflow:visible}
 @media(max-width:800px) {
   .hero-art {height:290px}
-  .hero-art .route-art {max-width:370px}
+  .hero-art .line-route-art {max-width:370px}
 }
