@@ -3,58 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Культурный код Кузбасса</title>
+  <title>Культурный код Кузбасса — места и истории</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <header class="header">
-  <a class="logo" href="index.html"><img src="assets/logo-lavka.png" alt="Лавка — Культурный код Кузбасса"></a>
-  <nav>
-    <a href="catalog.html">Лавка</a>
-    <a href="peoples.html">Народы</a>
-    <a href="collection.html">Культурный чек</a>
-    <a href="about.html">О проекте</a>
-  </nav>
+  <a class="logo" href="index.html"><img src="assets/logo-lavka.png" alt="Культурный код Кузбасса"></a>
+  <nav><a class="active" href="places.html">Места</a><a href="catalog.html">Предметы</a><a href="collection.html">Культурный чек</a><a href="about.html">О проекте</a></nav>
 </header>
 
 <main>
   <section class="hero">
     <div class="hero-text">
-      <p class="eyebrow">Культурная лавка Кузбасса · открыта для гостей</p>
+      <p class="eyebrow">Культурный маршрут Кузбасса</p>
       <h1>Заходи, добрый гость!<br><em>Есть что поглядеть.</em></h1>
-      <p>Не стесняйся, проходи! В нашей лавке собраны истории и культурные вещи шорцев и телеутов. Присматривай то, что тебе по душе, а после собери культурный чек — себе на память или в подарок другу.</p>
-      <a class="button" href="catalog.html">Заглянуть в лавку →</a>
+      <p>Здесь знакомятся не только с предметами, но и с местами, которые хранят память шорцев и телеутов. Открывай музеи, природные достопримечательности и истории, которые живут рядом с ними.</p>
+      <a class="button" href="places.html">Выбрать место →</a>
     </div>
-    <div class="hero-art">
+    <div class="hero-art" aria-hidden="true">
       <div class="circle"></div>
-      <div class="object-card"><small>ЛАВКА КУЗБАССА</small><br>КУЛЬТУРНЫЙ<br>КОД<br><span>заходи, гость дорогой</span></div>
+      <div class="object-card"><small>КУЗБАСС</small><br>МЕСТА<br>И ИСТОРИИ<br><span>заходи, гость дорогой</span></div>
       <div class="pattern pattern-a"></div>
       <div class="pattern pattern-b"></div>
     </div>
   </section>
 
   <section class="section">
-    <div class="section-heading">
-      <div>
-          <p class="eyebrow">Хозяйское слово</p>
-        <h2>Присмотрись → выбери → собери чек</h2>
-      </div>
-    </div>
-    <div class="steps">
-      <article><b>01</b><h3>Оглянись вокруг</h3><p>Познакомься с народами Кузбасса и историями вещей, бережно сохранённых в нашей лавке.</p></article>
-      <article><b>02</b><h3>Выбери по сердцу</h3><p>Открой отдельную карточку товара, узнай его историю и положи приглянувшееся в чек.</p></article>
-      <article><b>03</b><h3>Собери подарок</h3><p>Подготовь культурный чек для друга или близкого — из вещей, которые напоминают тебе о нём.</p></article>
+    <p class="eyebrow">С чего начать</p>
+    <h2>Выбери направление</h2>
+    <div class="region-grid">
+      <a class="region-card" href="area.html?area=tashtagol">
+        <img src="https://static.wixstatic.com/media/8694d0_0c95da7b1c9a4a7d8981752a04233bb2~mv2.jpg/v1/fill/w_900%2Ch_600%2Cal_c%2Cq_90%2Cenc_auto/8694d0_0c95da7b1c9a4a7d8981752a04233bb2~mv2.jpg" alt="Горная Шория" loading="lazy">
+        <div class="region-card-copy"><span class="eyebrow">Горная Шория</span><h3>Таштагол и Шерегеш</h3><p>Музеи, легенды и природные места.</p><strong>Смотреть направление →</strong></div>
+      </a>
+      <a class="region-card" href="area.html?area=novokuznetsk">
+        <img src="https://kultura-novokuznetsk.ru/assets/images/uchrezhdeniya-kultury/nkm/kraevedcheskij-muzej2.jpg" alt="Новокузнецкий краеведческий музей" loading="lazy">
+        <div class="region-card-copy"><span class="eyebrow">Юг Кузбасса</span><h3>Новокузнецк</h3><p>История города и музейные коллекции.</p><strong>Смотреть направление →</strong></div>
+      </a>
+      <a class="region-card" href="area.html?area=kemerovo">
+        <img src="https://kuzbasskray.ru/upload/iblock/e00/wtin6tq2eigqou4ndzz8xzaqi63s5ax3.jpg" alt="Этнографическая экспозиция Кузбасского музея" loading="lazy">
+        <div class="region-card-copy"><span class="eyebrow">Музеи региона</span><h3>Кемерово и Кузбасс</h3><p>Краеведческие музеи и места в районах области.</p><strong>Смотреть направление →</strong></div>
+      </a>
     </div>
   </section>
 
   <section class="section tint">
-    <p class="eyebrow">Товары нашей лавки</p>
-    <h2>С чего начнём выбор?</h2>
-    <div class="category-grid">
-      <a href="catalog.html?category=Одежда">Одежда <span>→</span></a>
-      <a href="catalog.html?category=Украшения">Украшения <span>→</span></a>
-      <a href="catalog.html?category=Музыка">Музыкальные инструменты <span>→</span></a>
-      <a href="catalog.html?category=Быт">Быт и ремесла <span>→</span></a>
+    <p class="eyebrow">Места, с которых можно начать</p>
+    <h2>Истории уже ждут</h2>
+    <div class="place-list">
+      <a class="place-card" href="place.html?id=tazgol">
+        <img src="https://static.wixstatic.com/media/8694d0_0c95da7b1c9a4a7d8981752a04233bb2~mv2.jpg/v1/fill/w_900%2Ch_600%2Cal_c%2Cq_90%2Cenc_auto/8694d0_0c95da7b1c9a4a7d8981752a04233bb2~mv2.jpg" alt="Территория экомузея «Тазгол»" loading="lazy">
+        <div class="place-card-copy"><span class="tag">Музей под открытым небом</span><h2>Шорский экомузей «Тазгол»</h2><p>Горная Шория, посёлок Усть-Анзас</p><strong>Открыть место →</strong></div>
+      </a>
+      <a class="place-card" href="place.html?id=cholkoi">
+        <img src="https://cholkoi.ru/img/img1.jpg" alt="Экспозиция музея «Чолкой»" loading="lazy">
+        <div class="place-card-copy"><span class="tag">Историко-этнографический музей</span><h2>«Чолкой»</h2><p>Село Беково, Беловский район</p><strong>Открыть место →</strong></div>
+      </a>
+      <a class="place-card" href="place.html?id=tsarskie-vorota">
+        <img src="https://shorskynp.ru/wp-content/uploads/2024/09/vorota-3-1-768x576.jpg" alt="Скала «Царские ворота»" loading="lazy">
+        <div class="place-card-copy"><span class="tag">Природная достопримечательность</span><h2>Скала «Царские ворота»</h2><p>Шорская легенда о горе и стреле Кизея.</p><strong>Открыть место →</strong></div>
+      </a>
     </div>
   </section>
 </main>
