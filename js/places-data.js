@@ -35,7 +35,7 @@ const places = [
     source: "Управление культуры Таштагольского муниципального округа",
     sourceUrl: "https://tashcult.ru/экомузей-тазгол/",
     objects: [4, 5, 6],
-    itemsTitle: "Предметы шорской культуры"
+    itemsTitle: "Культурные предметы"
   },
   {
     id: "saga-waterfall",
