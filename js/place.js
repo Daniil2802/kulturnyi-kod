@@ -20,7 +20,6 @@ function renderPartnerTour(tour) {
   return '<section class="place-panel place-tour-panel"><p class="eyebrow">Партнёр путешествия</p>' +
     '<h2>' + escapePlaceText(tour.title) + '</h2><p class="place-tour-partner">' + escapePlaceText(tour.partner) + '</p>' +
     '<p>' + escapePlaceText(tour.intro) + '</p><ul class="place-tour-details">' + details + '</ul>' +
-    '<p class="place-tour-safety">' + escapePlaceText(tour.safety) + '</p>' +
     '<div class="place-tour-pricing"><p><strong>Стоимость экскурсии:</strong> ' + escapePlaceText(tour.price) + '</p>' +
     '<p>' + escapePlaceText(tour.priceNote) + '</p></div>' +
     '<p><strong>Бронирование:</strong> <a href="tel:' + escapePlaceText(tour.phone.replace(/[^+\d]/g, "")) + '">' + escapePlaceText(tour.phone) + '</a> · ' + escapePlaceText(tour.address) + '</p>' +
