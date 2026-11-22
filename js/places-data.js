@@ -130,7 +130,7 @@ const places = [
   },
   {
     id: "cholkoi",
-    areaId: "kemerovo",
+    areaId: "tashtagol",
     title: "Историко-этнографический музей «Чолкой»",
     kind: "Музей",
     address: "село Беково, Беловский район",
