@@ -13,7 +13,7 @@ if (!item) {
     <article class="item-copy">
       <p class="eyebrow">${item.people} · ${item.category}</p>
       <h1>${item.name}</h1>
-      <p class="item-intro">${item.short}</p>
+      ${item.id === 7 ? "" : `<p class="item-intro">${item.short}</p>`}
       <div class="item-story"><h2>История товара</h2><p>${item.meaning}</p></div>
       <p class="item-source"><b>Откуда эта история:</b> ${item.source}</p>
       <button class="button" type="button" id="addItem">＋ Положить в культурный чек</button>
