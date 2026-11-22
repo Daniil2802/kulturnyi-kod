@@ -53,7 +53,6 @@ const places = [
     sourceUrl: "https://shorskynp.ru/2024/09/17/vodopad-saga/",
     objects: [7],
     itemsTitle: "Культурный предмет «Голос воды»",
-    itemsNote: "Современный символ проекта, вдохновлённый водопадом Сага. Это не историческая находка и не подтверждённый традиционный предмет шорской культуры."
   },
   {
     id: "novokuznetsk-museum",
