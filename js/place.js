@@ -12,6 +12,24 @@ function mapSearchUrl(place) {
   return "https://yandex.ru/maps/?text=" + encodeURIComponent(place.title + ", " + place.address);
 }
 
+function renderPartnerTour(tour) {
+  if (!tour) return "";
+  const details = (tour.details || []).map(function(detail) {
+    return "<li>" + escapePlaceText(detail) + "</li>";
+  }).join("");
+  return '<section class="place-panel place-tour-panel"><p class="eyebrow">Партнёр путешествия</p>' +
+    '<h2>' + escapePlaceText(tour.title) + '</h2><p class="place-tour-partner">' + escapePlaceText(tour.partner) + '</p>' +
+    '<p>' + escapePlaceText(tour.intro) + '</p><ul class="place-tour-details">' + details + '</ul>' +
+    '<p class="place-tour-safety">' + escapePlaceText(tour.safety) + '</p>' +
+    '<div class="place-tour-pricing"><p><strong>Стоимость экскурсии:</strong> ' + escapePlaceText(tour.price) + '</p>' +
+    '<p>' + escapePlaceText(tour.priceNote) + '</p></div>' +
+    '<p><strong>Бронирование:</strong> <a href="tel:' + escapePlaceText(tour.phone.replace(/[^+\\d]/g, "")) + '">' + escapePlaceText(tour.phone) + '</a> · ' + escapePlaceText(tour.address) + '</p>' +
+    '<div class="place-tour-links"><a href="' + escapePlaceText(tour.routeUrl) + '" target="_blank" rel="noopener">Маршрут на сайте парка ↗</a>' +
+    '<a href="' + escapePlaceText(tour.servicesUrl) + '" target="_blank" rel="noopener">Услуги и цены ↗</a>' +
+    '<a href="' + escapePlaceText(tour.rulesUrl) + '" target="_blank" rel="noopener">Правила посещения пещер ↗</a>' +
+    '<a href="' + escapePlaceText(tour.contactUrl) + '" target="_blank" rel="noopener">Контакты парка ↗</a></div></section>';
+}
+
 function addPlaceObject(id, button) {
   const ids = JSON.parse(localStorage.getItem("collection") || "[]");
   if (!ids.includes(id)) ids.push(id);
@@ -42,7 +60,7 @@ if (!place) {
         '<h3><a href="item.html?id=' + object.id + '">' + escapePlaceText(object.name) + '</a></h3><p>' + escapePlaceText(object.short) + '</p>' +
         '<div class="place-object-actions"><a href="item.html?id=' + object.id + '">История предмета →</a><button type="button" class="button" data-add-object="' + object.id + '">＋ В культурный чек</button></div></article>';
     }).join("") + '</div>' : '<p class="items-note">' + escapePlaceText(place.emptyObjects || "Список предметов этого места скоро появится.") + '</p>') +
-    '</section></div>';
+    '</section></div>' + renderPartnerTour(place.partnerTour);
   placeHost.querySelectorAll("[data-add-object]").forEach(function(button) {
     button.addEventListener("click", function() { addPlaceObject(Number(button.dataset.addObject), button); });
   });
