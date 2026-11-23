@@ -170,10 +170,16 @@
     }
     host.innerHTML = `<div class="journal-heading">
         <p class="eyebrow">Твой маршрут</p>
-        <h2>Впечатления о местах</h2>
-        <p>Отметь посещение, запиши свои впечатления и сохрани фотографии. Записи доступны только в этом браузере.</p>
+        <h2>Мой культурный путь</h2>
+        <p>Места идут одно за другим. Отмечай посещение, оставляй впечатления и сохраняй фотографии — записи доступны в этом браузере.</p>
       </div>
-      <div class="journal-places">${selected.map(place => `<article class="journal-place" data-journal-place="${escapeHTML(place.id)}">
+      <div class="journal-map">
+        <svg class="route-map-line" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M50 0 C50 55 76 75 50 130 S24 205 50 260 S76 335 50 390 S24 465 50 520 S76 595 50 650 S24 725 50 780 S76 855 50 910 S36 970 50 1000"/>
+        </svg>
+        <div class="journal-places">${selected.map(place => `<article class="journal-place" style="--journal-image:url(&quot;${escapeHTML(place.image || "")}&quot;)" data-journal-place="${escapeHTML(place.id)}">
+        <span class="route-node" aria-hidden="true"></span>
+        <div class="journal-step">ТОЧКА ${String(selected.indexOf(place)+1).padStart(2,"0")}</div>
         <div class="journal-place-head">
           <div><p class="eyebrow">${escapeHTML(place.kind)}</p><h3>${escapeHTML(place.title)}</h3></div>
           <span class="journal-status" data-visit-status>Загружаю…</span>
@@ -186,7 +192,7 @@
         <input class="journal-file-input" id="photos-${escapeHTML(place.id)}" data-photos type="file" accept="image/*" multiple>
         <small class="journal-hint">До ${MAX_PHOTOS} фото на место, не больше 8 МБ каждое. Фото сохраняются в этом браузере.</small>
         <div class="journal-photo-list" data-photo-list></div>
-      </article>`).join("")}</div>`;
+      </article>`).join("")}</div></div>`;
 
     selected.forEach(place => {
       const card = [...host.querySelectorAll("[data-journal-place]")].find(item => item.dataset.journalPlace === String(place.id));
