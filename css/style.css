@@ -2617,3 +2617,7 @@ body:not(.home-page) > .header{
   body:not(.home-page) > .header .logo img{height:42px!important}
   body:not(.home-page) > .header nav a{padding:8px 0!important}
 }
+
+
+/* Keep the interior-page header free of an outline, like the homepage */
+body:not(.home-page) > .header{border:0!important}
