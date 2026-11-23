@@ -1790,3 +1790,24 @@ body.receipt-page{background:transparent!important;background-image:none!importa
 @media(max-width:650px){
  .home-page .header{border-radius:0 0 14px 14px}
 }
+
+
+/* Give the panoramic header a little breathing room at the sides */
+.home-page .header{
+  width:calc(100% - 48px);
+  margin-left:auto;
+  margin-right:auto;
+}
+@media(max-width:900px){
+  .home-page .header{
+    width:calc(100% - 32px);
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
+@media(max-width:650px){
+  .home-page .header{
+    width:calc(100% - 20px);
+    margin:8px 10px -68px;
+  }
+}
