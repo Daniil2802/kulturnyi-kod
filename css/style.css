@@ -2012,3 +2012,15 @@ body.home-page::before {
   background-size: auto, auto, auto 145% !important;
   background-position: center center, center center, center 80% !important;
 }
+
+
+/* Center the left copy panel and right route visual within the desktop hero */
+@media (min-width: 651px) {
+  .home-page .home-hero {
+    justify-content: center !important;
+  }
+  .home-page .home-hero-grid {
+    align-items: center !important;
+    margin-block: auto !important;
+  }
+}
