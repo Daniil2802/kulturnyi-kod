@@ -2075,3 +2075,21 @@ body.home-page::before {
   background-image: none !important;
   background-color: transparent !important;
 }
+
+
+/* One edge-to-edge scenic canvas behind the floating home header */
+body.home-page {
+  background:
+    linear-gradient(180deg, rgba(25,30,29,.24), rgba(25,30,29,.48)),
+    url("../assets/darom-forest-background.webp") center 62% / cover fixed no-repeat !important;
+  background-color: #1f302c !important;
+}
+body.home-page::before {
+  content: none !important;
+  display: none !important;
+}
+.home-page .home-hero {
+  background: transparent !important;
+  background-image: none !important;
+  background-color: transparent !important;
+}
