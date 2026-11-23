@@ -7,6 +7,7 @@
  const count=document.getElementById("pathCount");
  const link=document.getElementById("pathLink");
  if(typeof areas==="undefined"||typeof places==="undefined")return;
+ if(areaTabs.length&&image&&kicker&&title&&description&&count&&link){
  function updatePath(id){
   const area=areas.find(x=>x.id===id)||areas[0];
   const picks=places.filter(x=>x.areaId===area.id);
@@ -42,6 +43,8 @@
   });
  });
  updatePath("tashtagol");
+ }
+
 
  const track=document.getElementById("stopsTrack");
  if(track){
