@@ -1764,3 +1764,24 @@ body.receipt-page{background:transparent!important;background-image:none!importa
  backdrop-filter:blur(14px) saturate(118%);
  -webkit-backdrop-filter:blur(14px) saturate(118%);
 }
+/* Full-bleed home canvas: remove the side gutters */
+.home-page .header{
+ width:100%;
+ margin-left:0;
+ margin-right:0;
+ border-radius:0;
+}
+.home-page .home-hero{
+ width:100%;
+ margin-left:0;
+ margin-right:0;
+ border-radius:0;
+}
+@media(max-width:900px){
+ .home-page .header{width:100%;margin-left:0;margin-right:0}
+ .home-page .home-hero{width:100%;margin-left:0;margin-right:0}
+}
+@media(max-width:650px){
+ .home-page .header{width:100%;margin:8px 0 -68px;border-radius:0}
+ .home-page .home-hero{width:100%;margin:0 0 20px;border-radius:0}
+}
