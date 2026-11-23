@@ -2125,3 +2125,16 @@ body.home-page::before {
   filter: none !important;
   transform: none !important;
 }
+
+
+/* Reduce the floating homepage header's top inset */
+.home-page .header {
+  margin-top: 4px !important;
+  transform: translateY(4px) !important;
+}
+@media (max-width: 650px) {
+  .home-page .header {
+    margin-top: 4px !important;
+    transform: translateY(4px) !important;
+  }
+}
