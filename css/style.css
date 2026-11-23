@@ -2638,3 +2638,17 @@ body > .header nav a.active:after,
 body > .header nav a:hover:after{
   right:0!important
 }
+
+
+/* Header navigation states: white underline on hover, red underline on current page */
+body > .header nav a:after{
+  background:#f3f3f3!important
+}
+body > .header nav a:hover:not(.active):after{
+  right:0!important;
+  background:#f3f3f3!important
+}
+body > .header nav a.active:after{
+  right:0!important;
+  background:#e93c4e!important
+}
