@@ -1857,3 +1857,27 @@ body.receipt-page{background:transparent!important;background-image:none!importa
 @media(max-width:650px){
   .home-page .home-hero{padding-top:76px!important;padding-bottom:12px!important}
 }
+
+
+/* Keep the homepage hero full-screen and align its content just below the header */
+.home-page .home-hero{
+  height:100svh!important;
+  min-height:700px!important;
+  margin-bottom:0!important;
+  padding-top:76px!important;
+  padding-bottom:0!important;
+  justify-content:flex-start!important;
+}
+.home-page .home-hero-grid{
+  margin-block:0!important;
+  align-self:stretch;
+}
+.home-page .home-hero-copy{margin:0!important}
+@media(max-width:650px){
+  .home-page .home-hero{
+    height:auto!important;
+    min-height:100svh!important;
+    padding-top:76px!important;
+    padding-bottom:12px!important;
+  }
+}
