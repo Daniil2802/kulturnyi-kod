@@ -2574,3 +2574,46 @@ body:not(.home-page) > .header{
     top:4px!important;left:10px!important;right:10px!important;width:auto!important
   }
 }
+
+
+/* Match the homepage header height and wrapping at each responsive breakpoint */
+@media (min-width:801px) and (max-width:900px){
+  body:not(.home-page) > .header{
+    height:76px!important;min-height:76px!important;
+    padding:0 clamp(16px,3vw,42px)!important;gap:18px!important;
+    flex-direction:row!important
+  }
+  body:not(.home-page) > .header nav{
+    flex-wrap:nowrap!important;gap:clamp(14px,2vw,32px)!important;font-size:15px!important
+  }
+}
+@media (max-width:800px){
+  body:not(.home-page) > .header{
+    height:auto!important;min-height:76px!important;
+    padding:8px 18px!important;gap:8px!important;
+    flex-direction:column!important
+  }
+  body:not(.home-page) > .header nav{
+    flex-wrap:wrap!important;justify-content:center!important;
+    gap:14px 20px!important;font-size:15px!important
+  }
+}
+@media (max-width:700px){
+  body:not(.home-page) > .header{
+    padding:7px 14px!important;gap:7px!important
+  }
+  body:not(.home-page) > .header nav{
+    gap:8px 13px!important;font-size:13px!important
+  }
+  body:not(.home-page) > .header .logo img{height:48px!important}
+}
+@media (max-width:650px){
+  body:not(.home-page) > .header{
+    min-height:76px!important;padding:9px 14px!important;gap:7px!important
+  }
+  body:not(.home-page) > .header nav{
+    gap:7px 12px!important;font-size:11px!important
+  }
+  body:not(.home-page) > .header .logo img{height:42px!important}
+  body:not(.home-page) > .header nav a{padding:8px 0!important}
+}
