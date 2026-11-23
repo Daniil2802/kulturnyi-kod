@@ -2395,7 +2395,7 @@ body.home-page.map-background-blurred::before{
  content:"";
  position:absolute;
  z-index:0;
- left:9%;
+ left:15%;
  right:3%;
  bottom:6px;
  height:16px;
