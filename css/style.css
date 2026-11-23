@@ -2138,3 +2138,18 @@ body.home-page::before {
     transform: translateY(4px) !important;
   }
 }
+
+
+/* Set a small, precise inset for the floating homepage header */
+.home-page .header {
+  top: 4px !important;
+  margin-top: 0 !important;
+  transform: none !important;
+}
+@media (max-width: 650px) {
+  .home-page .header {
+    top: 4px !important;
+    margin-top: 0 !important;
+    transform: none !important;
+  }
+}
