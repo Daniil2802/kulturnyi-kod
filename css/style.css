@@ -1911,3 +1911,21 @@ body.receipt-page{background:transparent!important;background-image:none!importa
     margin:0 10px -68px!important;
   }
 }
+
+
+/* Keep the inset header while extending a visible mountain photo behind it */
+.home-page .header{
+  top:12px!important;
+  margin:12px 2.4vw -76px!important;
+}
+body.home-page::before{
+  background-position:center center,center 62%;
+  background-size:auto,cover;
+  background-repeat:no-repeat,no-repeat;
+}
+@media(max-width:650px){
+  .home-page .header{
+    top:8px!important;
+    margin:8px 10px -68px!important;
+  }
+}
