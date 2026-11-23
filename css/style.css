@@ -1936,3 +1936,40 @@ body.home-page::before{
 @media(max-width:650px){
   .home-page .header{transform:translateY(8px)!important}
 }
+
+
+/* Let the forest photo reach the viewport top and center the welcome panel */
+html, body.home-page {
+  margin-top: 0 !important;
+  background: transparent !important;
+}
+body.home-page::before {
+  position: fixed !important;
+  inset: -24px !important;
+  background-position: center center, center 76% !important;
+  background-size: auto, cover !important;
+  background-repeat: no-repeat, no-repeat !important;
+}
+.home-page .home-hero {
+  background-position: center 68% !important;
+}
+.home-page .home-hero-grid {
+  align-items: center !important;
+}
+.home-page .home-hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.home-page .home-hero-copy #homeTitle,
+.home-page .home-hero-copy > p:not(.eyebrow) {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.home-page .home-hero-actions,
+.home-page .home-facts {
+  justify-content: center;
+}
