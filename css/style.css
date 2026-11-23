@@ -2245,3 +2245,73 @@ body.home-page::before {
     min-height: 320px !important;
   }
 }
+
+
+/* Full-width Kuzbass map replacing the second homepage section */
+.home-page .home-map-section{
+ position:relative;max-width:1440px;margin:0 auto;padding:clamp(70px,8vw,112px) clamp(22px,7vw,120px) 84px;
+ color:rgba(243,243,243,.96);background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.home-map-heading{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);align-items:end;gap:clamp(28px,8vw,120px);margin-bottom:22px}
+.home-map-heading .eyebrow{color:rgba(243,243,243,.68);margin:0 0 16px}
+.home-map-heading .eyebrow span{color:#b7233a;margin-left:12px}
+.home-map-heading h2{font:400 clamp(44px,6vw,78px)/.92 var(--display);letter-spacing:-.035em;text-transform:uppercase;margin:0;color:#f3f3f3}
+.home-map-heading>p{max-width:450px;margin:0 0 5px;color:rgba(243,243,243,.76);font:400 clamp(14px,1.25vw,17px)/1.65 var(--reading)}
+.kuzbass-map-stage{position:relative;display:grid;place-items:center;width:100%;height:clamp(500px,56vw,720px);overflow:visible}
+.kuzbass-map-plot{position:relative;height:min(100%,680px);aspect-ratio:525/850;width:auto;max-width:100%;isolation:isolate}
+.kuzbass-map-image{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 18px 35px rgba(0,0,0,.2))}
+.kuzbass-map-route{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1}
+.kuzbass-map-route path{fill:none;stroke:rgba(243,243,243,.8);stroke-width:3;stroke-dasharray:7 12;stroke-linecap:round;filter:drop-shadow(0 2px 3px rgba(10,20,16,.48))}
+.map-pin{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;width:max-content;max-width:240px;color:#f3f3f3;transform:translate(-50%,-50%);text-decoration:none}
+.map-pin--kemerovo{left:56%;top:36%}
+.map-pin--novokuznetsk{left:42%;top:64%}
+.map-pin--sheregesh{left:56%;top:82%}
+.map-pin-dot{flex:0 0 17px;width:17px;height:17px;border:3px solid #f3f3f3;border-radius:50%;background:#b7233a;box-shadow:0 0 0 5px rgba(183,35,58,.19),0 3px 12px rgba(0,0,0,.36);transition:transform .2s ease,box-shadow .2s ease}
+.map-pin-label{display:block;padding:10px 14px;border:1px solid rgba(243,243,243,.42);border-radius:30px;background:rgba(25,30,29,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:700 11px/1 var(--reading);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;transition:background-color .2s ease,border-color .2s ease,transform .2s ease}
+.map-pin--novokuznetsk{flex-direction:row-reverse}
+.map-pin:hover .map-pin-dot,.map-pin:focus-visible .map-pin-dot{transform:scale(1.2);box-shadow:0 0 0 8px rgba(183,35,58,.2),0 3px 12px rgba(0,0,0,.36)}
+.map-pin:hover .map-pin-label,.map-pin:focus-visible .map-pin-label{background:#b7233a;border-color:#f3f3f3;transform:translateY(-2px)}
+.map-pin:focus-visible,.home-map-links a:focus-visible{outline:2px solid #f3f3f3;outline-offset:5px;border-radius:4px}
+.home-map-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,28px);margin-top:4px}
+.home-map-links a{position:relative;min-height:96px;display:grid;grid-template-columns:34px 1fr 24px;grid-template-rows:auto auto;align-content:center;gap:7px 12px;padding:15px 18px;border-top:1px solid rgba(243,243,243,.48);background:rgba(12,28,23,.38);color:#f3f3f3;transition:background-color .22s ease,border-color .22s ease,transform .22s ease}
+.home-map-links a>span{grid-row:span 2;align-self:center;color:#c03a4b;font:400 23px var(--display)}
+.home-map-links a>b{font:700 15px var(--reading);text-transform:uppercase;letter-spacing:.04em}
+.home-map-links a>small{color:rgba(243,243,243,.68);font:400 11px/1.35 var(--reading)}
+.home-map-links a>i{grid-column:3;grid-row:1/3;align-self:center;justify-self:end;color:#e33b52;font:normal 22px var(--reading)}
+.home-map-links a:hover{transform:translateY(-3px);background:rgba(12,28,23,.65);border-color:#e33b52}
+@media(max-width:800px){
+ .home-page .home-map-section{padding:66px 28px 64px}
+ .home-map-heading{grid-template-columns:1fr;gap:18px;margin-bottom:10px}
+ .home-map-heading h2{font-size:clamp(42px,9vw,68px)}
+ .home-map-heading>p{max-width:530px}
+ .kuzbass-map-stage{height:clamp(480px,85vw,650px)}
+ .kuzbass-map-plot{height:min(100%,620px)}
+ .home-map-links{gap:12px}
+ .home-map-links a{grid-template-columns:25px 1fr 16px;gap:6px 8px;padding:14px 11px}
+ .home-map-links a>span{font-size:18px}
+ .home-map-links a>b{font-size:12px}
+ .home-map-links a>small{font-size:10px}
+}
+@media(max-width:560px){
+ .home-page .home-map-section{padding:58px 20px 54px}
+ .home-map-heading .eyebrow{font-size:10px}
+ .home-map-heading h2{font-size:clamp(38px,11vw,56px)}
+ .home-map-heading>p{font-size:14px;line-height:1.55}
+ .kuzbass-map-stage{height:clamp(430px,126vw,570px);margin:8px 0 0}
+ .kuzbass-map-plot{height:min(100%,570px)}
+ .map-pin{gap:7px}
+ .map-pin-dot{flex-basis:14px;width:14px;height:14px;border-width:2px}
+ .map-pin-label{font-size:9px;padding:8px 10px;letter-spacing:.04em}
+ .map-pin--kemerovo{left:58%;top:36%}
+ .map-pin--novokuznetsk{left:42%;top:64%}
+ .map-pin--sheregesh{left:58%;top:82%}
+ .home-map-links{grid-template-columns:1fr;gap:8px;margin-top:0}
+ .home-map-links a{min-height:68px;grid-template-columns:30px 1fr 20px;padding:10px 14px}
+ .home-map-links a>span{grid-row:1/3;font-size:20px}
+ .home-map-links a>b{font-size:13px}
+ .home-map-links a>small{font-size:10px}
+ .home-map-links a>i{grid-column:3;grid-row:1/3}
+}
+@media(prefers-reduced-motion:reduce){
+ .map-pin-dot,.map-pin-label,.home-map-links a{transition:none}
+}
