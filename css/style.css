@@ -1587,7 +1587,7 @@ body::before{content:"";position:fixed;z-index:-1;inset:-18px;pointer-events:non
 .home-route-map path{fill:none;stroke:rgba(243,243,243,.82);stroke-width:2.2;stroke-dasharray:5 10;stroke-linecap:round}
 .home-route-map circle{fill:var(--upsdell);stroke:var(--paper);stroke-width:3}
 .route-label{position:absolute;padding:8px 12px;border-radius:20px;background:rgba(25,30,29,.58);border:1px solid rgba(243,243,243,.48);backdrop-filter:blur(8px);color:var(--paper);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
-.route-label-one{top:22%;right:15%}.route-label-two{top:52%;left:16%}.route-label-three{bottom:32%;right:23%}
+.route-label-one{top:29%;right:13%}.route-label-two{top:52%;left:16%}.route-label-three{bottom:49%;right:19%}
 .home-visual-note{right:4%;bottom:22%;padding:11px 15px;background:rgba(243,243,243,.88);box-shadow:0 8px 28px rgba(25,30,29,.15)}
 .home-visual-coord{left:5%;bottom:24%;color:rgba(243,243,243,.8)}
 .home-visual-tags{position:relative;z-index:3;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:min(100%,710px);margin-left:auto;gap:10px}
@@ -1626,7 +1626,7 @@ body::before{content:"";position:fixed;z-index:-1;inset:-18px;pointer-events:non
  .home-visual-index small{font-size:8px}
  .home-route-map{inset:16% 0 25%;height:58%}
  .route-label{font-size:8px;padding:6px 9px}
- .route-label-one{top:20%;right:6%}.route-label-two{top:50%;left:3%}.route-label-three{bottom:30%;right:9%}
+ .route-label-one{top:26%;right:13%}.route-label-two{top:50%;left:3%}.route-label-three{bottom:48%;right:19%}
  .home-visual-note{right:1%;bottom:24%;padding:9px 11px;font-size:10px}
  .home-visual-coord{left:2%;bottom:25%;font-size:8px}
  .home-visual-tags{width:100%;grid-template-columns:repeat(3,minmax(0,1fr));max-width:none;gap:5px}
