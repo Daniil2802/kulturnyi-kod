@@ -2405,7 +2405,7 @@ body.home-page.map-background-blurred::before{
 /* Cultural path: blurred landscape and glass route cards */
 body.receipt-page{position:relative;isolation:isolate;background:#101d1a;color:#f4f2e9}
 body.receipt-page:before{content:"";position:fixed;z-index:-1;inset:-18px;background:linear-gradient(180deg,rgba(12,24,21,.63),rgba(12,24,21,.74)),url("../assets/darom-forest-background.webp") center/cover no-repeat;filter:blur(8px);transform:scale(1.04);pointer-events:none}
-body.receipt-page .page{max-width:1180px}
+body.receipt-page .page{max-width:1180px;background:transparent!important;background-color:transparent!important;background-image:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}body.receipt-page .page:before{display:none!important}
 body.receipt-page .page > .eyebrow{color:#e0c7ac}
 body.receipt-page .page > h1{color:#f4f2e9}
 body.receipt-page .page > .lead{color:#e0e5de}
