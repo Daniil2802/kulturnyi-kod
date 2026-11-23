@@ -1696,3 +1696,45 @@ body::before{content:"";position:fixed;z-index:-1;inset:-18px;pointer-events:non
  .home-hero-copy{padding:24px 21px}
  .home-hero h1{font-size:clamp(42px,11vw,58px);line-height:.95}
 }
+
+/* Consistent frosted-glass surfaces over the blurred forest background */
+:root{
+ --glass-light:rgba(243,243,243,.56);
+ --glass-light-soft:rgba(243,243,243,.42);
+ --glass-stroke:rgba(243,243,243,.48);
+}
+body{background:transparent!important}
+.page,.hero,.section{
+ background-color:var(--glass-light-soft)!important;
+ backdrop-filter:blur(16px) saturate(118%);
+ -webkit-backdrop-filter:blur(16px) saturate(118%);
+ border-color:var(--glass-stroke)!important;
+}
+.steps article,.category-grid a,.card,.people-card,.empty,
+.share-invitation,.receipt-tools,.receipt,.item-art,.object-card,
+.path-feature,.stop-card,.filters select,
+input,textarea,select{
+ background-color:var(--glass-light)!important;
+ backdrop-filter:blur(14px) saturate(118%);
+ -webkit-backdrop-filter:blur(14px) saturate(118%);
+ border-color:var(--glass-stroke)!important;
+}
+.tint,.shor,.teleut,.home-path-section,.home-culture-section{
+ background-color:var(--glass-light-soft)!important;
+ backdrop-filter:blur(16px) saturate(118%);
+ -webkit-backdrop-filter:blur(16px) saturate(118%);
+}
+.home-stops-section{
+ background-color:rgba(31,48,44,.50)!important;
+ backdrop-filter:blur(14px) saturate(118%);
+ -webkit-backdrop-filter:blur(14px) saturate(118%);
+}
+.home-hero-copy{background:rgba(25,30,29,.50)!important}
+@media(max-width:650px){
+ .page,.hero,.section{background-color:rgba(243,243,243,.52)!important}
+ .steps article,.category-grid a,.card,.people-card,.empty,
+ .share-invitation,.receipt-tools,.receipt,.item-art,.object-card,
+ .path-feature,.stop-card,.filters select,input,textarea,select{
+  background-color:rgba(243,243,243,.64)!important
+ }
+}
