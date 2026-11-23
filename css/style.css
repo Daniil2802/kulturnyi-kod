@@ -2390,3 +2390,25 @@ body.home-page.map-background-blurred::before{
 }
 
 
+
+/* Personal place memories stored in the visitor's browser */
+.place-memory{margin-top:24px}
+.place-memory h2{margin:10px 0 12px}
+.place-memory-intro,.place-memory-privacy,.place-memory-empty{color:#536157;line-height:1.6}
+.place-memory-form{display:grid;gap:10px;max-width:760px;margin:20px 0 26px}
+.place-memory-form label{font-weight:800}
+.place-memory-form label span{font-weight:400;color:#536157}
+.place-memory-form textarea,.place-memory-form input[type=file]{width:100%;padding:13px;border:1px solid #cbd5ce;border-radius:4px;background:#fff;font:inherit}
+.place-memory-form textarea{resize:vertical}
+.place-memory-form .button{justify-self:start;margin-top:4px;border:0;cursor:pointer}
+.place-memory-status{min-height:1.4em;margin:0;color:#384a30;font-size:14px}
+.place-memory-list{display:grid;gap:14px}
+.place-memory-entry{padding:18px;background:#f8f9f7;border:1px solid #cbd5ce}
+.place-memory-entry-head{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#536157;font-size:13px}
+.place-memory-delete{border:0;background:transparent;color:#6f3a31;text-decoration:underline;cursor:pointer;font:inherit}
+.place-memory-note{line-height:1.65;white-space:normal}
+.place-memory-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.place-memory-photo{display:block;aspect-ratio:1;overflow:hidden;background:#e8eee9}
+.place-memory-photo img{width:100%;height:100%;object-fit:cover}
+.place-memory-privacy{font-size:13px;margin-top:18px}
+@media(max-width:600px){.place-memory-photos{grid-template-columns:repeat(2,minmax(0,1fr))}.place-memory-entry{padding:14px}}
