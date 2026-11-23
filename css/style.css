@@ -2557,3 +2557,20 @@ body:not(.home-page) > .header{
     gap:7px!important
   }
 }
+
+/* Exact homepage positioning makes outer header widths identical */
+body:not(.home-page) > .header{
+  position:fixed!important;top:4px!important;
+  left:2.4vw!important;right:2.4vw!important;
+  width:auto!important;margin:0!important
+}
+@media(max-width:900px){
+  body:not(.home-page) > .header{
+    top:4px!important;left:16px!important;right:16px!important;width:auto!important
+  }
+}
+@media(max-width:600px){
+  body:not(.home-page) > .header{
+    top:4px!important;left:10px!important;right:10px!important;width:auto!important
+  }
+}
