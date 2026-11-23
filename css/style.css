@@ -2390,28 +2390,3 @@ body.home-page.map-background-blurred::before{
 }
 
 
-/* A fine white dashed curve across the floating homepage header */
-.home-page .header::before{
- content:"";
- position:absolute;
- z-index:0;
- left:15%;
- right:3%;
- bottom:6px;
- height:16px;
- pointer-events:none;
- background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 24' preserveAspectRatio='none'%3E%3Cpath d='M0 15 C130 3 220 22 350 12 S570 4 700 14 930 22 1200 8' fill='none' stroke='%23f3f3f3' stroke-opacity='.92' stroke-width='2' stroke-dasharray='5 9' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;
-}
-.home-page .header>.logo,
-.home-page .header>nav{
- position:relative;
- z-index:1;
-}
-@media(max-width:650px){
- .home-page .header::before{
-  left:12%;
-  right:4%;
-  bottom:3px;
-  height:9px;
- }
-}
