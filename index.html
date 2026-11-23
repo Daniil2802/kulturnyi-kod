@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#1F302C">
   <title>Даром — культурные маршруты Кузбасса</title>
   <meta name="description" content="Открывай места и истории Кузбасса, знакомься с культурными предметами и собирай свой культурный маршрут.">
-  <link rel="stylesheet" href="css/style.css?v=darom-route-labels-near-points-20261123">
+  <link rel="stylesheet" href="css/style.css?v=home-kuzbass-map-20261123">
 </head>
 <body class="home-page">
 <header class="header">
@@ -43,29 +43,36 @@
     </div>
   </section>
 
-  <section class="home-section home-path-section" id="choosePath">
-    <div class="home-section-heading">
-      <p class="eyebrow">Точка входа <span>01</span></p>
-      <h2>Куда потянет?</h2>
-      <p>Выбери настроение — покажем, с какого края начать знакомство с регионом.</p>
-    </div>
-    <div class="path-explorer">
-      <div class="path-tabs" role="tablist" aria-label="Выбор направления">
-        <button class="path-tab is-active" type="button" role="tab" aria-selected="true" data-area="tashtagol"><span>01</span>Горы и тайга</button>
-        <button class="path-tab" type="button" role="tab" aria-selected="false" data-area="novokuznetsk"><span>02</span>Городские истории</button>
-        <button class="path-tab" type="button" role="tab" aria-selected="false" data-area="kemerovo"><span>03</span>Музеи Кузбасса</button>
+  <section class="home-section home-map-section" id="choosePath" aria-labelledby="mapSectionTitle">
+    <div class="home-map-heading">
+      <div>
+        <p class="eyebrow">География путешествий <span>01</span></p>
+        <h2 id="mapSectionTitle">КУЗБАСС<br>НА ТВОЕЙ КАРТЕ</h2>
       </div>
-      <article class="path-feature" id="pathFeature">
-        <div class="path-feature-photo"><img id="pathImage" src="" alt=""><span class="path-feature-stamp">ТВОЙ<br>ВЫБОР</span></div>
-        <div class="path-feature-copy">
-          <p class="eyebrow" id="pathKicker">Направление · Таштагол и Шерегеш</p>
-          <h3 id="pathTitle">Горная Шория</h3>
-          <p id="pathDescription"></p>
-          <div class="path-feature-foot"><span id="pathCount"></span><a id="pathLink" href="area.html?area=tashtagol">Открыть направление <b aria-hidden="true">↗</b></a></div>
-        </div>
-      </article>
+      <p>Выбери точку на карте — и отправляйся знакомиться с местами, историями и людьми региона.</p>
     </div>
-    <div class="home-side-note">Выбор можно<br>поменять в любой момент.</div>
+    <div class="kuzbass-map-stage">
+      <div class="kuzbass-map-plot">
+        <img class="kuzbass-map-image" src="assets/kuzbass-map.webp" alt="Карта Кузбасса с границами муниципальных районов" loading="lazy">
+        <svg class="kuzbass-map-route" viewBox="0 0 525 850" aria-hidden="true">
+          <path d="M290 303 C340 375 235 480 245 564 S315 665 300 742"></path>
+        </svg>
+        <a class="map-pin map-pin--kemerovo" href="place.html?id=kuzbass-museum" aria-label="Открыть историю Кемерово">
+          <span class="map-pin-dot" aria-hidden="true"></span><span class="map-pin-label">Кемерово</span>
+        </a>
+        <a class="map-pin map-pin--novokuznetsk" href="place.html?id=novokuznetsk-museum" aria-label="Открыть историю Новокузнецка">
+          <span class="map-pin-dot" aria-hidden="true"></span><span class="map-pin-label">Новокузнецк</span>
+        </a>
+        <a class="map-pin map-pin--sheregesh" href="area.html?area=tashtagol" aria-label="Открыть направление Шерегеш">
+          <span class="map-pin-dot" aria-hidden="true"></span><span class="map-pin-label">Шерегеш</span>
+        </a>
+      </div>
+    </div>
+    <nav class="home-map-links" aria-label="Места на карте Кузбасса">
+      <a href="area.html?area=tashtagol"><span>01</span><b>Шерегеш</b><small>Горная Шория</small><i aria-hidden="true">↗</i></a>
+      <a href="place.html?id=kuzbass-museum"><span>02</span><b>Кемерово</b><small>Столица Кузбасса</small><i aria-hidden="true">↗</i></a>
+      <a href="place.html?id=novokuznetsk-museum"><span>03</span><b>Новокузнецк</b><small>Город с большой историей</small><i aria-hidden="true">↗</i></a>
+    </nav>
   </section>
 
   <section class="home-section home-stops-section" id="stops">
@@ -100,6 +107,6 @@
 </main>
 <script src="js/data.js?v=darom-panorama-20261123"></script>
 <script src="js/places-data.js?v=darom-panorama-20261123"></script>
-<script src="js/home.js?v=darom-panorama-20261123"></script>
+<script src="js/home.js?v=home-kuzbass-map-20261123"></script>
 </body>
 </html>
