@@ -2390,3 +2390,8 @@ body.home-page.map-background-blurred::before{
 }
 
 
+
+
+/* Controls for adding a cultural place to the route */
+.place-select-button{cursor:pointer}
+.place-select-button[aria-pressed="true"]{background:#a43339}

@@ -17,29 +17,10 @@ function render() {
       <span class="tag">${o.people} · ${o.category}</span>
       <h2><a href="item.html?id=${o.id}">${o.name}</a></h2>
       <p>${o.short}</p>
-      <div class="card-actions">
-        <button type="button" data-add="${o.id}">＋ В культурный чек</button>
-        <a href="item.html?id=${o.id}">История товара →</a>
-      </div>
+      <div class="card-actions"><a href="item.html?id=${o.id}">История предмета →</a></div>
     </div>
   </article>`).join("") || "<p class=\"empty\">Пока ничего не приглянулось по этому запросу. Попробуй выбрать другие товары.</p>";
 
-  catalog.querySelectorAll("[data-add]").forEach(button => {
-    button.addEventListener("click", () => addToReceipt(Number(button.dataset.add), button));
-  });
-}
-
-function addToReceipt(id, button) {
-  const ids = JSON.parse(localStorage.getItem("collection") || "[]");
-  if (!ids.includes(id)) ids.push(id);
-  localStorage.setItem("collection", JSON.stringify(ids));
-  const original = button.textContent;
-  button.textContent = "✓ Уже в чеке";
-  button.classList.add("is-added");
-  window.setTimeout(() => {
-    button.textContent = original;
-    button.classList.remove("is-added");
-  }, 1300);
 }
 
 pf.addEventListener("change", render);

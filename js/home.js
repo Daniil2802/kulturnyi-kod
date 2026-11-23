@@ -25,7 +25,7 @@
    image.onload=()=>{image.style.opacity="1"};
    if(image.complete)image.style.opacity="1";
   },140);
-  kicker.textContent="Направление · "+area.title;
+  kicker.textContent="Город / район · "+area.title;
   title.textContent=area.title;
   description.textContent=area.short;
   const n=picks.length, word=n===1?"место":(n>=2&&n<=4?"места":"мест");

@@ -18,8 +18,8 @@ function plural(count, one, few, many) {
 }
 
 function readSelected() {
-  const ids = JSON.parse(localStorage.getItem("collection") || "[]");
-  return objects.filter(object => ids.includes(object.id));
+  const ids = JSON.parse(localStorage.getItem("selectedPlaces") || "[]");
+  return places.filter(place => ids.includes(place.id));
 }
 
 function encodeSharePayload(value) {
@@ -52,8 +52,8 @@ function readSharedReceipt() {
     const value = readSharePayload(raw, Boolean(compactRaw));
     const rawIds = value.ids ?? value.i;
     if (!Array.isArray(rawIds)) return null;
-    const ids = rawIds.map(Number).filter(Number.isInteger);
-    const selected = objects.filter(object => ids.includes(object.id));
+    const ids = rawIds.map(String);
+    const selected = places.filter(place => ids.includes(place.id));
     if (!selected.length) return null;
     return {
       selected,
@@ -72,13 +72,13 @@ function formatDate() {
 }
 
 function receiptNumberFor(selected, recipient, dateText) {
-  const seed = `${dateText}|${recipient}|${selected.map(object => object.id).join(",")}`;
+  const seed = `${dateText}|${recipient}|${selected.map(place => place.id).join(",")}`;
   const value = [...seed].reduce((sum, character) => sum + character.charCodeAt(0), 0);
   return String(1000 + value % 9000);
 }
 
 function receiptMarkup(selected, recipient, {readOnly = false, dateText = formatDate()} = {}) {
-  const peoples = [...new Set(selected.map(object => object.people))];
+  const areaNames = [...new Set(selected.map(place => areas.find(area => area.id === place.areaId)?.title).filter(Boolean))];
   const number = receiptNumberFor(selected, recipient, dateText);
   return `<article class="receipt" id="receipt">
     <header class="receipt-head">
@@ -90,18 +90,18 @@ function receiptMarkup(selected, recipient, {readOnly = false, dateText = format
     </header>
     <div class="receipt-rule"></div>
     <p class="receipt-label">В ЧЕКЕ:</p>
-    <div class="receipt-items">${selected.map((object, index) => `<div class="receipt-row">
+    <div class="receipt-items">${selected.map((place, index) => `<div class="receipt-row">
       <div class="receipt-row-copy">
-        <div class="receipt-item-line"><strong>${index + 1}. ${escapeHTML(object.name)}</strong><b class="receipt-price">ДАРОМ</b></div>
-        <small>${escapeHTML(object.people)} · ${escapeHTML(object.category)}</small>
-        <p>${escapeHTML(object.short)}</p>
+        <div class="receipt-item-line"><strong>${index + 1}. ${escapeHTML(place.title)}</strong><b class="receipt-price">ДАРОМ</b></div>
+        <small>${escapeHTML(place.kind)} · ${escapeHTML(place.address)}</small>
+        <p>${escapeHTML(place.shortDescription || place.description)}</p>
       </div>
-      ${readOnly ? "" : `<button type="button" class="remove-item" data-remove="${object.id}" aria-label="Убрать ${escapeHTML(object.name)} из чека">×</button>`}
+      ${readOnly ? "" : `<button type="button" class="remove-item" data-remove="${place.id}" aria-label="Убрать ${escapeHTML(place.title)} из чека">×</button>`}
     </div>`).join("")}</div>
     <div class="receipt-rule"></div>
-    <div class="receipt-total"><span>ИТОГО: ${selected.length} ${plural(selected.length,"предмет","предмета","предметов")}</span><b>${peoples.length} ${plural(peoples.length,"культура","культуры","культур")}</b></div>
-    <div class="receipt-payment"><span>К ОПЛАТЕ</span><b>0 ₽</b></div>
-    <p class="receipt-note">Культуру нельзя купить — можно только подарить знание.</p>
+    <div class="receipt-total"><span>ИТОГО: ${selected.length} ${plural(selected.length,"место","места","мест")}</span><b>${areaNames.length} ${plural(areaNames.length,"территория","территории","территорий")}</b></div>
+    <div class="receipt-payment"><span>МАРШРУТ ГОТОВ</span><b>${selected.length} ${plural(selected.length,"место","места","мест")}</b></div>
+    <p class="receipt-note">Каждое место — новая история и впечатление.</p>
     <footer class="receipt-foot">СПАСИБО ЗА ВИЗИТ.<br>ДЕЛИСЬ ИСТОРИЯМИ.</footer>
   </article>`;
 }
@@ -109,15 +109,15 @@ function receiptMarkup(selected, recipient, {readOnly = false, dateText = format
 function render() {
   const shared = readSharedReceipt();
   if (shared) {
-    document.querySelector(".page > .eyebrow").textContent = "Тебя пригласили в лавку";
+    document.querySelector(".page > .eyebrow").textContent = "Тебя пригласили в маршрут";
     document.querySelector(".page > h1").textContent = "Вот твой культурный чек";
-    document.querySelector(".page > .lead").textContent = `Для тебя собрали истории о вещах, которые напомнили отправителю о тебе.`;
+    document.querySelector(".page > .lead").textContent = `Для тебя собрали места Кузбасса, которые можно включить в культурный маршрут.`;
     host.innerHTML = `${receiptMarkup(shared.selected, shared.recipient, {readOnly:true, dateText:shared.date || formatDate()})}
       <section class="share-invitation">
         <p class="eyebrow">Твоя очередь</p>
-        <h2>Собери чек для своего близкого</h2>
-        <p>Загляни в культурную лавку, выбери то, что ассоциируется с другом или родным человеком, и отправь ему свой чек.</p>
-        <a class="button" href="catalog.html">Собрать свой чек →</a>
+        <h2>Собери свой маршрут</h2>
+        <p>Выбери места, которые хочешь посетить, и добавь их в свой культурный чек.</p>
+        <a class="button" href="places.html">Выбрать места →</a>
       </section>`;
     return;
   }
@@ -126,21 +126,21 @@ function render() {
   if (!selected.length) {
     host.innerHTML = `<div class="empty">
       <h2>Чек пока пуст</h2>
-      <p>Загляни в лавку и выбери товары, которые напоминают тебе о близком человеке.</p>
-      <a class="button" href="catalog.html">Выбрать товары</a>
+      <p>Добавь в чек музеи и другие места, которые хочешь посетить.</p>
+      <a class="button" href="places.html">Выбрать места</a>
     </div>`;
     return;
   }
 
   const recipient = localStorage.getItem(recipientKey) || "Дорогой человек";
   host.innerHTML = `<div class="receipt-tools">
-      <label for="recipient">Кому собираем чек?</label>
+      <label for="recipient">Кому отправить маршрут?</label>
       <input id="recipient" name="recipient" type="text" maxlength="60" value="${escapeHTML(recipient)}" placeholder="Например, для Ани">
-      <p>Выбирай то, что ассоциируется с этим человеком. Это подарок из историй и культурных вещей.</p>
+      <p>В чеке собраны места для твоего маршрута; предметы остаются экспонатами этих мест.</p>
     </div>
     ${receiptMarkup(selected, recipient)}
     <div class="receipt-actions">
-      <button class="button" id="shareReceipt" type="button">Поделиться чеком и пригласить</button>
+      <button class="button" id="shareReceipt" type="button">Поделиться маршрутом</button>
       <button class="button button-light" id="printReceipt" type="button">Распечатать / сохранить PDF</button>
     </div>`;
 
@@ -150,8 +150,8 @@ function render() {
     host.querySelector(".receipt-recipient").textContent = value;
   });
   host.querySelectorAll("[data-remove]").forEach(button => button.addEventListener("click", () => {
-    const ids = JSON.parse(localStorage.getItem("collection") || "[]").filter(id => id !== Number(button.dataset.remove));
-    localStorage.setItem("collection", JSON.stringify(ids));
+    const ids = JSON.parse(localStorage.getItem("selectedPlaces") || "[]").filter(id => id !== button.dataset.remove);
+    localStorage.setItem("selectedPlaces", JSON.stringify(ids));
     render();
   }));
   document.getElementById("shareReceipt").addEventListener("click", () => {
@@ -185,11 +185,11 @@ async function makeReceiptImage(selected, recipient) {
   const right = width - left;
   const maxWidth = right - left;
   const bodyFont = '22px "Courier New", monospace';
-  const rows = selected.map(object => {
+  const rows = selected.map(place => {
     context.font = bodyFont;
     return {
-      object,
-      lines: wrapCanvasText(context, object.short, maxWidth)
+      place,
+      lines: wrapCanvasText(context, place.shortDescription || place.description, maxWidth)
     };
   });
   const rowHeights = rows.map(row => 104 + row.lines.length * 31);
@@ -232,10 +232,10 @@ async function makeReceiptImage(selected, recipient) {
   ctx.fillText("В ЧЕКЕ:", left, 267);
 
   let y = 310;
-  rows.forEach(({object, lines}, index) => {
+  rows.forEach(({place, lines}, index) => {
     ctx.fillStyle = "#a43339";
     ctx.font = 'bold 23px "Courier New", monospace';
-    const titleLines = wrapCanvasText(ctx, `${index + 1}. ${object.name}`, maxWidth - 130);
+    const titleLines = wrapCanvasText(ctx, `${index + 1}. ${place.title}`, maxWidth - 130);
     titleLines.forEach((line, lineIndex) => ctx.fillText(line, left, y + lineIndex * 29));
     ctx.textAlign = "right";
     ctx.fillStyle = "#a43339";
@@ -245,7 +245,7 @@ async function makeReceiptImage(selected, recipient) {
     y += titleLines.length * 29 + 26;
     ctx.fillStyle = "#77716a";
     ctx.font = '17px "Courier New", monospace';
-    ctx.fillText(`${object.people} · ${object.category}`, left, y);
+    ctx.fillText(`${place.kind} · ${place.address}`, left, y);
     y += 28;
     ctx.fillStyle = "#432523";
     ctx.font = bodyFont;
@@ -257,33 +257,33 @@ async function makeReceiptImage(selected, recipient) {
     rule(y - 8);
   });
 
-  const peoples = [...new Set(selected.map(object => object.people))];
+  const areaNames = [...new Set(selected.map(place => areas.find(area => area.id === place.areaId)?.title).filter(Boolean))];
   y += 22;
   ctx.fillStyle = "#432523";
   ctx.font = 'bold 20px "Courier New", monospace';
   ctx.textAlign = "left";
-  ctx.fillText(`ИТОГО: ${selected.length} ${plural(selected.length,"предмет","предмета","предметов")}`, left, y);
+  ctx.fillText(`ИТОГО: ${selected.length} ${plural(selected.length,"место","места","мест")}`, left, y);
   ctx.textAlign = "right";
-  ctx.fillText(`${peoples.length} ${plural(peoples.length,"культура","культуры","культур")}`, right, y);
+  ctx.fillText(`${areaNames.length} ${plural(areaNames.length,"территория","территории","территорий")}`, right, y);
   y += 58;
   rule(y - 20);
   ctx.textAlign = "left";
   ctx.fillStyle = "#a43339";
   ctx.font = 'bold 29px "Courier New", monospace';
-  ctx.fillText("К ОПЛАТЕ", left, y + 20);
+  ctx.fillText("МАРШРУТ ГОТОВ", left, y + 20);
   ctx.textAlign = "right";
   ctx.font = 'bold 34px "Courier New", monospace';
-  ctx.fillText("0 ₽", right, y + 20);
+  ctx.fillText(`${selected.length} ${plural(selected.length,"место","места","мест")}`, right, y + 20);
   y += 70;
   ctx.textAlign = "center";
   ctx.fillStyle = "#77716a";
   ctx.font = '19px "Courier New", monospace';
-  ctx.fillText("Культуру нельзя купить — можно только подарить знание.", width / 2, y, maxWidth);
+  ctx.fillText("Каждое место — новая история и впечатление.", width / 2, y, maxWidth);
   y += 48;
   rule(y - 15);
   ctx.fillStyle = "#432523";
   ctx.font = 'bold 20px "Courier New", monospace';
-  ctx.fillText("СПАСИБО ЗА ВИЗИТ. ДЕЛИСЬ ИСТОРИЯМИ.", width / 2, y + 20, maxWidth);
+  ctx.fillText("ДО ВСТРЕЧИ В КУЗБАССЕ. ДЕЛИСЬ ИСТОРИЯМИ.", width / 2, y + 20, maxWidth);
 
   return new Promise(resolve => canvas.toBlob(blob => {
     if (!blob) return resolve(null);
@@ -306,9 +306,9 @@ function downloadReceiptImage(file) {
 async function shareReceipt(selected, recipient) {
   const date = formatDate();
   const shareUrl = new URL("collection.html", location.href);
-  shareUrl.searchParams.set("s", encodeSharePayload({ids:selected.map(object => object.id), recipient, date}));
-  const peoples = [...new Set(selected.map(object => object.people))];
-  const text = `Я собрал(а) этот культурный чек для тебя: выбрал(а) истории, которые напомнили мне о тебе. Открой его и собери свой для друга или близкого.\n\nКультуры: ${peoples.join(", ")}.`;
+  shareUrl.searchParams.set("s", encodeSharePayload({ids:selected.map(place => place.id), recipient, date}));
+  const areaNames = [...new Set(selected.map(place => areas.find(area => area.id === place.areaId)?.title).filter(Boolean))];
+  const text = `Я собрал(а) культурный чек из мест, которые хочу посетить. Посмотри мой маршрут и выбери места для своего.\n\nМеста: ${selected.map(place => place.title).join(", ")}.`;
   const shareText = `${text}\n\n${shareUrl.href}`;
   const copyText = shareText;
 
@@ -330,8 +330,8 @@ async function shareReceipt(selected, recipient) {
     await navigator.clipboard.writeText(copyText);
     if (image) downloadReceiptImage(image);
     alert(image
-      ? "Ссылка-приглашение скопирована, а картинка чека скачана. Отправь их другу вместе."
-      : "Ссылка на чек и приглашение скопирована — отправь её другу.");
+      ? "Ссылка на маршрут скопирована, а картинка чека скачана."
+      : "Ссылка на культурный маршрут скопирована.");
   } catch {
     if (image) downloadReceiptImage(image);
     alert(copyText);

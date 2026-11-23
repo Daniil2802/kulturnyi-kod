@@ -23,16 +23,17 @@ function renderPlaceCards(list) {
       '<img src="' + place.image + '" alt="' + escapeText(place.imageAlt) + '" loading="lazy">' +
       '<div class="place-card-copy"><span class="tag">' + escapeText(place.kind) + '</span><h2><a href="place.html?id=' + encodeURIComponent(place.id) + '">' + escapeText(place.title) + '</a></h2>' +
       '<p>' + escapeText(place.shortDescription || place.description) + '</p><div class="place-card-location"><span class="place-location-label">Местоположение:</span><span>' + escapeText(place.address) + '</span>' +
-      '<a class="place-map-link" href="' + mapSearchUrl(place) + '" target="_blank" rel="noopener">Открыть в Яндекс Картах ↗</a></div><a class="place-card-open" href="place.html?id=' + encodeURIComponent(place.id) + '">Открыть место →</a></div></article>';
+      '<a class="place-map-link" href="' + mapSearchUrl(place) + '" target="_blank" rel="noopener">Открыть в Яндекс Картах ↗</a></div><a class="place-card-open" href="place.html?id=' + encodeURIComponent(place.id) + '">Открыть место →</a>' + placeSelectionButton(place) + '</div></article>';
   }).join("") || '<p class="empty">Для этого сезона мест пока нет. Выбери другое время поездки.</p>';
+  bindPlaceSelectionButtons();
 }
 
 if (!area) {
-  areaHost.innerHTML = '<section class="empty"><h1>Такого направления пока нет</h1><a class="button" href="places.html">Посмотреть все места</a></section>';
+  areaHost.innerHTML = '<section class="empty"><h1>Такого города или района пока нет</h1><a class="button" href="places.html">Посмотреть все места</a></section>';
 } else {
   const list = places.filter(function(place) { return place.areaId === area.id; });
   document.title = area.title + " — Культурный код Кузбасса";
-  areaHost.innerHTML = '<a class="back-link" href="places.html">← Все направления</a>' +
+  areaHost.innerHTML = '<a class="back-link" href="places.html">← Все места</a>' +
     '<p class="eyebrow">Места Кузбасса</p><h1>' + escapeText(area.title) + '</h1>' +
     '<p class="lead">' + escapeText(area.short) + '</p>' +
     '<div class="filters place-season-filter"><label for="seasonFilter">Сезон поездки</label>' +

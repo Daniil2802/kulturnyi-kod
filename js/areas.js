@@ -4,7 +4,7 @@ areaList.innerHTML = areas.map(function(area) {
   const count = places.filter(function(place) { return place.areaId === area.id; }).length;
   return '<a class="region-card" href="area.html?area=' + encodeURIComponent(area.id) + '">' +
     '<img src="' + area.image + '" alt="" loading="lazy">' +
-    '<div class="region-card-copy"><span class="eyebrow">Направление</span><h2>' + area.title + '</h2>' +
+    '<div class="region-card-copy"><span class="eyebrow">Город / район</span><h2>' + area.title + '</h2>' +
     '<p>' + area.short + '</p><span class="region-card-meta">' + count + ' ' + pluralPlaces(count) + ' →</span></div></a>';
 }).join("");
 
