@@ -73,4 +73,14 @@
   }),{threshold:.12});
   reveals.forEach(el=>{el.classList.add("reveal");observer.observe(el)});
  }
+
+ const mapSection=document.getElementById("choosePath");
+ if(mapSection&&"IntersectionObserver" in window){
+  const mapBlurObserver=new IntersectionObserver(entries=>{
+   entries.forEach(entry=>{
+    document.body.classList.toggle("map-background-blurred",entry.isIntersecting);
+   });
+  },{threshold:0.01});
+  mapBlurObserver.observe(mapSection);
+ }
 })();
