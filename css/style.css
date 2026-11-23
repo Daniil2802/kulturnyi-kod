@@ -973,3 +973,27 @@ body.receipt-page .empty {
   body.receipt-page .page { padding: 0 !important; }
   body.receipt-page .receipt { background: #f8f3e9 !important; }
 }
+
+
+/* Restore the site's original wallpaper and display heading on the receipt page */
+body.receipt-page {
+  background-color: #ff0808;
+  background-image: url("../assets/fon.png");
+  background-repeat: repeat;
+  background-position: center top;
+  background-size: min(100vw, 1920px) auto;
+  color: var(--shop-red);
+  font-family: "Blogger Sans", Arial, sans-serif;
+}
+body.receipt-page .page {
+  background-color: rgba(255, 255, 255, .9);
+  border: 1px solid var(--shop-outline);
+}
+body.receipt-page .page:before { display: block; }
+body.receipt-page .page > h1 {
+  color: var(--shop-red);
+  font-family: "Column Simple", Georgia, serif !important;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .015em;
+}
