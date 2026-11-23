@@ -2153,3 +2153,9 @@ body.home-page::before {
     transform: none !important;
   }
 }
+
+
+/* Let the homepage header scroll away with the page */
+.home-page .header {
+  position: absolute !important;
+}
