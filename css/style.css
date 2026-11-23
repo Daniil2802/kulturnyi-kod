@@ -1842,3 +1842,18 @@ body.receipt-page{background:transparent!important;background-image:none!importa
 @media(max-width:650px){
   .home-page #homeTitle{font-size:clamp(36px,9vw,48px)!important;line-height:.96!important}
 }
+
+
+/* Compact the homepage hero vertically while keeping its floating header clearance */
+.home-page .home-hero{
+  height:auto!important;
+  min-height:0!important;
+  margin-bottom:0!important;
+  padding-top:clamp(88px,9vh,112px)!important;
+  padding-bottom:24px!important;
+}
+.home-page .home-hero-grid{margin-block:0!important}
+.home-page .home-hero-copy{margin:0!important}
+@media(max-width:650px){
+  .home-page .home-hero{padding-top:76px!important;padding-bottom:12px!important}
+}
