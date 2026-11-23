@@ -1785,3 +1785,8 @@ body.receipt-page{background:transparent!important;background-image:none!importa
  .home-page .header{width:100%;margin:8px 0 -68px;border-radius:0}
  .home-page .home-hero{width:100%;margin:0 0 20px;border-radius:0}
 }
+/* Soft lower corners on the full-width home header */
+.home-page .header{border-radius:0 0 18px 18px}
+@media(max-width:650px){
+ .home-page .header{border-radius:0 0 14px 14px}
+}
