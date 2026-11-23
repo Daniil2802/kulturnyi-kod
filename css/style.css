@@ -2358,3 +2358,33 @@ body.home-page.map-background-blurred::before{
 @media(prefers-reduced-motion:reduce){
  body.home-page::before{transition:none!important}
 }
+
+
+/* Anchor each city coordinate to the red dot itself; labels sit beside it */
+.home-page .kuzbass-map-plot .map-pin{
+ display:block;width:17px;height:17px;max-width:none;transform:translate(-50%,-50%)
+}
+.home-page .kuzbass-map-plot .map-pin-dot{
+ position:absolute;left:0;top:0;display:block;flex:none;width:17px;height:17px
+}
+.home-page .kuzbass-map-plot .map-pin-label{
+ position:absolute;top:50%;left:calc(100% + 10px);right:auto;transform:translateY(-50%)
+}
+.home-page .kuzbass-map-plot .map-pin--novokuznetsk .map-pin-label,
+.home-page .kuzbass-map-plot .map-pin--sheregesh .map-pin-label{
+ left:auto;right:calc(100% + 10px)
+}
+.home-page .kuzbass-map-plot .map-pin:hover .map-pin-label,
+.home-page .kuzbass-map-plot .map-pin:focus-visible .map-pin-label{
+ transform:translateY(-50%);background:#b7233a;border-color:#f3f3f3
+}
+.home-page .map-pin--kemerovo{left:56%;top:43%}
+.home-page .map-pin--novokuznetsk{left:65%;top:65%}
+.home-page .map-pin--sheregesh{left:70%;top:82%}
+@media(max-width:560px){
+ .home-page .kuzbass-map-plot .map-pin{width:14px;height:14px}
+ .home-page .kuzbass-map-plot .map-pin-dot{width:14px;height:14px}
+ .home-page .map-pin--kemerovo{left:56%;top:43%}
+ .home-page .map-pin--novokuznetsk{left:65%;top:65%}
+ .home-page .map-pin--sheregesh{left:70%;top:82%}
+}
