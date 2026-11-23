@@ -2218,3 +2218,30 @@ body.home-page::before {
     letter-spacing: -0.035em !important;
   }
 }
+
+
+/* Add a little height to both homepage hero columns */
+@media (min-width: 901px) {
+  .home-page .home-hero-copy {
+    padding-block: clamp(34px, 4vw, 54px) !important;
+  }
+  .home-page .home-visual {
+    min-height: clamp(450px, 55vh, 640px) !important;
+  }
+}
+@media (min-width: 651px) and (max-width: 900px) {
+  .home-page .home-hero-copy {
+    padding-block: 32px !important;
+  }
+  .home-page .home-visual {
+    min-height: 410px !important;
+  }
+}
+@media (max-width: 650px) {
+  .home-page .home-hero-copy {
+    padding-block: 28px !important;
+  }
+  .home-page .home-visual {
+    min-height: 320px !important;
+  }
+}
