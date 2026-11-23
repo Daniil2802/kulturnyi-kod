@@ -1289,7 +1289,7 @@ body,body.receipt-page{
 /* Refine the dark forest hero for legibility and preserve the line illustration */
 .hero:before,.page:before,.section:after{display:none}
 .hero .eyebrow{color:#d7e4d9}
-.hero-art .line-route-art{filter:hue-rotate(112deg) saturate(.78);opacity:1}
+.hero-art .line-route-art{filter:saturate(.62) brightness(.94);opacity:1}
 
 
 /* Darom immersive editorial experience */
