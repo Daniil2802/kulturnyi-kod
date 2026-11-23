@@ -1898,3 +1898,16 @@ body.receipt-page{background:transparent!important;background-image:none!importa
     margin-top:0!important;
   }
 }
+
+
+/* Flush the homepage header to the top edge */
+.home-page .header{
+  top:0!important;
+  margin:0 auto -76px!important;
+}
+@media(max-width:650px){
+  .home-page .header{
+    top:0!important;
+    margin:0 10px -68px!important;
+  }
+}
