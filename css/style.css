@@ -2331,17 +2331,17 @@ body.home-page::before {
 /* Place map copy beside the regional map on wider screens */
 @media(min-width:801px){
  .home-page .home-map-section{
-  display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+  display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
   column-gap:clamp(28px,4vw,64px);row-gap:20px;
-  align-items:center;padding-top:clamp(54px,6vw,78px);padding-bottom:clamp(54px,6vw,78px)
+  align-items:center;padding-top:clamp(42px,4vw,56px);padding-bottom:clamp(42px,4vw,56px)
  }
  .home-page .home-map-heading{
   grid-column:1;grid-row:1;display:flex;flex-direction:column;align-items:flex-start;
   gap:24px;margin:0
  }
- .home-page .home-map-heading h2{font-size:clamp(42px,4.6vw,66px);line-height:.98}
+ .home-page .home-map-heading h2{font-size:clamp(38px,4.1vw,56px);line-height:.98}
  .home-page .home-map-heading>p{max-width:500px;margin:0;font-size:clamp(16px,1.35vw,19px);line-height:1.65}
  .home-page .kuzbass-map-stage{grid-column:2;grid-row:1;height:auto;min-height:0}
- .home-page .home-map-section .kuzbass-map-plot{width:min(100%,380px);height:auto}
+ .home-page .home-map-section .kuzbass-map-plot{width:min(100%,350px);height:auto}
  .home-page .home-map-links{grid-column:1/-1;grid-row:2;margin-top:0}
 }
