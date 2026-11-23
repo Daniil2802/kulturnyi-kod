@@ -2038,3 +2038,9 @@ body.home-page::before {
     transform: translate(-50%, -50%);
   }
 }
+
+
+/* Move only the forest photograph slightly upward behind the header */
+.home-page .home-hero {
+  background-position: center center, center center, center 90% !important;
+}
