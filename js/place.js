@@ -8,6 +8,162 @@ function escapePlaceText(value) {
   });
 }
 
+
+const MEMORY_DB_NAME = "darom-place-memories";
+const MEMORY_STORE_NAME = "entries";
+
+function openMemoryDatabase() {
+  return new Promise(function(resolve, reject) {
+    if (!("indexedDB" in window)) {
+      reject(new Error("В этом браузере недоступно локальное хранилище фотографий."));
+      return;
+    }
+    const request = indexedDB.open(MEMORY_DB_NAME, 1);
+    request.onupgradeneeded = function() {
+      const database = request.result;
+      if (!database.objectStoreNames.contains(MEMORY_STORE_NAME)) {
+        const store = database.createObjectStore(MEMORY_STORE_NAME, {keyPath:"id", autoIncrement:true});
+        store.createIndex("placeId", "placeId", {unique:false});
+      }
+    };
+    request.onsuccess = function() { resolve(request.result); };
+    request.onerror = function() { reject(request.error || new Error("Не удалось открыть хранилище.")); };
+  });
+}
+
+function loadPlaceMemories(placeId) {
+  return openMemoryDatabase().then(function(database) {
+    return new Promise(function(resolve, reject) {
+      const transaction = database.transaction(MEMORY_STORE_NAME, "readonly");
+      const request = transaction.objectStore(MEMORY_STORE_NAME).index("placeId").getAll(placeId);
+      request.onsuccess = function() {
+        resolve(request.result.sort(function(a, b) { return b.createdAt - a.createdAt; }));
+      };
+      request.onerror = function() { reject(request.error); };
+      transaction.oncomplete = function() { database.close(); };
+      transaction.onerror = function() { database.close(); reject(transaction.error); };
+    });
+  });
+}
+
+function savePlaceMemory(entry) {
+  return openMemoryDatabase().then(function(database) {
+    return new Promise(function(resolve, reject) {
+      const transaction = database.transaction(MEMORY_STORE_NAME, "readwrite");
+      const request = transaction.objectStore(MEMORY_STORE_NAME).add(entry);
+      request.onsuccess = function() { resolve(request.result); };
+      request.onerror = function() { reject(request.error); };
+      transaction.oncomplete = function() { database.close(); };
+      transaction.onerror = function() { database.close(); reject(transaction.error); };
+    });
+  });
+}
+
+function removePlaceMemory(id) {
+  return openMemoryDatabase().then(function(database) {
+    return new Promise(function(resolve, reject) {
+      const transaction = database.transaction(MEMORY_STORE_NAME, "readwrite");
+      transaction.objectStore(MEMORY_STORE_NAME).delete(Number(id));
+      transaction.oncomplete = function() { database.close(); resolve(); };
+      transaction.onerror = function() { database.close(); reject(transaction.error); };
+    });
+  });
+}
+
+function renderMemoryJournal() {
+  return '<section class="place-panel place-memory">' +
+    '<p class="eyebrow">Твои воспоминания</p><h2>Заметка об этом месте</h2>' +
+    '<p class="place-memory-intro">Запиши впечатления и добавь фотографии. Они сохранятся в этом браузере на твоём устройстве.</p>' +
+    '<form id="placeMemoryForm" class="place-memory-form">' +
+    '<label for="placeMemoryText">Впечатления</label>' +
+    '<textarea id="placeMemoryText" name="text" maxlength="2000" rows="4" placeholder="Что запомнилось? Какие чувства вызвало это место?"></textarea>' +
+    '<label for="placeMemoryPhotos">Фотографии <span>до 5 за одну заметку</span></label>' +
+    '<input id="placeMemoryPhotos" name="photos" type="file" accept="image/*" multiple>' +
+    '<button class="button" type="submit">Сохранить в браузере</button>' +
+    '<p id="placeMemoryStatus" class="place-memory-status" aria-live="polite"></p>' +
+    '</form><div id="placeMemoryList" class="place-memory-list" aria-live="polite"></div>' +
+    '<p class="place-memory-privacy">Заметки и фото доступны только в этом браузере. Если очистить его данные или открыть сайт на другом устройстве, записи не перенесутся.</p>' +
+    '</section>';
+}
+
+function renderPlaceMemories(placeId) {
+  const list = document.getElementById("placeMemoryList");
+  if (!list) return;
+  (window.placeMemoryObjectUrls || []).forEach(function(url) { URL.revokeObjectURL(url); });
+  window.placeMemoryObjectUrls = [];
+  loadPlaceMemories(placeId).then(function(entries) {
+    if (!document.getElementById("placeMemoryList")) return;
+    if (!entries.length) {
+      list.innerHTML = '<p class="place-memory-empty">Здесь появятся твои заметки и фотографии.</p>';
+      return;
+    }
+    list.innerHTML = entries.map(function(entry) {
+      const photos = (entry.photos || []).map(function(photo) {
+        const url = URL.createObjectURL(photo.blob);
+        window.placeMemoryObjectUrls.push(url);
+        return '<a class="place-memory-photo" href="' + url + '" target="_blank" rel="noopener" aria-label="Открыть фотографию: ' + escapePlaceText(photo.name) + '">' +
+          '<img src="' + url + '" alt="' + escapePlaceText(photo.name) + '" loading="lazy"></a>';
+      }).join("");
+      const text = entry.text ? '<p class="place-memory-note">' + escapePlaceText(entry.text).replace(/\n/g, "<br>") + '</p>' : "";
+      const date = new Intl.DateTimeFormat("ru-RU", {day:"numeric", month:"long", year:"numeric", hour:"2-digit", minute:"2-digit"}).format(new Date(entry.createdAt));
+      return '<article class="place-memory-entry"><div class="place-memory-entry-head"><time>' + escapePlaceText(date) + '</time>' +
+        '<button type="button" class="place-memory-delete" data-delete-memory="' + entry.id + '">Удалить</button></div>' +
+        text + (photos ? '<div class="place-memory-photos">' + photos + '</div>' : '') + '</article>';
+    }).join("");
+  }).catch(function() {
+    list.innerHTML = '<p class="place-memory-empty">Не удалось прочитать сохранённые заметки в этом браузере.</p>';
+  });
+}
+
+function initMemoryJournal(placeId) {
+  renderPlaceMemories(placeId);
+  const form = document.getElementById("placeMemoryForm");
+  const status = document.getElementById("placeMemoryStatus");
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const text = form.elements.text.value.trim();
+    const files = Array.from(form.elements.photos.files || []);
+    if (!text && !files.length) {
+      status.textContent = "Добавь текст или выбери фотографию.";
+      return;
+    }
+    if (files.length > 5) {
+      status.textContent = "В одну заметку можно добавить не больше пяти фотографий.";
+      return;
+    }
+    if (files.some(function(file) { return !file.type.startsWith("image/"); })) {
+      status.textContent = "Можно добавлять только изображения.";
+      return;
+    }
+    status.textContent = "Сохраняю…";
+    Promise.resolve().then(function() {
+      return navigator.storage && navigator.storage.persist ? navigator.storage.persist().catch(function() { return false; }) : false;
+    }).then(function() {
+      return savePlaceMemory({
+        placeId: placeId,
+        text: text,
+        createdAt: Date.now(),
+        photos: files.map(function(file) { return {name:file.name, type:file.type, blob:file}; })
+      });
+    }).then(function() {
+      form.reset();
+      status.textContent = "Сохранено в этом браузере.";
+      renderPlaceMemories(placeId);
+    }).catch(function() {
+      status.textContent = "Не удалось сохранить. Возможно, в браузере закончилось место.";
+    });
+  });
+  document.getElementById("placeMemoryList").addEventListener("click", function(event) {
+    const button = event.target.closest("[data-delete-memory]");
+    if (!button) return;
+    removePlaceMemory(button.dataset.deleteMemory).then(function() {
+      renderPlaceMemories(placeId);
+    }).catch(function() {
+      status.textContent = "Не удалось удалить запись.";
+    });
+  });
+}
+
 function mapSearchUrl(place) {
   return "https://yandex.ru/maps/?text=" + encodeURIComponent(place.title + ", " + place.address);
 }
@@ -59,8 +215,9 @@ if (!place) {
         '<h3><a href="item.html?id=' + object.id + '">' + escapePlaceText(object.name) + '</a></h3><p>' + escapePlaceText(object.short) + '</p>' +
         '<div class="place-object-actions"><a href="item.html?id=' + object.id + '">История предмета →</a><button type="button" class="button" data-add-object="' + object.id + '">＋ В культурный чек</button></div></article>';
     }).join("") + '</div>' : '<p class="items-note">' + escapePlaceText(place.emptyObjects || "Список предметов этого места скоро появится.") + '</p>') +
-    '</section></div>' + renderPartnerTour(place.partnerTour);
+    '</section></div>' + renderPartnerTour(place.partnerTour) + renderMemoryJournal();
   placeHost.querySelectorAll("[data-add-object]").forEach(function(button) {
     button.addEventListener("click", function() { addPlaceObject(Number(button.dataset.addObject), button); });
   });
+  initMemoryJournal(place.id);
 }
