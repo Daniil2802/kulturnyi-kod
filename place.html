@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место — Культурный код Кузбасса</title>
-  <link rel="stylesheet" href="css/style.css?v=header-nav-states-20261124">
+  <link rel="stylesheet" href="css/style.css?v=header-nav-current-route-20261124">
 </head>
 <body>
 <header class="header">
@@ -20,5 +20,27 @@
 <script src="js/places-data.js?v=product-pictures-20261123-v2"></script>
 <script src="js/place-selection.js?v=places-in-receipt-20261124"></script>
 <script src="js/place.js?v=place-selection-20261124"></script>
+<script>
+(() => {
+  const page = location.pathname.split("/").pop() || "index.html";
+  const sectionByPage = {
+    "places.html": "places.html",
+    "area.html": "places.html",
+    "place.html": "places.html",
+    "catalog.html": "catalog.html",
+    "item.html": "catalog.html",
+    "peoples.html": "catalog.html",
+    "collection.html": "collection.html",
+    "partners.html": "partners.html",
+    "contacts.html": "contacts.html",
+    "about.html": "about.html"
+  };
+  const target = sectionByPage[page];
+  document.querySelectorAll(".header nav a").forEach(link => {
+    const linkPage = new URL(link.href, location.href).pathname.split("/").pop();
+    link.classList.toggle("active", Boolean(target && linkPage === target));
+  });
+})();
+</script>
 </body>
 </html>
