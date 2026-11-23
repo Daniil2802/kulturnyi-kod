@@ -1885,3 +1885,16 @@ body.receipt-page{background:transparent!important;background-image:none!importa
 
 /* Align the hero copy with the top edge below the floating navigation */
 .home-page .home-hero-grid{align-items:start!important}
+
+
+/* Remove the gray strip above the inset homepage navigation */
+.home-page .header{
+  top:0!important;
+  margin-top:0!important;
+}
+@media(max-width:650px){
+  .home-page .header{
+    top:0!important;
+    margin-top:0!important;
+  }
+}
