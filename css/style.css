@@ -2159,3 +2159,10 @@ body.home-page::before {
 .home-page .header {
   position: absolute !important;
 }
+
+
+/* Keep the homepage navigation visible while scrolling */
+.home-page .header {
+  position: sticky !important;
+  top: 4px !important;
+}
