@@ -1929,3 +1929,10 @@ body.home-page::before{
     margin:8px 10px -68px!important;
   }
 }
+
+
+/* Keep the glass header visibly inset over the full-bleed forest image */
+.home-page .header{transform:translateY(12px)!important}
+@media(max-width:650px){
+  .home-page .header{transform:translateY(8px)!important}
+}
