@@ -2024,3 +2024,17 @@ body.home-page::before {
     margin-block: auto !important;
   }
 }
+
+
+/* Place both hero columns at the visual center of the first screen */
+@media (min-width: 901px) {
+  .home-page .home-hero { position: relative; }
+  .home-page .home-hero-grid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(100%, 1450px);
+    margin: 0 !important;
+    transform: translate(-50%, -50%);
+  }
+}
