@@ -2191,3 +2191,10 @@ body.home-page::before {
     top: 4px !important;
   }
 }
+
+
+/* Keep the homepage forest photo crisp behind the hero content */
+.home-page .home-hero {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
