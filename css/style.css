@@ -1591,7 +1591,7 @@ body::before{content:"";position:fixed;z-index:-1;inset:-18px;pointer-events:non
 .home-visual-note{right:4%;bottom:22%;padding:11px 15px;background:rgba(243,243,243,.88);box-shadow:0 8px 28px rgba(25,30,29,.15)}
 .home-visual-coord{left:5%;bottom:24%;color:rgba(243,243,243,.8)}
 .home-visual-tags{position:relative;z-index:3;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:min(100%,710px);margin-left:auto;gap:10px}
-.home-visual-tags a{min-height:72px;display:grid;grid-template-columns:28px 1fr;align-content:center;gap:4px 10px;padding:10px 12px;color:var(--paper);border-top:1px solid rgba(243,243,243,.55);background:rgba(25,30,29,.30);backdrop-filter:blur(7px)}
+.home-visual-tags > div{min-height:72px;display:grid;grid-template-columns:28px 1fr;align-content:center;gap:4px 10px;padding:10px 12px;color:var(--paper);border-top:1px solid rgba(243,243,243,.55);background:rgba(25,30,29,.30);backdrop-filter:blur(7px)}
 .home-visual-tags i{grid-row:span 2;align-self:center;color:var(--paper);font:400 22px var(--display);font-style:normal}
 .home-visual-tags b{font:600 10px var(--reading);text-transform:uppercase;letter-spacing:.08em}
 .home-visual-tags small{font:400 9px/1.35 var(--reading);color:rgba(243,243,243,.74)}
@@ -1604,7 +1604,7 @@ body::before{content:"";position:fixed;z-index:-1;inset:-18px;pointer-events:non
  .home-hero h1{font-size:clamp(48px,7vw,68px)}
  .home-visual{min-height:390px}
  .home-visual-tags{grid-template-columns:1fr;max-width:230px}
- .home-visual-tags a{min-height:52px}
+ .home-visual-tags > div{min-height:52px}
  .home-route-map{inset:14% 0 30%;width:100%;height:55%}
 }
 @media(max-width:650px){
@@ -1630,7 +1630,7 @@ body::before{content:"";position:fixed;z-index:-1;inset:-18px;pointer-events:non
  .home-visual-note{right:1%;bottom:24%;padding:9px 11px;font-size:10px}
  .home-visual-coord{left:2%;bottom:25%;font-size:8px}
  .home-visual-tags{width:100%;grid-template-columns:repeat(3,minmax(0,1fr));max-width:none;gap:5px}
- .home-visual-tags a{grid-template-columns:1fr;gap:4px;padding:8px 7px;min-height:64px}
+ .home-visual-tags > div{grid-template-columns:1fr;gap:4px;padding:8px 7px;min-height:64px}
  .home-visual-tags i{display:none}
  .home-visual-tags b{font-size:8px}
  .home-visual-tags small{font-size:7px}
