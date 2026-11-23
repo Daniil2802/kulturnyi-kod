@@ -1881,3 +1881,7 @@ body.receipt-page{background:transparent!important;background-image:none!importa
     padding-bottom:12px!important;
   }
 }
+
+
+/* Align the hero copy with the top edge below the floating navigation */
+.home-page .home-hero-grid{align-items:start!important}
