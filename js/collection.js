@@ -124,6 +124,7 @@ function render() {
 
   const selected = readSelected();
   if (!selected.length) {
+    window.RouteJournal?.mount([]);
     host.innerHTML = `<div class="empty">
       <h2>Чек пока пуст</h2>
       <p>Добавь в чек музеи и другие места, которые хочешь посетить.</p>
@@ -142,7 +143,9 @@ function render() {
     <div class="receipt-actions">
       <button class="button" id="shareReceipt" type="button">Поделиться маршрутом</button>
       <button class="button button-light" id="printReceipt" type="button">Распечатать / сохранить PDF</button>
-    </div>`;
+    </div>
+    <section class="route-journal" id="routeJournal" aria-label="Впечатления о местах"></section>`;
+  window.RouteJournal?.mount(selected);
 
   document.getElementById("recipient").addEventListener("input", event => {
     const value = event.target.value.trim() || "Дорогой человек";
