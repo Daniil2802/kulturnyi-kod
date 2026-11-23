@@ -2659,3 +2659,10 @@ body.home-page .home-stops-section{
   padding-top:clamp(48px,5vw,80px)!important
 }
 body.home-page .stops-head h2{margin-top:0!important}
+
+
+/* Homepage route intro: clearer copy with slightly larger type */
+body.home-page .stops-head>p{font-size:16px}
+@media(max-width:700px){
+  body.home-page .stops-head>p{font-size:15px}
+}
