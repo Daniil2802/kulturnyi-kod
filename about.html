@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>О проекте — Культурный код</title><link rel="stylesheet" href="css/style.css?v=header-nav-states-20261124"></head>
+<title>О проекте — Культурный код</title><link rel="stylesheet" href="css/style.css?v=header-nav-current-route-20261124"></head>
 <body>
 <header class="header">
   <a class="logo" href="index.html" aria-label="Даром — на главную"><img src="assets/logo-lavka.png" alt="Даром"></a>
@@ -16,4 +16,26 @@
 <ul><li>HTML5 — структура страниц</li><li>CSS3 — адаптивная визуальная система</li><li>JavaScript — каталог, фильтры и коллекция</li><li>LocalStorage — сохранение выбранных объектов в браузере</li><li>JSON/JavaScript-данные — модель культурных объектов</li></ul>
 <h2>Следующий этап</h2>
 <p>Подключение базы данных, админ-панели для редакторов, авторизации и генерации изображения «Мой культурный код» для публикации в социальных сетях.</p>
-</main></body></html>
+</main><script>
+(() => {
+  const page = location.pathname.split("/").pop() || "index.html";
+  const sectionByPage = {
+    "places.html": "places.html",
+    "area.html": "places.html",
+    "place.html": "places.html",
+    "catalog.html": "catalog.html",
+    "item.html": "catalog.html",
+    "peoples.html": "catalog.html",
+    "collection.html": "collection.html",
+    "partners.html": "partners.html",
+    "contacts.html": "contacts.html",
+    "about.html": "about.html"
+  };
+  const target = sectionByPage[page];
+  document.querySelectorAll(".header nav a").forEach(link => {
+    const linkPage = new URL(link.href, location.href).pathname.split("/").pop();
+    link.classList.toggle("active", Boolean(target && linkPage === target));
+  });
+})();
+</script>
+</body></html>
