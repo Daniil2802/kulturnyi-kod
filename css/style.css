@@ -1738,3 +1738,22 @@ input,textarea,select{
   background-color:rgba(243,243,243,.64)!important
  }
 }
+/* Extend glass treatment to editorial and place-specific panels */
+.region-card,.place-card,.place-panel,.place-hero,.place-tour-pricing,
+.place-object,.items-note,.card-art.has-image,.item-art.has-image,
+.place-object-image,.place-season-filter select,
+body.receipt-page .receipt,body.receipt-page .share-invitation,
+body.receipt-page .empty{
+ background-color:rgba(243,243,243,.58)!important;
+ backdrop-filter:blur(14px) saturate(118%);
+ -webkit-backdrop-filter:blur(14px) saturate(118%);
+ border-color:rgba(243,243,243,.48)!important;
+}
+.region-card,.place-card,.place-panel{color:var(--editorial-ink,#1f302c)}
+@media(max-width:650px){
+ .region-card,.place-card,.place-panel,.place-hero,.place-tour-pricing,
+ .place-object,.items-note,.card-art.has-image,.item-art.has-image,
+ .place-object-image,.place-season-filter select,
+ body.receipt-page .receipt,body.receipt-page .share-invitation,
+ body.receipt-page .empty{background-color:rgba(243,243,243,.66)!important}
+}
