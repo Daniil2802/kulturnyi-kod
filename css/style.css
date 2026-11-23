@@ -1655,3 +1655,44 @@ body::before{content:"";position:fixed;z-index:-1;inset:-18px;pointer-events:non
  .home-hero-copy{width:100%;max-width:none;padding:clamp(26px,3vw,40px)}
  .home-hero h1{font-size:clamp(42px,3.8vw,56px);line-height:.98;letter-spacing:0}
 }
+
+/* Quiet, single-layer panoramic homepage composition */
+.home-page .header{
+ border:0!important;
+ box-shadow:0 12px 35px rgba(25,30,29,.12);
+}
+.home-hero{
+ border:0!important;
+}
+.home-hero::after{
+ display:none!important;
+ content:none!important;
+}
+.home-hero-copy{
+ border:0!important;
+ box-shadow:0 20px 60px rgba(25,30,29,.18);
+ background:rgba(25,30,29,.62)!important;
+}
+.home-hero-top,
+.home-scroll-cue,
+.home-visual-note{
+ display:none!important;
+}
+.home-hero-grid{margin-block:auto}
+@media(min-width:901px){
+ .home-hero-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)!important}
+ .home-hero-copy{width:100%;max-width:none;padding:clamp(28px,3.4vw,48px)}
+ .home-hero h1{font-size:clamp(38px,3.2vw,50px);line-height:1.02;letter-spacing:0;margin:18px 0 22px}
+ .home-visual{min-height:clamp(430px,52vh,590px)}
+}
+@media(min-width:651px) and (max-width:900px){
+ .home-hero{min-height:700px}
+ .home-hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)!important}
+ .home-hero-copy{padding:26px}
+ .home-hero h1{font-size:clamp(38px,4.5vw,48px);line-height:1.02;letter-spacing:0}
+}
+@media(max-width:650px){
+ .home-hero{border-radius:18px}
+ .home-hero-copy{padding:24px 21px}
+ .home-hero h1{font-size:clamp(42px,11vw,58px);line-height:.95}
+}
