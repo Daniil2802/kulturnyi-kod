@@ -2093,3 +2093,28 @@ body.home-page::before {
   background-image: none !important;
   background-color: transparent !important;
 }
+
+
+/* Softer, slightly darker forest photo behind the inset homepage header */
+body.home-page {
+  position: relative !important;
+  isolation: isolate !important;
+  background: #1f302c !important;
+}
+body.home-page::before {
+  content: "" !important;
+  display: block !important;
+  position: fixed !important;
+  z-index: -1 !important;
+  inset: -18px !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(180deg, rgba(16,24,22,.38), rgba(16,24,22,.52)),
+    url("../assets/darom-forest-background.webp") center 62% / cover no-repeat !important;
+  filter: blur(9px) !important;
+  transform: scale(1.035) !important;
+}
+body.home-page main,
+body.home-page > .header {
+  position: relative;
+}
