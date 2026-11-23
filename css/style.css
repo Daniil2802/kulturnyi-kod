@@ -2652,3 +2652,10 @@ body > .header nav a.active:after{
   right:0!important;
   background:#e93c4e!important
 }
+
+
+/* Compact the third homepage section after the map */
+body.home-page .home-stops-section{
+  padding-top:clamp(48px,5vw,80px)!important
+}
+body.home-page .stops-head h2{margin-top:0!important}
