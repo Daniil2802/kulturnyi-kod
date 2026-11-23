@@ -71,26 +71,38 @@ function formatDate() {
   return new Intl.DateTimeFormat("ru-RU", {day:"numeric", month:"long", year:"numeric"}).format(new Date());
 }
 
+function receiptNumberFor(selected, recipient, dateText) {
+  const seed = `${dateText}|${recipient}|${selected.map(object => object.id).join(",")}`;
+  const value = [...seed].reduce((sum, character) => sum + character.charCodeAt(0), 0);
+  return String(1000 + value % 9000);
+}
+
 function receiptMarkup(selected, recipient, {readOnly = false, dateText = formatDate()} = {}) {
   const peoples = [...new Set(selected.map(object => object.people))];
+  const number = receiptNumberFor(selected, recipient, dateText);
   return `<article class="receipt" id="receipt">
     <header class="receipt-head">
-      <p class="receipt-shop">КУЛЬТУРНАЯ ЛАВКА КУЗБАССА</p>
-      <h2>Культурный чек</h2>
-      <p>Собран с теплом для <strong class="receipt-recipient">${escapeHTML(recipient)}</strong></p>
+      <p class="receipt-shop">КАССА «ДАРОМ»</p>
+      <h2>КУЛЬТУРНЫЙ ЧЕК</h2>
+      <p class="receipt-number">№ ${number}</p>
+      <p>для <strong class="receipt-recipient">${escapeHTML(recipient)}</strong></p>
       <small>${escapeHTML(dateText)} · Кемеровская область — Кузбасс</small>
     </header>
     <div class="receipt-rule"></div>
-    <p class="receipt-label">ВЫБРАННЫЕ ИСТОРИИ</p>
-    <div class="receipt-items">${selected.map(object => `<div class="receipt-row">
-      <div><strong>${escapeHTML(object.name)}</strong><small>${escapeHTML(object.people)} · ${escapeHTML(object.category)}</small><p>${escapeHTML(object.short)}</p></div>
+    <p class="receipt-label">В ЧЕКЕ:</p>
+    <div class="receipt-items">${selected.map((object, index) => `<div class="receipt-row">
+      <div class="receipt-row-copy">
+        <div class="receipt-item-line"><strong>${index + 1}. ${escapeHTML(object.name)}</strong><b class="receipt-price">ДАРОМ</b></div>
+        <small>${escapeHTML(object.people)} · ${escapeHTML(object.category)}</small>
+        <p>${escapeHTML(object.short)}</p>
+      </div>
       ${readOnly ? "" : `<button type="button" class="remove-item" data-remove="${object.id}" aria-label="Убрать ${escapeHTML(object.name)} из чека">×</button>`}
     </div>`).join("")}</div>
     <div class="receipt-rule"></div>
-    <div class="receipt-total"><span>Историй в чеке</span><b>${selected.length} ${plural(selected.length,"история","истории","историй")}</b></div>
-    <div class="receipt-total"><span>Культур представлено</span><b>${peoples.length} ${plural(peoples.length,"народ","народа","народов")}</b></div>
-    <p class="receipt-peoples">${peoples.map(escapeHTML).join(" · ")}</p>
-    <footer class="receipt-foot">Не цена важна, а то, о ком ты вспомнил.<br>Передай чек и поделись историей.</footer>
+    <div class="receipt-total"><span>ИТОГО: ${selected.length} ${plural(selected.length,"предмет","предмета","предметов")}</span><b>${peoples.length} ${plural(peoples.length,"культура","культуры","культур")}</b></div>
+    <div class="receipt-payment"><span>К ОПЛАТЕ</span><b>0 ₽</b></div>
+    <p class="receipt-note">Культуру нельзя купить — можно только подарить знание.</p>
+    <footer class="receipt-foot">СПАСИБО ЗА ВИЗИТ.<br>ДЕЛИСЬ ИСТОРИЯМИ.</footer>
   </article>`;
 }
 
@@ -169,97 +181,109 @@ async function makeReceiptImage(selected, recipient) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
   const width = 1000;
-  const left = 82;
-  const maxWidth = width - left * 2;
-  const bodyFont = '20px "Blogger Sans", Arial, sans-serif';
-  const itemLines = selected.map(object => {
+  const left = 76;
+  const right = width - left;
+  const maxWidth = right - left;
+  const bodyFont = '22px "Courier New", monospace';
+  const rows = selected.map(object => {
     context.font = bodyFont;
-    return wrapCanvasText(context, object.short, maxWidth);
+    return {
+      object,
+      lines: wrapCanvasText(context, object.short, maxWidth)
+    };
   });
-  const rowHeights = itemLines.map(lines => 92 + lines.length * 30);
-  const height = 590 + rowHeights.reduce((sum, value) => sum + value, 0);
+  const rowHeights = rows.map(row => 104 + row.lines.length * 31);
+  const height = 570 + rowHeights.reduce((sum, value) => sum + value, 0);
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext("2d");
 
-  ctx.fillStyle = "#fffdf7";
+  ctx.fillStyle = "#f8f3e9";
   ctx.fillRect(0, 0, width, height);
-  ctx.strokeStyle = "#ef2638";
-  ctx.lineWidth = 2;
-  ctx.strokeRect(24, 24, width - 48, height - 48);
-  ctx.strokeStyle = "rgba(239, 38, 56, .22)";
-  ctx.lineWidth = 1;
-  ctx.strokeRect(34, 34, width - 68, height - 68);
   ctx.textAlign = "center";
-  ctx.fillStyle = "#d91f31";
-  ctx.font = 'bold 17px "Blogger Sans", Arial, sans-serif';
-  ctx.fillText("КУЛЬТУРНАЯ ЛАВКА КУЗБАССА", width / 2, 86);
-  ctx.fillStyle = "#242a26";
-  ctx.font = 'bold 48px "Column Simple", Georgia, serif';
-  ctx.fillText("КУЛЬТУРНЫЙ ЧЕК", width / 2, 154);
-  ctx.fillStyle = "#424943";
-  ctx.font = '22px "Blogger Sans", Arial, sans-serif';
-  ctx.fillText(`Собран с теплом для ${recipient}`, width / 2, 200, maxWidth);
-  ctx.fillStyle = "#7a807b";
-  ctx.font = '18px "Blogger Sans", Arial, sans-serif';
-  ctx.fillText(`${formatDate()} · Кемеровская область — Кузбасс`, width / 2, 236);
+  ctx.fillStyle = "#432523";
+  ctx.font = 'bold 22px "Courier New", monospace';
+  ctx.fillText("КАССА «ДАРОМ»", width / 2, 72);
+  ctx.fillStyle = "#a43339";
+  ctx.font = 'bold 34px "Courier New", monospace';
+  ctx.fillText("КУЛЬТУРНЫЙ ЧЕК", width / 2, 124);
+  const date = formatDate();
+  ctx.fillStyle = "#432523";
+  ctx.font = '20px "Courier New", monospace';
+  ctx.fillText(`№ ${receiptNumberFor(selected, recipient, date)} · ДЛЯ ${recipient.toLocaleUpperCase("ru-RU")}`, width / 2, 166, maxWidth);
+  ctx.fillStyle = "#77716a";
+  ctx.font = '17px "Courier New", monospace';
+  ctx.fillText(`${date} · КЕМЕРОВСКАЯ ОБЛАСТЬ — КУЗБАСС`, width / 2, 204, maxWidth);
 
   const rule = y => {
     ctx.save();
-    ctx.strokeStyle = "rgba(239, 38, 56, .35)";
-    ctx.setLineDash([8, 8]);
+    ctx.strokeStyle = "#a43339";
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.moveTo(left, y);
-    ctx.lineTo(width - left, y);
+    ctx.lineTo(right, y);
     ctx.stroke();
     ctx.restore();
   };
-  rule(276);
+  rule(230);
   ctx.textAlign = "left";
-  ctx.fillStyle = "#d91f31";
-  ctx.font = 'bold 16px "Blogger Sans", Arial, sans-serif';
-  ctx.fillText("ВЫБРАННЫЕ ИСТОРИИ", left, 318);
+  ctx.fillStyle = "#432523";
+  ctx.font = 'bold 19px "Courier New", monospace';
+  ctx.fillText("В ЧЕКЕ:", left, 267);
 
-  let y = 366;
-  selected.forEach((object, index) => {
-    ctx.fillStyle = "#242a26";
-    ctx.font = 'bold 27px "Column Simple", Georgia, serif';
-    ctx.fillText(object.name, left, y);
-    y += 30;
-    ctx.fillStyle = "#d91f31";
-    ctx.font = '18px "Blogger Sans", Arial, sans-serif';
+  let y = 310;
+  rows.forEach(({object, lines}, index) => {
+    ctx.fillStyle = "#a43339";
+    ctx.font = 'bold 23px "Courier New", monospace';
+    const titleLines = wrapCanvasText(ctx, `${index + 1}. ${object.name}`, maxWidth - 130);
+    titleLines.forEach((line, lineIndex) => ctx.fillText(line, left, y + lineIndex * 29));
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#a43339";
+    ctx.font = 'bold 20px "Courier New", monospace';
+    ctx.fillText("ДАРОМ", right, y);
+    ctx.textAlign = "left";
+    y += titleLines.length * 29 + 26;
+    ctx.fillStyle = "#77716a";
+    ctx.font = '17px "Courier New", monospace';
     ctx.fillText(`${object.people} · ${object.category}`, left, y);
-    y += 32;
-    ctx.fillStyle = "#59615b";
-    ctx.font = bodyFont;
-    itemLines[index].forEach(line => {
-      ctx.fillText(line, left, y);
-      y += 30;
-    });
     y += 28;
+    ctx.fillStyle = "#432523";
+    ctx.font = bodyFont;
+    lines.forEach(line => {
+      ctx.fillText(line, left, y);
+      y += 31;
+    });
+    y += 17;
     rule(y - 8);
   });
 
   const peoples = [...new Set(selected.map(object => object.people))];
-  y += 24;
-  ctx.fillStyle = "#242a26";
-  ctx.font = 'bold 20px "Blogger Sans", Arial, sans-serif';
+  y += 22;
+  ctx.fillStyle = "#432523";
+  ctx.font = 'bold 20px "Courier New", monospace';
   ctx.textAlign = "left";
-  ctx.fillText(`Историй в чеке: ${selected.length}`, left, y);
+  ctx.fillText(`ИТОГО: ${selected.length} ${plural(selected.length,"предмет","предмета","предметов")}`, left, y);
   ctx.textAlign = "right";
-  ctx.fillText(`Культур представлено: ${peoples.length}`, width - left, y);
-  y += 42;
+  ctx.fillText(`${peoples.length} ${plural(peoples.length,"культура","культуры","культур")}`, right, y);
+  y += 58;
+  rule(y - 20);
+  ctx.textAlign = "left";
+  ctx.fillStyle = "#a43339";
+  ctx.font = 'bold 29px "Courier New", monospace';
+  ctx.fillText("К ОПЛАТЕ", left, y + 20);
+  ctx.textAlign = "right";
+  ctx.font = 'bold 34px "Courier New", monospace';
+  ctx.fillText("0 ₽", right, y + 20);
+  y += 70;
   ctx.textAlign = "center";
-  ctx.fillStyle = "#d91f31";
-  ctx.font = 'bold 19px "Blogger Sans", Arial, sans-serif';
-  ctx.fillText(peoples.join(" · "), width / 2, y);
-  y += 54;
-  ctx.fillStyle = "#59615b";
-  ctx.font = 'italic 20px Georgia, serif';
-  ctx.fillText("Не цена важна, а то, о ком ты вспомнил.", width / 2, y);
-  y += 32;
-  ctx.font = bodyFont;
-  ctx.fillText("Передай чек и поделись историей.", width / 2, y);
+  ctx.fillStyle = "#77716a";
+  ctx.font = '19px "Courier New", monospace';
+  ctx.fillText("Культуру нельзя купить — можно только подарить знание.", width / 2, y, maxWidth);
+  y += 48;
+  rule(y - 15);
+  ctx.fillStyle = "#432523";
+  ctx.font = 'bold 20px "Courier New", monospace';
+  ctx.fillText("СПАСИБО ЗА ВИЗИТ. ДЕЛИСЬ ИСТОРИЯМИ.", width / 2, y + 20, maxWidth);
 
   return new Promise(resolve => canvas.toBlob(blob => {
     if (!blob) return resolve(null);
