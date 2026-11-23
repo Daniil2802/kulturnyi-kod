@@ -2315,3 +2315,14 @@ body.home-page::before {
 @media(prefers-reduced-motion:reduce){
  .map-pin-dot,.map-pin-label,.home-map-links a{transition:none}
 }
+
+/* Keep the tall regional silhouette within its natural portrait ratio */
+.home-map-section .kuzbass-map-stage{height:auto;min-height:0;overflow:visible}
+.home-map-section .kuzbass-map-plot{width:min(100%,420px);height:auto;aspect-ratio:525/850}
+@media(max-width:800px){
+ .home-map-section .kuzbass-map-plot{width:min(100%,380px);height:auto}
+}
+@media(max-width:560px){
+ .home-map-section .kuzbass-map-stage{margin:14px 0}
+ .home-map-section .kuzbass-map-plot{width:min(100%,350px);height:auto}
+}
