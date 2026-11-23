@@ -3,66 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Культурный код Кузбасса — места и истории</title>
-  <link rel="stylesheet" href="css/style.css?v=forest-palette-20261123-v2">
+  <meta name="theme-color" content="#1F302C">
+  <title>Даром — культурные маршруты Кузбасса</title>
+  <meta name="description" content="Открывай места и истории Кузбасса, знакомься с культурными предметами и собирай свой культурный маршрут.">
+  <link rel="stylesheet" href="css/style.css?v=darom-immersive-20261123">
 </head>
-<body>
+<body class="home-page">
 <header class="header">
-  <a class="logo" href="index.html"><img src="assets/logo-lavka.png" alt="Культурный код Кузбасса"></a>
-  <nav><a class="active" href="places.html">Места</a><a href="catalog.html">Предметы</a><a href="collection.html">Культурный чек</a><a href="partners.html">Партнёры</a><a href="contacts.html">Контакты</a><a href="about.html">О проекте</a></nav>
+  <a class="logo" href="index.html" aria-label="Даром — на главную"><img src="assets/logo-lavka.png" alt="Даром"></a>
+  <nav aria-label="Главная навигация">
+    <a href="places.html">Места</a><a href="catalog.html">Предметы</a><a href="collection.html">Культурный чек</a><a href="partners.html">Партнёры</a><a href="contacts.html">Контакты</a><a href="about.html">О проекте</a>
+  </nav>
 </header>
 
 <main>
-  <section class="hero">
-    <div class="hero-text">
-      <p class="eyebrow">Культурный маршрут Кузбасса</p>
-      <h1>Заходи, добрый гость!<br><em>Есть что поглядеть.</em></h1>
-      <p>Здесь знакомятся не только с предметами, но и с местами, которые хранят память шорцев и телеутов. Открывай музеи, природные достопримечательности и истории, которые живут рядом с ними.</p>
-      <a class="button" href="places.html">Выбрать место →</a>
+  <section class="hero home-hero" aria-labelledby="homeTitle">
+    <div class="home-hero-top"><span>Кузбасс · территория историй</span><span>Ищи своё направление <b>↘</b></span></div>
+    <div class="home-hero-grid">
+      <div class="hero-text home-hero-copy">
+        <p class="eyebrow">Культурный маршрут · 01 / 04</p>
+        <h1 id="homeTitle">Заходи,<br>добрый гость.<br><em>Есть что<br>поглядеть.</em></h1>
+        <p>Места, люди и культурные предметы, которые помогают узнать Кузбасс ближе.</p>
+        <div class="home-hero-actions">
+          <a class="button" href="places.html">Начать путь <span aria-hidden="true">↗</span></a>
+          <a class="home-quiet-link" href="#choosePath">Посмотреть направления</a>
+        </div>
+        <div class="home-facts"><span><b>03</b> направления</span><i></i><span><b>04</b> места</span><i></i><span><b>08</b> историй предметов</span></div>
+      </div>
+      <div class="home-visual" aria-label="Путешественница исследует маршрут в горах">
+        <div class="home-visual-index">DAROM<br><small>FIELD NOTES</small></div>
+        <img class="line-route-art" src="assets/darom-hero-trace.webp" alt="Путешественница с телефоном, горный маршрут и водопад">
+        <div class="home-visual-note"><span class="home-pulse"></span><span>Маршрут открыт</span><b>Кузбасс / 2026</b></div>
+        <div class="home-visual-coord">53° 43' N<br>88° 06' E</div>
+      </div>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <img class="line-route-art" src="assets/darom-hero-trace.webp" alt="">
+    <a class="home-scroll-cue" href="#choosePath"><span>Листай вниз</span><b aria-hidden="true">↓</b></a>
+    <div class="home-hero-edge" aria-hidden="true"><span>Культура рядом</span><span>Не продаём — знакомим</span><span>Даром / Кузбасс</span></div>
+  </section>
+
+  <section class="home-section home-path-section" id="choosePath">
+    <div class="home-section-heading">
+      <p class="eyebrow">Точка входа <span>01</span></p>
+      <h2>Куда потянет?</h2>
+      <p>Выбери настроение — покажем, с какого края начать знакомство с регионом.</p>
+    </div>
+    <div class="path-explorer">
+      <div class="path-tabs" role="tablist" aria-label="Выбор направления">
+        <button class="path-tab is-active" type="button" role="tab" aria-selected="true" data-area="tashtagol"><span>01</span>Горы и тайга</button>
+        <button class="path-tab" type="button" role="tab" aria-selected="false" data-area="novokuznetsk"><span>02</span>Городские истории</button>
+        <button class="path-tab" type="button" role="tab" aria-selected="false" data-area="kemerovo"><span>03</span>Музеи Кузбасса</button>
+      </div>
+      <article class="path-feature" id="pathFeature">
+        <div class="path-feature-photo"><img id="pathImage" src="" alt=""><span class="path-feature-stamp">ТВОЙ<br>ВЫБОР</span></div>
+        <div class="path-feature-copy">
+          <p class="eyebrow" id="pathKicker">Направление · Таштагол и Шерегеш</p>
+          <h3 id="pathTitle">Горная Шория</h3>
+          <p id="pathDescription"></p>
+          <div class="path-feature-foot"><span id="pathCount"></span><a id="pathLink" href="area.html?area=tashtagol">Открыть направление <b aria-hidden="true">↗</b></a></div>
+        </div>
+      </article>
+    </div>
+    <div class="home-side-note">Выбор можно<br>поменять в любой момент.</div>
+  </section>
+
+  <section class="home-section home-stops-section" id="stops">
+    <div class="stops-head">
+      <div><p class="eyebrow">Полевые заметки <span>02</span></p><h2>Истории на карте</h2></div>
+      <p>Не список достопримечательностей.<br>Четыре повода отправиться дальше.</p>
+    </div>
+    <div class="stops-toolbar">
+      <span><b id="stopsCount">04</b> места в маршруте</span>
+      <div class="stops-arrows"><button type="button" id="stopsPrev" aria-label="Предыдущие места">←</button><button type="button" id="stopsNext" aria-label="Следующие места">→</button></div>
+    </div>
+    <div class="stops-track" id="stopsTrack" tabindex="0" aria-label="Места Кузбасса"></div>
+    <div class="stops-progress"><span id="stopsProgress"></span></div>
+  </section>
+
+  <section class="home-culture-section">
+    <div class="culture-art-wrap"><img src="assets/voice-of-water.webp" alt="Современный символ «Голос воды»" loading="lazy"><span class="culture-orbit culture-orbit-one"></span><span class="culture-orbit culture-orbit-two"></span><span class="culture-caption">НЕ ВЕЩЬ.<br>А ИСТОРИЯ.</span></div>
+    <div class="culture-copy">
+      <p class="eyebrow">Культурная лавка · 03</p>
+      <h2>Предметы,<br>у которых есть<br><em>свой голос.</em></h2>
+      <p>Открой предмет, узнай его историю и собери свой культурный чек — подарок из мест, традиций и памяти региона.</p>
+      <div class="culture-links"><a href="catalog.html">Исследовать каталог <b>↗</b></a><a href="collection.html">Собрать культурный чек <b>↗</b></a></div>
+      <div class="culture-note"><span>01</span><p>Знание — лучший сувенир.<br>Культуру нельзя забрать, но её можно узнать.</p></div>
     </div>
   </section>
 
-  <section class="section">
-    <p class="eyebrow">С чего начать</p>
-    <h2>Выбери направление</h2>
-    <div class="region-grid">
-      <a class="region-card" href="area.html?area=tashtagol">
-        <img src="https://shorskynp.ru/wp-content/uploads/2024/09/kobzev-a.v.-dsc_0511-1-768x512.jpg" alt="Горная Шория" loading="lazy">
-        <div class="region-card-copy"><span class="eyebrow">Горная Шория</span><h3>Таштагол и Шерегеш</h3><p>Музеи, легенды и природные места.</p><strong>Смотреть направление →</strong></div>
-      </a>
-      <a class="region-card" href="area.html?area=novokuznetsk">
-        <img src="https://kultura-novokuznetsk.ru/assets/images/uchrezhdeniya-kultury/nkm/kraevedcheskij-muzej2.jpg" alt="Новокузнецкий краеведческий музей" loading="lazy">
-        <div class="region-card-copy"><span class="eyebrow">Юг Кузбасса</span><h3>Новокузнецк</h3><p>История города и музейные коллекции.</p><strong>Смотреть направление →</strong></div>
-      </a>
-      <a class="region-card" href="area.html?area=kemerovo">
-        <img src="https://kuzbasskray.ru/upload/iblock/e00/wtin6tq2eigqou4ndzz8xzaqi63s5ax3.jpg" alt="Этнографическая экспозиция Кузбасского музея" loading="lazy">
-        <div class="region-card-copy"><span class="eyebrow">Музеи региона</span><h3>Кемерово и Кузбасс</h3><p>Краеведческие музеи и места в районах области.</p><strong>Смотреть направление →</strong></div>
-      </a>
-    </div>
-  </section>
-
-  <section class="section tint">
-    <p class="eyebrow">Места, с которых можно начать</p>
-    <h2>Истории уже ждут</h2>
-    <div class="place-list">
-      <a class="place-card tazgol-place" href="place.html?id=tazgol">
-        <img src="https://static.wixstatic.com/media/8694d0_d8c48b277ea24294b321795d3783dfa7~mv2.jpg/v1/fill/w_1200%2Ch_800%2Cal_c%2Cq_90%2Cenc_auto/8694d0_d8c48b277ea24294b321795d3783dfa7~mv2.jpg" alt="Гора Айган у посёлка Усть-Анзас" loading="lazy">
-        <div class="place-card-copy"><span class="tag">Музей под открытым небом</span><h2>Шорский экомузей «Тазгол»</h2><p>Горная Шория, посёлок Усть-Анзас</p><strong>Открыть место →</strong></div>
-      </a>
-      <a class="place-card" href="place.html?id=cholkoi">
-        <img src="https://cholkoi.ru/img/img1.jpg" alt="Экспозиция музея «Чолкой»" loading="lazy">
-        <div class="place-card-copy"><span class="tag">Историко-этнографический музей</span><h2>«Чолкой»</h2><p>Село Беково, Беловский район</p><strong>Открыть место →</strong></div>
-      </a>
-      <a class="place-card" href="place.html?id=saga-waterfall">
-        <img src="https://shorskynp.ru/wp-content/uploads/2024/09/kobzev-a.v.-img-20210705-wa0021-1024x576.jpg" alt="Водопад Сага на ручье Шолбычак" loading="lazy">
-        <div class="place-card-copy"><span class="tag">Голос горной воды</span><h2>Водопад Сага</h2><p>Шолбычак, Шорский национальный парк, Горная Шория.</p><strong>Открыть место →</strong></div>
-      </a>
-    </div>
+  <section class="home-endnote">
+    <span class="endnote-mark">Д</span>
+    <p>Не просто увидеть.<br><strong>Узнать, сохранить, передать дальше.</strong></p>
+    <a href="places.html">Выбрать историю <b>↗</b></a>
   </section>
 </main>
-<script src="js/data.js?v=product-pictures-20261123-v2"></script>
+<script src="js/data.js?v=darom-immersive-20261123"></script>
+<script src="js/places-data.js?v=darom-immersive-20261123"></script>
+<script src="js/home.js?v=darom-immersive-20261123"></script>
 </body>
 </html>
