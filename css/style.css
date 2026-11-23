@@ -2118,3 +2118,10 @@ body.home-page main,
 body.home-page > .header {
   position: relative;
 }
+
+
+/* Keep the darkened homepage forest photo sharp */
+body.home-page::before {
+  filter: none !important;
+  transform: none !important;
+}
