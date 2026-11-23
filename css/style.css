@@ -2621,3 +2621,20 @@ body:not(.home-page) > .header{
 
 /* Keep the interior-page header free of an outline, like the homepage */
 body:not(.home-page) > .header{border:0!important}
+
+
+/* Keep navigation text white and use one red indicator for every header state */
+body > .header nav a,
+body > .header nav a.active,
+body > .header nav a:hover{
+  color:#f3f3f3!important;
+  border-color:transparent!important;
+  transform:none!important
+}
+body > .header nav a:after{
+  background:#e93c4e!important
+}
+body > .header nav a.active:after,
+body > .header nav a:hover:after{
+  right:0!important
+}
