@@ -1973,3 +1973,31 @@ body.home-page::before {
 .home-page .home-facts {
   justify-content: center;
 }
+
+
+/* Final homepage alignment and visible landscape crop at the very top */
+body.home-page::before {
+  background-size: auto, auto 145% !important;
+  background-position: center center, center 80% !important;
+}
+.home-page .home-hero-copy {
+  align-items: stretch !important;
+  text-align: center !important;
+}
+.home-page .home-hero-copy > * {
+  width: 100%;
+  text-align: center !important;
+}
+.home-page .home-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center !important;
+}
+.home-page .home-facts {
+  display: flex;
+  align-items: center;
+  justify-content: center !important;
+}
+.home-page .home-hero-copy > p:not(.eyebrow) {
+  max-width: 430px;
+}
