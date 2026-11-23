@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Народы — Культурный код</title><link rel="stylesheet" href="css/style.css?v=header-nav-states-20261124"></head>
+<title>Народы — Культурный код</title><link rel="stylesheet" href="css/style.css?v=header-nav-current-route-20261124"></head>
 <body>
 <header class="header">
   <a class="logo" href="index.html" aria-label="Даром — на главную"><img src="assets/logo-lavka.png" alt="Даром"></a>
@@ -13,4 +13,26 @@
 <div class="people-grid">
 <article class="people-card"><div class="art shor">Ш</div><h2>Шорцы</h2><p>Коренной народ Кузбасса. В музейных коллекциях представлены предметы быта, ремесла, одежды, украшения и культовые предметы.</p><a href="catalog.html?people=Шорцы">Смотреть предметы →</a></article>
 <article class="people-card"><div class="art teleut">Т</div><h2>Телеуты</h2><p>Коренной народ Кузбасса. Материалы музеев включают национальную одежду, украшения, музыкальные инструменты, предметы быта и жилища.</p><a href="catalog.html?people=Телеуты">Смотреть предметы →</a></article>
-</div></main></body></html>
+</div></main><script>
+(() => {
+  const page = location.pathname.split("/").pop() || "index.html";
+  const sectionByPage = {
+    "places.html": "places.html",
+    "area.html": "places.html",
+    "place.html": "places.html",
+    "catalog.html": "catalog.html",
+    "item.html": "catalog.html",
+    "peoples.html": "catalog.html",
+    "collection.html": "collection.html",
+    "partners.html": "partners.html",
+    "contacts.html": "contacts.html",
+    "about.html": "about.html"
+  };
+  const target = sectionByPage[page];
+  document.querySelectorAll(".header nav a").forEach(link => {
+    const linkPage = new URL(link.href, location.href).pathname.split("/").pop();
+    link.classList.toggle("active", Boolean(target && linkPage === target));
+  });
+})();
+</script>
+</body></html>
