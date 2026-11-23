@@ -6,7 +6,7 @@
  const description=document.getElementById("pathDescription");
  const count=document.getElementById("pathCount");
  const link=document.getElementById("pathLink");
- if(!window.areas||!window.places)return;
+ if(typeof areas==="undefined"||typeof places==="undefined")return;
  function updatePath(id){
   const area=areas.find(x=>x.id===id)||areas[0];
   const picks=places.filter(x=>x.areaId===area.id);
