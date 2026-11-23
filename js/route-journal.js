@@ -4,6 +4,7 @@
   const MAX_PHOTOS = 5;
   const MAX_FILE_SIZE = 8 * 1024 * 1024;
   let dbPromise;
+  let routeObserver;
 
   function openDatabase() {
     if (dbPromise) return dbPromise;
@@ -161,6 +162,41 @@
     };
   }
 
+  function drawRoute() {
+    const map = document.querySelector(".journal-map");
+    const svg = map?.querySelector(".route-map-line");
+    const path = svg?.querySelector("path");
+    if (!map || !svg || !path) return;
+
+    const mapRect = map.getBoundingClientRect();
+    const isMobile = window.matchMedia("(max-width: 700px)").matches;
+    const routeX = isMobile ? 13 : mapRect.width / 2;
+    const points = [...map.querySelectorAll(".route-node")].map(node => {
+      const card = node.closest(".journal-place");
+      const cardRect = card.getBoundingClientRect();
+      const radius = 7;
+      const x = routeX - (cardRect.left - mapRect.left) - radius;
+      const y = 66;
+      node.style.left = `${x}px`;
+      node.style.top = `${y}px`;
+      return {x:routeX, y:cardRect.top - mapRect.top + y + radius};
+    });
+
+    svg.setAttribute("viewBox", `0 0 ${Math.max(1, mapRect.width)} ${Math.max(1, mapRect.height)}`);
+    if (!points.length) {
+      path.setAttribute("d", "");
+      return;
+    }
+    let drawing = `M ${points[0].x} ${points[0].y}`;
+    for (let index = 1; index < points.length; index++) {
+      const from = points[index - 1];
+      const to = points[index];
+      const distance = to.y - from.y;
+      drawing += ` C ${from.x} ${from.y + distance * .42}, ${to.x} ${to.y - distance * .42}, ${to.x} ${to.y}`;
+    }
+    path.setAttribute("d", drawing);
+  }
+
   function mount(selected) {
     const host = document.getElementById("routeJournal");
     if (!host) return;
@@ -175,7 +211,7 @@
       </div>
       <div class="journal-map">
         <svg class="route-map-line" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M50 0 C50 55 76 75 50 130 S24 205 50 260 S76 335 50 390 S24 465 50 520 S76 595 50 650 S24 725 50 780 S76 855 50 910 S36 970 50 1000"/>
+          <path d=""/>
         </svg>
         <div class="journal-places">${selected.map(place => `<article class="journal-place" style="--journal-image:url(&quot;${escapeHTML(place.image || "")}&quot;)" data-journal-place="${escapeHTML(place.id)}">
         <span class="route-node" aria-hidden="true"></span>
@@ -198,6 +234,15 @@
       const card = [...host.querySelectorAll("[data-journal-place]")].find(item => item.dataset.journalPlace === String(place.id));
       renderPlace(place, card).catch(reportError);
     });
+
+    if (routeObserver) routeObserver.disconnect();
+    if ("ResizeObserver" in window) {
+      routeObserver = new ResizeObserver(() => requestAnimationFrame(drawRoute));
+      const map = host.querySelector(".journal-map");
+      if (map) routeObserver.observe(map);
+      host.querySelectorAll(".journal-place").forEach(card => routeObserver.observe(card));
+    }
+    requestAnimationFrame(drawRoute);
   }
 
   window.RouteJournal = {mount};

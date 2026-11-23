@@ -2465,3 +2465,23 @@ body.receipt-page .journal-heading>p:last-child{color:#d7dfd7}
   body.receipt-page:before{display:none}
   body.receipt-page .route-journal{display:none}
 }
+
+
+/* Staggered itinerary with one continuous route */
+.journal-map{overflow:visible}
+.route-map-line{z-index:0;overflow:visible}
+.route-map-line path{stroke:rgba(224,184,165,.94);stroke-width:2;stroke-dasharray:7 8;stroke-linecap:round;vector-effect:non-scaling-stroke;filter:drop-shadow(0 1px 4px rgba(0,0,0,.45))}
+.journal-places{z-index:1;display:flex;flex-direction:column;gap:34px}
+.journal-place{width:47%;overflow:visible}
+.journal-place:before{border-radius:inherit;clip-path:inset(0 round 16px)}
+.journal-place:nth-of-type(odd){align-self:flex-start;margin-top:0}
+.journal-place:nth-of-type(even){align-self:flex-end;margin-top:34px}
+.route-node{position:absolute;z-index:4;left:0;right:auto;top:66px;width:14px;height:14px;transform:none;border:3px solid #f0e9db;border-radius:50%;background:#a43339;box-shadow:0 0 0 5px rgba(164,51,57,.22);pointer-events:none}
+.route-node:after{display:none}
+@media(max-width:700px){
+  .journal-places{gap:28px;padding-left:34px}
+  .journal-place,.journal-place:nth-of-type(odd),.journal-place:nth-of-type(even){align-self:stretch;width:auto;margin-top:0}
+  .route-map-line{left:0;width:26px}
+  .route-map-line path{stroke-width:1.8}
+  .route-node{left:-27px!important;right:auto;top:66px}
+}
