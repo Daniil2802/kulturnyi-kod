@@ -1523,3 +1523,17 @@ body{background:var(--paper);color:var(--ink)}
 @media(prefers-reduced-motion:reduce){
  .home-page .reveal,.home-page .reveal.is-visible{opacity:1;transform:none;transition:none}
 }
+
+
+/* Misty forest photo backdrop and translucent surfaces */
+html{background:#1f302c}
+body{position:relative;isolation:isolate;background:transparent!important;background-image:none!important}
+body::before{content:"";position:fixed;z-index:-1;inset:-18px;pointer-events:none;background:linear-gradient(180deg,rgba(25,30,29,.34),rgba(25,30,29,.48)),url("../assets/darom-forest-background.webp") center center/cover no-repeat;filter:blur(8px);transform:scale(1.035)}
+.header{background:rgba(25,30,29,.76)!important;backdrop-filter:blur(12px)}
+.hero,.page,.section,.steps article,.category-grid a,.card,.people-card,.empty,.share-invitation,.receipt-tools,.receipt,.item-art,.object-card{background-color:rgba(243,243,243,.82)!important;backdrop-filter:blur(5px)}
+.home-page{background:transparent!important}
+.home-hero{background:rgba(31,48,44,.62)!important;backdrop-filter:blur(3px)}
+.home-hero:before{display:none!important;background:none!important;mask:none!important;-webkit-mask:none!important}
+.home-path-section,.home-culture-section{background:rgba(243,243,243,.78);backdrop-filter:blur(5px)}
+.home-stops-section{background:rgba(31,48,44,.74)!important;backdrop-filter:blur(4px)}
+@media(max-width:650px){.header{background:rgba(25,30,29,.84)!important}.home-hero{background:rgba(31,48,44,.72)!important}}
