@@ -2521,3 +2521,12 @@ body:not(.home-page) > .header nav a:after{background:#e93c4e}
   body:not(.home-page) > .header .logo img{height:42px}
   body:not(.home-page) > .header nav a{padding:8px 0}
 }
+
+/* Match header dimensions to the homepage at every breakpoint */
+body > .header{width:95.2vw!important;min-height:76px!important;height:76px!important}
+@media(max-width:900px){
+  body > .header{width:calc(100% - 32px)!important;min-height:76px!important;height:auto!important}
+}
+@media(max-width:600px){
+  body > .header{width:calc(100% - 20px)!important;min-height:76px!important;height:auto!important}
+}
