@@ -2345,3 +2345,16 @@ body.home-page::before {
  .home-page .home-map-section .kuzbass-map-plot{width:min(100%,350px);height:auto}
  .home-page .home-map-links{grid-column:1/-1;grid-row:2;margin-top:0}
 }
+
+
+/* Softly blur the scenic backdrop as the map section enters view */
+body.home-page::before{
+ filter:blur(0px)!important;
+ transition:filter .9s ease!important;
+}
+body.home-page.map-background-blurred::before{
+ filter:blur(7px)!important;
+}
+@media(prefers-reduced-motion:reduce){
+ body.home-page::before{transition:none!important}
+}
