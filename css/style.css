@@ -1637,3 +1637,15 @@ body::before{content:"";position:fixed;z-index:-1;inset:-18px;pointer-events:non
  .home-hero-edge{font-size:7px;padding:10px 2px 7px}
  .home-hero-edge span:nth-child(2){display:none}
 }
+
+/* Refine the panoramic hero proportions */
+@media(min-width:901px){
+ .home-hero-grid{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+ .home-hero-copy{max-width:700px;padding:clamp(26px,3vw,42px)}
+ .home-hero h1{font-size:clamp(44px,4.4vw,64px);line-height:.94;letter-spacing:0;overflow-wrap:normal}
+}
+@media(min-width:651px) and (max-width:900px){
+ .home-hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .home-hero-copy{padding:22px}
+ .home-hero h1{font-size:clamp(42px,5.3vw,54px);line-height:.94;letter-spacing:0}
+}
