@@ -997,3 +997,26 @@ body.receipt-page .page > h1 {
   text-transform: uppercase;
   letter-spacing: .015em;
 }
+
+
+/* Seasonal filter on area place lists */
+.place-season-filter {
+  align-items: center;
+  margin: 24px 0 12px;
+}
+.place-season-filter label {
+  color: var(--shop-red);
+  font-weight: 800;
+}
+.place-season-filter select {
+  min-width: 190px;
+}
+@media(max-width:600px) {
+  .place-season-filter {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .place-season-filter select {
+    width: 100%;
+  }
+}

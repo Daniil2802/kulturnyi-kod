@@ -22,6 +22,7 @@ const areas = [
 const places = [
   {
     id: "tazgol",
+    seasons: ["summer", "winter"],
     areaId: "tashtagol",
     title: "Шорский экомузей «Тазгол»",
     kind: "Музей под открытым небом",
@@ -39,6 +40,7 @@ const places = [
   },
   {
     id: "saga-waterfall",
+    seasons: ["summer", "winter"],
     areaId: "tashtagol",
     title: "Водопад Сага",
     kind: "Водопад · Голос горной воды",
@@ -57,6 +59,7 @@ const places = [
   },
   {
     id: "grandioznaya-cave",
+    seasons: ["summer"],
     areaId: "tashtagol",
     title: "Пещера Грандиозная",
     kind: "Пещера · Тайна, спрятанная внутри горы",
@@ -96,6 +99,7 @@ const places = [
   },
   {
     id: "novokuznetsk-museum",
+    seasons: ["summer", "winter"],
     areaId: "novokuznetsk",
     title: "Новокузнецкий краеведческий музей",
     kind: "Музей",
@@ -113,6 +117,7 @@ const places = [
   },
   {
     id: "kuzbass-museum",
+    seasons: ["summer", "winter"],
     areaId: "kemerovo",
     title: "Кузбасский государственный краеведческий музей",
     kind: "Музей",
@@ -130,6 +135,7 @@ const places = [
   },
   {
     id: "cholkoi",
+    seasons: ["summer", "winter"],
     areaId: "kemerovo",
     title: "Историко-этнографический музей «Чолкой»",
     kind: "Музей",
@@ -148,6 +154,7 @@ const places = [
   },
   {
     id: "shantuu-terim",
+    seasons: ["summer", "winter"],
     areaId: "kemerovo",
     title: "Музей под открытым небом «Шан Туу Jерим»",
     kind: "Телеутский музей под открытым небом",

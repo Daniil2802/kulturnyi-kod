@@ -12,6 +12,21 @@ function mapSearchUrl(place) {
   return "https://yandex.ru/maps/?text=" + encodeURIComponent(place.title + ", " + place.address);
 }
 
+function renderPlaceCards(list) {
+  const season = document.getElementById("seasonFilter").value;
+  const filtered = season
+    ? list.filter(function(place) { return (place.seasons || []).includes(season); })
+    : list;
+  const host = document.getElementById("placeList");
+  host.innerHTML = filtered.map(function(place) {
+    return '<article class="place-card">' +
+      '<img src="' + place.image + '" alt="' + escapeText(place.imageAlt) + '" loading="lazy">' +
+      '<div class="place-card-copy"><span class="tag">' + escapeText(place.kind) + '</span><h2><a href="place.html?id=' + encodeURIComponent(place.id) + '">' + escapeText(place.title) + '</a></h2>' +
+      '<p>' + escapeText(place.shortDescription || place.description) + '</p><div class="place-card-location"><span class="place-location-label">Местоположение:</span><span>' + escapeText(place.address) + '</span>' +
+      '<a class="place-map-link" href="' + mapSearchUrl(place) + '" target="_blank" rel="noopener">Открыть в Яндекс Картах ↗</a></div><a class="place-card-open" href="place.html?id=' + encodeURIComponent(place.id) + '">Открыть место →</a></div></article>';
+  }).join("") || '<p class="empty">Для этого сезона мест пока нет. Выбери другое время поездки.</p>';
+}
+
 if (!area) {
   areaHost.innerHTML = '<section class="empty"><h1>Такого направления пока нет</h1><a class="button" href="places.html">Посмотреть все места</a></section>';
 } else {
@@ -20,11 +35,10 @@ if (!area) {
   areaHost.innerHTML = '<a class="back-link" href="places.html">← Все направления</a>' +
     '<p class="eyebrow">Места Кузбасса</p><h1>' + escapeText(area.title) + '</h1>' +
     '<p class="lead">' + escapeText(area.short) + '</p>' +
-    '<div class="place-list">' + list.map(function(place) {
-      return '<article class="place-card">' +
-        '<img src="' + place.image + '" alt="' + escapeText(place.imageAlt) + '" loading="lazy">' +
-        '<div class="place-card-copy"><span class="tag">' + escapeText(place.kind) + '</span><h2><a href="place.html?id=' + encodeURIComponent(place.id) + '">' + escapeText(place.title) + '</a></h2>' +
-        '<p>' + escapeText(place.shortDescription || place.description) + '</p><div class="place-card-location"><span class="place-location-label">Местоположение:</span><span>' + escapeText(place.address) + '</span>' +
-        '<a class="place-map-link" href="' + mapSearchUrl(place) + '" target="_blank" rel="noopener">Открыть в Яндекс Картах ↗</a></div><a class="place-card-open" href="place.html?id=' + encodeURIComponent(place.id) + '">Открыть место →</a></div></article>';
-    }).join("") + '</div>';
+    '<div class="filters place-season-filter"><label for="seasonFilter">Сезон поездки</label>' +
+    '<select id="seasonFilter"><option value="">Все сезоны</option><option value="summer">Лето</option><option value="winter">Зима</option></select></div>' +
+    '<div class="place-list" id="placeList"></div>';
+  document.getElementById("seasonFilter").value = ["summer", "winter"].includes(params.get("season")) ? params.get("season") : "";
+  document.getElementById("seasonFilter").addEventListener("change", function() { renderPlaceCards(list); });
+  renderPlaceCards(list);
 }
