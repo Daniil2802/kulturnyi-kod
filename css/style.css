@@ -1649,3 +1649,9 @@ body::before{content:"";position:fixed;z-index:-1;inset:-18px;pointer-events:non
  .home-hero-copy{padding:22px}
  .home-hero h1{font-size:clamp(42px,5.3vw,54px);line-height:.94;letter-spacing:0}
 }
+
+@media(min-width:901px){
+ .home-hero-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)!important}
+ .home-hero-copy{width:100%;max-width:none;padding:clamp(26px,3vw,40px)}
+ .home-hero h1{font-size:clamp(42px,3.8vw,56px);line-height:.98;letter-spacing:0}
+}
