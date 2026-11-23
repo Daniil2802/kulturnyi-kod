@@ -1757,3 +1757,10 @@ body.receipt-page .empty{
  body.receipt-page .receipt,body.receipt-page .share-invitation,
  body.receipt-page .empty{background-color:rgba(243,243,243,.66)!important}
 }
+/* Keep the forest backdrop visible on every page, including the cultural receipt */
+body.receipt-page{background:transparent!important;background-image:none!important}
+.code-card,.mini-grid div{
+ background:rgba(31,48,44,.70)!important;
+ backdrop-filter:blur(14px) saturate(118%);
+ -webkit-backdrop-filter:blur(14px) saturate(118%);
+}
