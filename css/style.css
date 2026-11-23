@@ -1830,3 +1830,15 @@ body.receipt-page{background:transparent!important;background-image:none!importa
 @media(max-width:650px){
   .home-hero h1{font-size:clamp(38px,10vw,52px)}
 }
+
+
+/* Final, high-specificity size for the homepage welcome headline */
+@media(min-width:901px){
+  .home-page #homeTitle{font-size:clamp(32px,2vw,36px)!important;line-height:1.02!important}
+}
+@media(min-width:651px) and (max-width:900px){
+  .home-page #homeTitle{font-size:clamp(32px,3.7vw,38px)!important;line-height:1.02!important}
+}
+@media(max-width:650px){
+  .home-page #homeTitle{font-size:clamp(36px,9vw,48px)!important;line-height:.96!important}
+}
