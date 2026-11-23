@@ -2485,3 +2485,39 @@ body.receipt-page .journal-heading>p:last-child{color:#d7dfd7}
   .route-map-line path{stroke-width:1.8}
   .route-node{left:-27px!important;right:auto;top:66px}
 }
+
+
+/* Use the homepage glass header on every interior page */
+body:not(.home-page) > .header{
+  position:sticky!important;top:4px!important;left:auto!important;right:auto!important;
+  width:calc(100% - 48px)!important;min-height:76px;height:auto;
+  margin:4px auto -76px!important;padding:0 clamp(16px,3vw,42px);
+  display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:18px;
+  color:#f3f3f3;background:rgba(25,30,29,.48)!important;
+  border:1px solid rgba(243,243,243,.32)!important;border-radius:16px;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 12px 35px rgba(25,30,29,.12);z-index:20
+}
+body:not(.home-page) > .header::after{display:none!important}
+body:not(.home-page) > .header nav{flex-wrap:nowrap;justify-content:flex-end;gap:clamp(14px,2vw,32px);font-size:15px}
+body:not(.home-page) > .header nav a,
+body:not(.home-page) > .header nav a.active,
+body:not(.home-page) > .header nav a:hover{color:#f3f3f3}
+body:not(.home-page) > .header nav a.active{border:0}
+body:not(.home-page) > .header nav a:after{background:#e93c4e}
+@media(max-width:900px){
+  body:not(.home-page) > .header{
+    width:calc(100% - 32px)!important;min-height:82px;margin:8px auto -92px!important;
+    padding:9px 16px;flex-direction:column;gap:8px
+  }
+  body:not(.home-page) > .header nav{flex-wrap:wrap;justify-content:center;gap:8px 16px;font-size:14px}
+}
+@media(max-width:600px){
+  body:not(.home-page) > .header{
+    width:calc(100% - 20px)!important;min-height:60px;margin:8px 10px -88px!important;
+    padding:8px 12px;border-radius:14px
+  }
+  body:not(.home-page) > .header nav{gap:7px 12px;font-size:11px}
+  body:not(.home-page) > .header .logo img{height:42px}
+  body:not(.home-page) > .header nav a{padding:8px 0}
+}
