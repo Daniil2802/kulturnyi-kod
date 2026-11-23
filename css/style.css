@@ -2166,3 +2166,28 @@ body.home-page::before {
   position: sticky !important;
   top: 4px !important;
 }
+
+
+/* Pin the homepage header to the viewport during page scrolling */
+.home-page .header {
+  position: fixed !important;
+  top: 4px !important;
+  left: 2.4vw !important;
+  right: 2.4vw !important;
+  width: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+@media (max-width: 900px) {
+  .home-page .header {
+    left: 16px !important;
+    right: 16px !important;
+  }
+}
+@media (max-width: 650px) {
+  .home-page .header {
+    left: 10px !important;
+    right: 10px !important;
+    top: 4px !important;
+  }
+}
