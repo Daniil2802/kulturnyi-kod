@@ -2750,3 +2750,7 @@ body.home-page .home-hero-copy #homeTitle{line-height:1.15!important}
 
 /* Leave room for the fixed header when the homepage map section is targeted */
 body.home-page #choosePath{scroll-margin-top:90px}
+
+
+/* Remove the pale glass frame from the territory page */
+body.area-page > main.page{background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
