@@ -2767,6 +2767,6 @@ body.area-page #areaPage>h1:after{content:"";position:absolute;left:3%;right:3%;
 @media(max-width:700px){body.area-page #areaPage>h1:after{bottom:-9px;border-bottom-width:3px}}
 
 
-/* Highlight the territory page return link in red */
-body.area-page #areaPage>.back-link{color:var(--upsdell)!important}
-body.area-page #areaPage>.back-link:hover{color:var(--paper)!important}
+/* Keep the return label white and highlight only its arrow */
+body.area-page #areaPage>.back-link{color:#f3f3f3!important}
+body.area-page #areaPage>.back-link:before{content:"←";display:inline-block;margin-right:8px;color:var(--upsdell)!important}
