@@ -9,7 +9,7 @@ function escapePlaceText(value) {
 }
 
 function formatPlaceTitle(value) {
-  return escapePlaceText(value).replace(/«([^»]+)»/g, '<span style="white-space:nowrap">«$1»</span>');
+  return escapePlaceText(value).replace(/«([^»]+)»/g, '<span style="white-space:nowrap;font-family:inherit!important;font-size:inherit!important;font-weight:inherit!important;font-style:inherit!important;letter-spacing:inherit!important;text-transform:inherit!important">«$1»</span>');
 }
 
 function mapSearchUrl(place) {
