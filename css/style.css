@@ -2738,3 +2738,7 @@ body.home-page .culture-copy h2 em{color:var(--upsdell)!important}
 /* Highlight the homepage catalog link with a red underline and arrow */
 body.home-page .culture-links a:first-child{border-bottom-color:var(--upsdell)!important}
 body.home-page .culture-links a:first-child b{color:var(--upsdell)!important}
+
+
+/* Add a little more line spacing to the homepage welcome heading */
+body.home-page .home-hero h1{line-height:1.04!important}
