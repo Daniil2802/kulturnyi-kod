@@ -9,9 +9,10 @@ if (!item) {
     <a class="button" href="catalog.html">К предметам</a>
   </section>`;
 } else {
-  container.innerHTML = `${renderCultureObjectCard(item, { detail: true })}
+  container.innerHTML = `<div class="item-art${item.image ? " has-image" : ""}" ${item.image ? "" : 'aria-hidden="true"'}>${item.image ? `<img src="${item.image}" alt="${item.name}">` : `<span>${item.people[0]}</span>`}<small>КУЛЬТУРНАЯ ЛАВКА КУЗБАССА</small></div>
     <article class="item-copy">
       <p class="eyebrow">${item.people} · ${item.category}</p>
+      <h1>${item.name}</h1>
       ${item.id === 7 ? "" : `<p class="item-intro">${item.short}</p>`}
       <div class="item-story"><h2>История предмета</h2><p>${item.meaning}</p></div>
       <p class="item-source"><b>Откуда эта история:</b> ${item.source}</p>

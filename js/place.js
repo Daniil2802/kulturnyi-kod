@@ -51,7 +51,9 @@ if (!place) {
     '<section class="place-panel"><p class="eyebrow">Культурная связь</p><h2>' + escapePlaceText(place.itemsTitle || "Предметы этого места") + '</h2>' +
     (place.itemsNote ? '<p class="items-note">' + escapePlaceText(place.itemsNote) + '</p>' : '') +
     (selectedObjects.length ? '<div class="place-object-list">' + selectedObjects.map(function(object) {
-      return renderCultureObjectCard(object);
+      return '<article class="place-object">' + (object.image ? '<a class="place-object-image" href="item.html?id=' + object.id + '" aria-label="Открыть карточку: ' + escapePlaceText(object.name) + '"><img src="' + escapePlaceText(object.image) + '" alt="' + escapePlaceText(object.name) + '" loading="lazy"></a>' : '') + '<span class="tag">' + escapePlaceText(object.people) + ' · ' + escapePlaceText(object.category) + '</span>' +
+        '<h3><a href="item.html?id=' + object.id + '">' + escapePlaceText(object.name) + '</a></h3><p>' + escapePlaceText(object.short) + '</p>' +
+        '<div class="place-object-actions"><a href="item.html?id=' + object.id + '">История предмета →</a></div></article>';
     }).join("") + '</div>' : '<p class="items-note">' + escapePlaceText(place.emptyObjects || "Список предметов этого места скоро появится.") + '</p>') +
     '</section></div>' + renderPartnerTour(place.partnerTour);
   bindPlaceSelectionButtons();
