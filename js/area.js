@@ -3,28 +3,37 @@ const params = new URLSearchParams(location.search);
 const area = areas.find(function(item) { return item.id === params.get("area"); });
 
 function escapeText(value) {
-  return String(value).replace(/[&<>"']/g, function(char) {
+  return String(value || "").replace(/[&<>"']/g, function(char) {
     return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char];
   });
 }
 
-function mapSearchUrl(place) {
-  return "https://yandex.ru/maps/?text=" + encodeURIComponent(place.title + ", " + place.address);
-}
-
 function renderPlaceCards(list) {
-  const season = document.getElementById("seasonFilter").value;
+  const seasonFilter = document.getElementById("seasonFilter");
+  const season = seasonFilter.value;
   const filtered = season
     ? list.filter(function(place) { return (place.seasons || []).includes(season); })
     : list;
   const host = document.getElementById("placeList");
+  host.className = "places-catalog-grid";
+
   host.innerHTML = filtered.map(function(place) {
-    return '<article class="place-card">' +
-      '<img src="' + place.image + '" alt="' + escapeText(place.imageAlt) + '" loading="lazy">' +
-      '<div class="place-card-copy"><span class="tag">' + escapeText(place.kind) + '</span><h2><a href="place.html?id=' + encodeURIComponent(place.id) + '">' + escapeText(place.title) + '</a></h2>' +
-      '<p>' + escapeText(place.shortDescription || place.description) + '</p><div class="place-card-location"><span class="place-location-label">Местоположение:</span><span>' + escapeText(place.address) + '</span>' +
-      '<a class="place-map-link" href="' + mapSearchUrl(place) + '" target="_blank" rel="noopener">Открыть в Яндекс Картах ↗</a></div><a class="place-card-open" href="place.html?id=' + encodeURIComponent(place.id) + '">Открыть место →</a>' + placeSelectionButton(place) + '</div></article>';
-  }).join("") || '<p class="empty">Для этого сезона мест пока нет. Выбери другое время поездки.</p>';
+    const summary = place.shortDescription || place.description || "";
+    return '<article class="place-catalog-card">' +
+      '<img class="place-catalog-image" src="' + escapeText(place.image) + '" alt="' + escapeText(place.imageAlt || place.title) + '" loading="lazy">' +
+      '<div class="place-catalog-shade" aria-hidden="true"></div>' +
+      '<div class="place-catalog-copy">' +
+        '<span class="place-catalog-kind">' + escapeText(place.kind) + '</span>' +
+        '<h2><a href="place.html?id=' + encodeURIComponent(place.id) + '">' + escapeText(place.title) + '</a></h2>' +
+        '<p>' + escapeText(summary) + '</p>' +
+        '<span class="place-catalog-location">' + escapeText(area.title) + ' · ' + escapeText(place.address) + '</span>' +
+      '</div>' +
+      '<div class="place-catalog-actions">' + placeSelectionButton(place) +
+        '<a class="place-catalog-more" href="place.html?id=' + encodeURIComponent(place.id) + '">Подробнее <span aria-hidden="true">↗</span></a>' +
+      '</div>' +
+    '</article>';
+  }).join("") || '<p class="place-catalog-empty">Для этого сезона мест пока нет. Выбери другое время поездки.</p>';
+
   bindPlaceSelectionButtons();
 }
 
@@ -38,7 +47,7 @@ if (!area) {
     '<p class="lead">' + escapeText(area.short) + '</p>' +
     '<div class="filters place-season-filter"><label for="seasonFilter">Сезон поездки</label>' +
     '<select id="seasonFilter"><option value="">Все сезоны</option><option value="summer">Лето</option><option value="winter">Зима</option></select></div>' +
-    '<div class="place-list" id="placeList"></div>';
+    '<div id="placeList"></div>';
   document.getElementById("seasonFilter").value = ["summer", "winter"].includes(params.get("season")) ? params.get("season") : "";
   document.getElementById("seasonFilter").addEventListener("change", function() { renderPlaceCards(list); });
   renderPlaceCards(list);
