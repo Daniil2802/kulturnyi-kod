@@ -8,6 +8,10 @@ function escapePlaceText(value) {
   });
 }
 
+function formatPlaceTitle(value) {
+  return escapePlaceText(value).replace(/«([^»]+)»/g, '<span style="white-space:nowrap">«$1»</span>');
+}
+
 function mapSearchUrl(place) {
   return "https://yandex.ru/maps/?text=" + encodeURIComponent(place.title + ", " + place.address);
 }
@@ -39,7 +43,7 @@ if (!place) {
   document.title = place.title + " — Культурный код Кузбасса";
   placeHost.innerHTML = '<a class="back-link" href="area.html?area=' + encodeURIComponent(place.areaId) + '">← ' + escapePlaceText(area ? area.title : "Все места") + '</a>' +
     '<section class="place-hero"><img src="' + place.image + '" alt="' + escapePlaceText(place.imageAlt) + '">' +
-    '<div class="place-hero-caption"><span class="tag">' + escapePlaceText(place.kind) + '</span><h1>' + escapePlaceText(place.title) + '</h1><div class="place-location"><span class="place-location-label">Местоположение:</span><span>' + escapePlaceText(place.address) + '</span><a class="place-map-link" href="' + mapSearchUrl(place) + '" target="_blank" rel="noopener">Открыть в Яндекс Картах ↗</a></div>' + placeSelectionButton(place) + '</div></section>' +
+    '<div class="place-hero-caption"><span class="tag">' + escapePlaceText(place.kind) + '</span><h1>' + formatPlaceTitle(place.title) + '</h1><div class="place-location"><span class="place-location-label">Местоположение:</span><span>' + escapePlaceText(place.address) + '</span><a class="place-map-link" href="' + mapSearchUrl(place) + '" target="_blank" rel="noopener">Открыть в Яндекс Картах ↗</a></div>' + placeSelectionButton(place) + '</div></section>' +
     '<div class="place-panels"><section class="place-panel"><p class="eyebrow">История места</p><h2>Описание</h2>' +
     '<p>' + escapePlaceText(place.description) + '</p>' + (place.extra ? '<p>' + escapePlaceText(place.extra) + '</p>' : '') +
     '<p class="source-line">Источник: <a href="' + place.sourceUrl + '" target="_blank" rel="noopener">' + escapePlaceText(place.source) + '</a></p>' +
