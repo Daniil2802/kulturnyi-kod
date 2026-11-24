@@ -3003,3 +3003,24 @@ body.place-detail-page>main.page{
   -webkit-backdrop-filter:none!important
 }
 body.place-detail-page>main.page:before{display:none!important}
+
+
+/* Fit long place names fully inside the place detail title column */
+body.place-detail-page .place-hero-caption h1{
+  width:100%!important;
+  max-width:100%!important;
+  font-size:clamp(38px,4.1vw,58px)!important;
+  line-height:1.04!important;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+@media(max-width:900px){
+  body.place-detail-page .place-hero-caption h1{
+    font-size:clamp(34px,7vw,52px)!important;
+  }
+}
+@media(max-width:600px){
+  body.place-detail-page .place-hero-caption h1{
+    font-size:clamp(32px,9vw,44px)!important;
+  }
+}
