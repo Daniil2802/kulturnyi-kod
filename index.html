@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#1F302C">
   <title>Даром — культурные маршруты Кузбасса</title>
   <meta name="description" content="Открывай места и истории Кузбасса, знакомься с культурными предметами и собирай свой культурный маршрут.">
-  <link rel="stylesheet" href="css/style.css?v=home-route-copy-20261124">
+  <link rel="stylesheet" href="css/style.css?v=home-stops-message-20261124">
 </head>
 <body class="home-page">
 <header class="header">
@@ -80,7 +80,7 @@
       <p>Каждая точка — новая история.<br>Выбирай место и отправляйся в путь.</p>
     </div>
     <div class="stops-toolbar">
-      <span><b id="stopsCount">04</b> места в маршруте</span>
+      <span class="stops-ready-label">Уже можно посетить</span>
       <div class="stops-arrows"><button type="button" id="stopsPrev" aria-label="Предыдущие места">←</button><button type="button" id="stopsNext" aria-label="Следующие места">→</button></div>
     </div>
     <div class="stops-track" id="stopsTrack" tabindex="0" aria-label="Места Кузбасса"></div>
@@ -106,7 +106,7 @@
 </main>
 <script src="js/data.js?v=darom-panorama-20261123"></script>
 <script src="js/places-data.js?v=darom-panorama-20261123"></script>
-<script src="js/home.js?v=place-selection-20261124"></script>
+<script src="js/home.js?v=stops-cards-clean-20261124"></script>
 <script>
 (() => {
   const page = location.pathname.split("/").pop() || "index.html";
