@@ -73,13 +73,16 @@
   reveals.forEach(el=>{el.classList.add("reveal");observer.observe(el)});
  }
 
- const mapSection=document.getElementById("choosePath");
- if(mapSection&&"IntersectionObserver" in window){
+ const blurSections=[document.getElementById("choosePath"),document.querySelector(".home-culture-section")].filter(Boolean);
+ if(blurSections.length&&"IntersectionObserver" in window){
+  const visibleBlurSections=new Set();
   const mapBlurObserver=new IntersectionObserver(entries=>{
    entries.forEach(entry=>{
-    document.body.classList.toggle("map-background-blurred",entry.isIntersecting);
+    if(entry.isIntersecting)visibleBlurSections.add(entry.target);
+    else visibleBlurSections.delete(entry.target);
    });
+   document.body.classList.toggle("map-background-blurred",visibleBlurSections.size>0);
   },{threshold:0.01});
-  mapBlurObserver.observe(mapSection);
+  blurSections.forEach(section=>mapBlurObserver.observe(section));
  }
 })();
