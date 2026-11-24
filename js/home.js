@@ -49,11 +49,10 @@
  const track=document.getElementById("stopsTrack");
  if(track){
   const data=places;
-  document.getElementById("stopsCount").textContent=String(data.length).padStart(2,"0");
-  track.innerHTML=data.map((place,index)=>
+  track.innerHTML=data.map(place=>
    '<a class="stop-card reveal" href="place.html?id='+encodeURIComponent(place.id)+'">'+
     '<img src="'+place.image+'" alt="'+(place.imageAlt||place.title).replace(/"/g,"&quot;")+'" loading="lazy">'+
-    '<div class="stop-card-top"><span>'+place.kind+'</span><b>0'+(index+1)+'</b></div>'+
+    '<div class="stop-card-top"><span>'+place.kind+'</span></div>'+
     '<div class="stop-card-copy"><h3>'+place.title+'</h3><p>'+place.address+'</p><span>Открыть историю ↗</span></div></a>'
   ).join("");
   const progress=document.getElementById("stopsProgress");
