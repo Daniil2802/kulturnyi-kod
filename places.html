@@ -23,8 +23,10 @@
     <select id="placeAreaFilter" aria-label="Территория">
       <option value="">Все территории</option>
     </select>
-    <select id="placeKindFilter" aria-label="Тип места">
-      <option value="">Все типы мест</option>
+    <select id="placeSeasonFilter" aria-label="Сезон поездки">
+      <option value="">Все сезоны</option>
+      <option value="summer">Лето</option>
+      <option value="winter">Зима</option>
     </select>
     <input id="placeSearch" type="search" placeholder="Найти место" aria-label="Поиск по местам">
     <select id="placeSort" aria-label="Порядок сортировки">
@@ -36,7 +38,7 @@
 </main>
 <script src="js/places-data.js?v=places-photo-catalog-20261124"></script>
 <script src="js/place-selection.js?v=places-in-receipt-20261124"></script>
-<script src="js/places-catalog.js?v=places-photo-catalog-20261124"></script>
+<script src="js/places-catalog.js?v=season-filter-20261124"></script>
 <script>
 (() => {
   const page = location.pathname.split("/").pop() || "index.html";
