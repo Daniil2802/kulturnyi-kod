@@ -2920,3 +2920,44 @@ body.area-page #placeList.places-catalog-grid{
 @media(max-width:600px){
   body.area-page #placeList.places-catalog-grid{grid-template-columns:1fr;gap:14px}
 }
+
+
+/* Remove pale panels from place detail pages and keep text readable on the site backdrop */
+.place-hero,
+.place-panel{
+  color:#f3f3f3;
+  background:rgba(31,48,44,.38)!important;
+  border:1px solid rgba(243,243,243,.3);
+  backdrop-filter:blur(16px) saturate(118%);
+  -webkit-backdrop-filter:blur(16px) saturate(118%)
+}
+.place-hero-caption h1,
+.place-hero-caption p,
+.place-panel h2,
+.place-panel>p:not(.eyebrow),
+.place-panel li,
+.place-panel strong,
+.place-tour-pricing p,
+.place-tour-safety,
+.place-object h3 a,
+.place-object>p,
+.items-note{
+  color:#f3f3f3!important
+}
+.place-hero-caption .tag,
+.place-panel .eyebrow,
+.place-location-label{color:#f3f3f3!important}
+.place-map-link,
+.source-line a,
+.place-tour-links a,
+.place-object-actions>a{color:#f0717b!important}
+.place-object,
+.items-note,
+.place-tour-pricing,
+.place-tour-safety{
+  background:rgba(20,30,27,.48)!important;
+  border-color:rgba(243,243,243,.24)!important;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px)
+}
+.place-object-image{background:transparent!important}
