@@ -2673,3 +2673,9 @@ body.home-page .stops-ready-label{font-size:16px;font-weight:700;color:var(--pap
 @media(max-width:700px){
   body.home-page .stops-ready-label{font-size:14px}
 }
+
+
+/* Fit long place names more comfortably inside homepage route cards */
+.home-page .stop-card-copy h3{
+  font-size:clamp(26px,2.7vw,35px)
+}
