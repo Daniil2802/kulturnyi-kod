@@ -2777,7 +2777,7 @@ body.places-catalog-page{background-position:center top}
 body.places-catalog-page>.header{margin-bottom:0!important}
 body.places-catalog-page>main.places-catalog-page{
   width:min(calc(100% - 40px),1680px);max-width:1680px;
-  margin:20px auto 56px;padding:clamp(24px,3.6vw,56px);
+  margin:48px auto 56px;padding:clamp(24px,3.6vw,56px);
   background:transparent!important;border:0!important;box-shadow:none!important;
   backdrop-filter:none!important;-webkit-backdrop-filter:none!important
 }
@@ -2874,8 +2874,11 @@ body.places-catalog-page>main.places-catalog-page{
   .place-catalog-card{min-height:clamp(470px,65vw,590px)}
   .place-catalog-copy h2{font-size:clamp(22px,3.2vw,30px)}
 }
+@media(max-width:900px){
+  body.places-catalog-page>main.places-catalog-page{margin-top:112px}
+}
 @media(max-width:600px){
-  body.places-catalog-page>main.places-catalog-page{width:calc(100% - 20px);margin:10px auto 34px;padding:28px 12px}
+  body.places-catalog-page>main.places-catalog-page{width:calc(100% - 20px);margin:112px auto 34px;padding:28px 12px}
   .places-catalog-page .places-catalog-head h1{font-size:clamp(34px,10vw,48px)}
   .places-catalog-page .places-catalog-head .lead{font-size:15px}
   .places-catalog-controls{grid-template-columns:1fr 1fr;gap:8px;margin:22px 0}
