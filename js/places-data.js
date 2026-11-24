@@ -13,7 +13,7 @@ const areas = [
   },
   {
     id: "kemerovo",
-    title: "Кемерово и Кузбасс",
+    title: "Кемерово",
     short: "Краеведческие и этнографические музеи, а также места в районах Кузбасса.",
     image: "https://kuzbasskray.ru/upload/iblock/e00/wtin6tq2eigqou4ndzz8xzaqi63s5ax3.jpg"
   }
