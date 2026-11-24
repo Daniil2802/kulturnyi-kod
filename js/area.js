@@ -33,8 +33,9 @@ if (!area) {
 } else {
   const list = places.filter(function(place) { return place.areaId === area.id; });
   document.title = area.title + " — Культурный код Кузбасса";
+  const areaTitleHtml = escapeText(area.title).replace(/(Шерегеш)/i, '<span class="area-title-accent">$1</span>');
   areaHost.innerHTML = '<a class="back-link" href="places.html">← Все места</a>' +
-    '<p class="eyebrow">Места Кузбасса</p><h1>' + escapeText(area.title) + '</h1>' +
+    '<p class="eyebrow">Места Кузбасса</p><h1>' + areaTitleHtml + '</h1>' +
     '<p class="lead">' + escapeText(area.short) + '</p>' +
     '<div class="filters place-season-filter"><label for="seasonFilter">Сезон поездки</label>' +
     '<select id="seasonFilter"><option value="">Все сезоны</option><option value="summer">Лето</option><option value="winter">Зима</option></select></div>' +
