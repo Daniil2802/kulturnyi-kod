@@ -1,6 +1,6 @@
 const catalogHost = document.getElementById("placeCatalog");
 const areaFilter = document.getElementById("placeAreaFilter");
-const kindFilter = document.getElementById("placeKindFilter");
+const seasonFilter = document.getElementById("placeSeasonFilter");
 const searchInput = document.getElementById("placeSearch");
 const sortFilter = document.getElementById("placeSort");
 
@@ -15,22 +15,16 @@ function populateCatalogFilters() {
     return '<option value="' + catalogEscape(area.id) + '">' + catalogEscape(area.title) + '</option>';
   }).join("");
 
-  const kinds = Array.from(new Set(places.map(function(place) { return place.kind; }))).sort(function(a, b) {
-    return a.localeCompare(b, "ru");
-  });
-  kindFilter.innerHTML += kinds.map(function(kind) {
-    return '<option value="' + catalogEscape(kind) + '">' + catalogEscape(kind) + '</option>';
-  }).join("");
 }
 
 function renderPlacesCatalog() {
   const query = searchInput.value.trim().toLocaleLowerCase("ru");
   let visiblePlaces = places.filter(function(place) {
     const areaMatches = !areaFilter.value || place.areaId === areaFilter.value;
-    const kindMatches = !kindFilter.value || place.kind === kindFilter.value;
+    const seasonMatches = !seasonFilter.value || (place.seasons || []).includes(seasonFilter.value);
     const searchText = [place.title, place.kind, place.address, place.shortDescription, place.description]
       .join(" ").toLocaleLowerCase("ru");
-    return areaMatches && kindMatches && (!query || searchText.includes(query));
+    return areaMatches && seasonMatches && (!query || searchText.includes(query));
   });
 
   if (sortFilter.value === "title") {
@@ -59,7 +53,7 @@ function renderPlacesCatalog() {
 }
 
 populateCatalogFilters();
-[areaFilter, kindFilter, sortFilter].forEach(function(control) {
+[areaFilter, seasonFilter, sortFilter].forEach(function(control) {
   control.addEventListener("change", renderPlacesCatalog);
 });
 searchInput.addEventListener("input", renderPlacesCatalog);
