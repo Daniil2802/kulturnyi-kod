@@ -33,7 +33,7 @@ if (!area) {
 } else {
   const list = places.filter(function(place) { return place.areaId === area.id; });
   document.title = area.title + " — Культурный код Кузбасса";
-  areaHost.innerHTML = '<a class="back-link" href="places.html">← Все места</a>' +
+  areaHost.innerHTML = '<a class="back-link" href="places.html">Все места</a>' +
     '<p class="eyebrow">Места Кузбасса</p><h1>' + escapeText(area.title) + '</h1>' +
     '<p class="lead">' + escapeText(area.short) + '</p>' +
     '<div class="filters place-season-filter"><label for="seasonFilter">Сезон поездки</label>' +
