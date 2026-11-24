@@ -3106,3 +3106,28 @@ body.place-detail-page .place-object>.tag{color:#f3f3f3!important}
     -webkit-backdrop-filter:none!important
   }
 }
+
+/* Strong mobile override: keep the logo and menu floating over the page background */
+@media(max-width:700px){
+  html body.home-page > .header,
+  html body:not(.home-page) > .header{
+    background:transparent!important;
+    background-color:transparent!important;
+    background-image:none!important;
+    border:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important
+  }
+  html body.home-page > .header::before,
+  html body.home-page > .header::after,
+  html body:not(.home-page) > .header::before,
+  html body:not(.home-page) > .header::after{
+    content:none!important;
+    display:none!important;
+    background:none!important;
+    border:0!important;
+    box-shadow:none!important
+  }
+}
