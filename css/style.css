@@ -2763,5 +2763,5 @@ body.area-page #areaPage>.back-link,body.area-page #areaPage>.eyebrow,body.area-
 
 /* Red angled accent under the territory title, matching the homepage */
 body.area-page #areaPage>h1{position:relative;display:inline-block}
-body.area-page #areaPage>h1:after{content:"";position:absolute;left:4%;right:3%;bottom:-8px;border-bottom:4px solid var(--upsdell);transform:rotate(-1.6deg);transform-origin:left center;pointer-events:none}
-@media(max-width:700px){body.area-page #areaPage>h1:after{bottom:-6px;border-bottom-width:3px}}
+body.area-page #areaPage>h1:after{content:"";position:absolute;left:3%;right:3%;bottom:-13px;border-bottom:4px solid var(--upsdell);transform:rotate(-.55deg);transform-origin:left center;pointer-events:none}
+@media(max-width:700px){body.area-page #areaPage>h1:after{bottom:-9px;border-bottom-width:3px}}
