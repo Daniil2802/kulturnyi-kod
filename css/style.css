@@ -2679,3 +2679,9 @@ body.home-page .stops-ready-label{font-size:16px;font-weight:700;color:var(--pap
 .home-page .stop-card-copy h3{
   font-size:clamp(26px,2.7vw,35px)
 }
+
+
+/* Slightly more room for long names in route cards */
+.home-page .stop-card-copy h3{
+  font-size:clamp(24px,2.4vw,31px)
+}
