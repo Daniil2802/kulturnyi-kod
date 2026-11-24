@@ -2733,3 +2733,8 @@ body.home-page .culture-links a b{color:#f3f3f3!important}
 
 /* Restore the original red emphasis on the culture title */
 body.home-page .culture-copy h2 em{color:var(--upsdell)!important}
+
+
+/* Highlight the homepage catalog link with a red underline and arrow */
+body.home-page .culture-links a:first-child{border-bottom-color:var(--upsdell)!important}
+body.home-page .culture-links a:first-child b{color:var(--upsdell)!important}
