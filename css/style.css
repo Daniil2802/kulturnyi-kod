@@ -2720,4 +2720,4 @@ body.home-page .culture-art-wrap{background:transparent!important}
 
 
 /* Lighten the main culture title while preserving the red emphasized line */
-body.home-page .culture-copy h2{color:#3a4c46!important}
+body.home-page .culture-copy h2{color:var(--jungle)!important}
