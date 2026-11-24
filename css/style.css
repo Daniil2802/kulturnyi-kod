@@ -2765,3 +2765,8 @@ body.area-page #areaPage>.back-link,body.area-page #areaPage>.eyebrow,body.area-
 body.area-page #areaPage>h1{position:relative;display:inline-block}
 body.area-page #areaPage>h1:after{content:"";position:absolute;left:3%;right:3%;bottom:-13px;border-bottom:4px solid var(--upsdell);transform:rotate(-.55deg);transform-origin:left center;pointer-events:none}
 @media(max-width:700px){body.area-page #areaPage>h1:after{bottom:-9px;border-bottom-width:3px}}
+
+
+/* Highlight the territory page return link in red */
+body.area-page #areaPage>.back-link{color:var(--upsdell)!important}
+body.area-page #areaPage>.back-link:hover{color:var(--paper)!important}
