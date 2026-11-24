@@ -11,15 +11,7 @@ function render() {
     (!pf.value || o.people === pf.value) && (!cf.value || o.category === cf.value)
   );
 
-  catalog.innerHTML = list.map(o => `<article class="card">
-    <a class="card-art${o.image ? " has-image" : ""}" href="item.html?id=${o.id}" aria-label="Открыть карточку: ${o.name}">${o.image ? `<img src="${o.image}" alt="${o.name}" loading="lazy">` : o.people[0]}</a>
-    <div class="card-body">
-      <span class="tag">${o.people} · ${o.category}</span>
-      <h2><a href="item.html?id=${o.id}">${o.name}</a></h2>
-      <p>${o.short}</p>
-      <div class="card-actions"><a href="item.html?id=${o.id}">История предмета →</a></div>
-    </div>
-  </article>`).join("") || "<p class=\"empty\">Пока ничего не приглянулось по этому запросу. Попробуй выбрать другие товары.</p>";
+  catalog.innerHTML = list.map(o => renderCultureObjectCard(o)).join("") || "<p class=\"empty\">Пока ничего не приглянулось по этому запросу. Попробуй выбрать другие товары.</p>";
 
 }
 
