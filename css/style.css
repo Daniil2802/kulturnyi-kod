@@ -3029,3 +3029,7 @@ body.place-detail-page .place-hero-caption h1{
 /* Place detail back link: white label, red arrow */
 body.place-detail-page .back-link{color:#f3f3f3!important}
 body.place-detail-page .back-link::first-letter{color:#e93c4e!important}
+
+
+/* Place detail item captions: white */
+body.place-detail-page .place-object>.tag{color:#f3f3f3!important}
