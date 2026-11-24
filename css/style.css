@@ -2795,7 +2795,7 @@ body.places-catalog-page>main.places-catalog-page{
 .places-catalog-controls select,.places-catalog-controls input{
   width:100%;min-width:0;min-height:50px;padding:12px 16px;
   border:1px solid rgba(243,243,243,.35);border-radius:8px;
-  background:rgba(243,243,243,.76);color:#1f302c;font:600 15px/1.2 inherit
+  background:rgba(243,243,243,.76);color:#1f302c;font-family:inherit;font-size:15px;font-weight:600;line-height:1.2
 }
 .places-catalog-controls input::placeholder{color:#66716d}
 .places-catalog-controls select:focus,.places-catalog-controls input:focus{
@@ -2847,7 +2847,7 @@ body.places-catalog-page>main.places-catalog-page{
   display:inline-flex;align-items:center;justify-content:center;min-height:42px;
   margin:0;padding:9px 12px;border:1px solid rgba(243,243,243,.8);
   border-radius:999px;background:rgba(20,30,27,.28);color:#f3f3f3;
-  font:700 11px/1.15 inherit;text-align:center;text-decoration:none;
+  font-family:inherit;font-size:11px;font-weight:700;line-height:1.15;text-align:center;text-decoration:none;
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)
 }
 .place-catalog-card .place-select-button{cursor:pointer;white-space:normal}
