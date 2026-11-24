@@ -2895,7 +2895,8 @@ body.places-catalog-page>main.places-catalog-page{
 
 /* Red angled underline on the catalog title's final word */
 .places-catalog-page .places-title-accent{
-  position:relative;display:inline-block;white-space:nowrap;color:inherit
+  position:relative;display:inline-block;white-space:nowrap;color:inherit;
+  font-family:inherit!important;font-weight:inherit!important
 }
 .places-catalog-page .places-title-accent:after{
   content:"";position:absolute;left:2%;right:1%;bottom:-8px;
