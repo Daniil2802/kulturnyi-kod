@@ -2717,3 +2717,7 @@ body.home-page .culture-copy h2{line-height:.96!important}
 
 /* Remove the pale backing behind the left culture artwork */
 body.home-page .culture-art-wrap{background:transparent!important}
+
+
+/* Lighten the main culture title while preserving the red emphasized line */
+body.home-page .culture-copy h2{color:#3a4c46!important}
