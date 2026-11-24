@@ -2758,3 +2758,8 @@ body.area-page > main.page{background:transparent!important;background-color:tra
 
 /* Improve intro text contrast on the transparent territory page */
 body.area-page #areaPage>.back-link,body.area-page #areaPage>.eyebrow,body.area-page #areaPage>h1,body.area-page #areaPage>.lead,body.area-page #areaPage .place-season-filter label{color:#f3f3f3!important;text-shadow:0 2px 12px rgba(5,20,16,.82)!important}
+
+
+/* Red accent for the territory breadcrumb and Sheregesh in its title */
+body.area-page #areaPage>.back-link{color:var(--upsdell)!important;text-shadow:0 2px 12px rgba(5,20,16,.82)!important}
+body.area-page #areaPage>h1 .area-title-accent{color:var(--upsdell)!important;text-shadow:0 2px 12px rgba(5,20,16,.82)!important}
