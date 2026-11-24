@@ -2754,3 +2754,7 @@ body.home-page #choosePath{scroll-margin-top:90px}
 
 /* Remove the pale glass frame from the territory page */
 body.area-page > main.page{background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+
+
+/* Improve intro text contrast on the transparent territory page */
+body.area-page #areaPage>.back-link,body.area-page #areaPage>.eyebrow,body.area-page #areaPage>h1,body.area-page #areaPage>.lead,body.area-page #areaPage .place-season-filter label{color:#f3f3f3!important;text-shadow:0 2px 12px rgba(5,20,16,.82)!important}
