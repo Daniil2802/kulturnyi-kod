@@ -4,23 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Места — Культурный код Кузбасса</title>
-  <link rel="stylesheet" href="css/style.css?v=home-route-copy-20261124">
+  <link rel="stylesheet" href="css/style.css?v=places-photo-catalog-20261124">
 </head>
-<body>
+<body class="places-catalog-page">
 <header class="header">
   <a class="logo" href="index.html" aria-label="Даром — на главную"><img src="assets/logo-lavka.png" alt="Даром"></a>
   <nav aria-label="Главная навигация">
    <a class="active" href="places.html">Места</a><a href="catalog.html">Предметы</a><a href="collection.html">Культурный чек</a><a href="partners.html">Партнёры</a><a href="contacts.html">Контакты</a><a href="about.html">О проекте</a>
   </nav>
  </header>
-<main class="page">
-  <p class="eyebrow">Культурный маршрут</p>
-  <h1>Выбери город или район</h1>
-  <p class="lead">Начни с города или района, а затем открой места, истории и предметы, связанные с ним.</p>
-  <div id="areaList" class="region-grid"></div>
+<main class="page places-catalog-page">
+  <div class="places-catalog-head">
+    <p class="eyebrow">Культурный маршрут · Кузбасс</p>
+    <h1>Места, которые хочется открыть</h1>
+    <p class="lead">Выбирай музей, природную точку или место с историей — и собирай свой культурный путь.</p>
+  </div>
+  <div class="places-catalog-controls" aria-label="Фильтры мест">
+    <select id="placeAreaFilter" aria-label="Территория">
+      <option value="">Все территории</option>
+    </select>
+    <select id="placeKindFilter" aria-label="Тип места">
+      <option value="">Все типы мест</option>
+    </select>
+    <input id="placeSearch" type="search" placeholder="Найти место" aria-label="Поиск по местам">
+    <select id="placeSort" aria-label="Порядок сортировки">
+      <option value="recommended">Порядок: по умолчанию</option>
+      <option value="title">Название: от А до Я</option>
+    </select>
+  </div>
+  <div id="placeCatalog" class="places-catalog-grid" aria-live="polite"></div>
 </main>
-<script src="js/places-data.js?v=tazgol-cultural-items-20261123"></script>
-<script src="js/areas.js"></script>
+<script src="js/places-data.js?v=places-photo-catalog-20261124"></script>
+<script src="js/place-selection.js?v=places-in-receipt-20261124"></script>
+<script src="js/places-catalog.js?v=places-photo-catalog-20261124"></script>
 <script>
 (() => {
   const page = location.pathname.split("/").pop() || "index.html";
