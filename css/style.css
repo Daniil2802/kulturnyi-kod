@@ -2977,3 +2977,16 @@ body.area-page #placeList.places-catalog-grid{
   -webkit-backdrop-filter:none!important
 }
 .place-object-image{background:transparent!important}
+
+
+/* Preserve contrast on transparent place details without restoring the panels */
+body.place-detail-page .place-hero-caption,
+body.place-detail-page .place-hero-caption h1,
+body.place-detail-page .place-hero-caption .tag,
+body.place-detail-page .place-location,
+body.place-detail-page .place-panel,
+body.place-detail-page .place-object,
+body.place-detail-page .place-tour-panel,
+body.place-detail-page .items-note{
+  text-shadow:0 2px 10px rgba(0,0,0,.82)
+}
