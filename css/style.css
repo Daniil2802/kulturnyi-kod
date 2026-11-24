@@ -2721,3 +2721,11 @@ body.home-page .culture-art-wrap{background:transparent!important}
 
 /* Lighten the main culture title while preserving the red emphasized line */
 body.home-page .culture-copy h2{color:var(--jungle)!important}
+
+
+/* White typography for the homepage culture section */
+body.home-page .culture-copy h2,
+body.home-page .culture-copy h2 em,
+body.home-page .culture-copy p,
+body.home-page .culture-links a,
+body.home-page .culture-links a b{color:#f3f3f3!important}
