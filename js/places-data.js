@@ -24,7 +24,7 @@ const places = [
     id: "tazgol",
     seasons: ["summer", "winter"],
     areaId: "tashtagol",
-    title: "Шорский экомузей «Тазгол»",
+    title: "Шорский экомузей « Тазгол»",
     kind: "Музей под открытым небом",
     address: "посёлок Усть-Анзас, Таштагольский округ",
     image: "https://static.wixstatic.com/media/8694d0_d8c48b277ea24294b321795d3783dfa7~mv2.jpg/v1/fill/w_1200%2Ch_800%2Cal_c%2Cq_90%2Cenc_auto/8694d0_d8c48b277ea24294b321795d3783dfa7~mv2.jpg",
