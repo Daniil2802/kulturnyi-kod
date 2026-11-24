@@ -2729,3 +2729,7 @@ body.home-page .culture-copy h2 em,
 body.home-page .culture-copy p,
 body.home-page .culture-links a,
 body.home-page .culture-links a b{color:#f3f3f3!important}
+
+
+/* Restore the original red emphasis on the culture title */
+body.home-page .culture-copy h2 em{color:var(--upsdell)!important}
