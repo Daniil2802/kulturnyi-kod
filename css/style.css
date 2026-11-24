@@ -2666,3 +2666,10 @@ body.home-page .stops-head>p{font-size:16px}
 @media(max-width:700px){
   body.home-page .stops-head>p{font-size:15px}
 }
+
+
+/* Homepage availability label after removing the route counter */
+body.home-page .stops-ready-label{font-size:16px;font-weight:700;color:var(--paper)}
+@media(max-width:700px){
+  body.home-page .stops-ready-label{font-size:14px}
+}
