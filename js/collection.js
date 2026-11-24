@@ -134,7 +134,8 @@ function render() {
   }
 
   const recipient = localStorage.getItem(recipientKey) || "Дорогой человек";
-  host.innerHTML = `<div class="receipt-tools">
+  host.innerHTML = `<section class="route-journal" id="routeJournal" aria-label="Впечатления о местах"></section>
+    <div class="receipt-tools">
       <label for="recipient">Кому отправить маршрут?</label>
       <input id="recipient" name="recipient" type="text" maxlength="60" value="${escapeHTML(recipient)}" placeholder="Например, для Ани">
       <p>В чеке собраны места для твоего маршрута; предметы остаются экспонатами этих мест.</p>
@@ -143,8 +144,7 @@ function render() {
     <div class="receipt-actions">
       <button class="button" id="shareReceipt" type="button">Поделиться маршрутом</button>
       <button class="button button-light" id="printReceipt" type="button">Распечатать / сохранить PDF</button>
-    </div>
-    <section class="route-journal" id="routeJournal" aria-label="Впечатления о местах"></section>`;
+    </div>`;
   window.RouteJournal?.mount(selected);
 
   document.getElementById("recipient").addEventListener("input", event => {
